@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
+
+Route::resource('users', 'UserController');
+
+Route::get('users/delete/{id}', [
+    'as' => 'users.delete',
+    'uses' => 'UserController@destroy',
+]);

@@ -26,3 +26,10 @@ Route::get('users/delete/{id}', [
     'as' => 'users.delete',
     'uses' => 'UserController@destroy',
 ]);
+
+Route::resource('roles', 'RoleController');
+
+Route::get('roles/delete/{id}', [
+    'as' => 'roles.delete',
+    'uses' => 'RoleController@destroy',
+]);

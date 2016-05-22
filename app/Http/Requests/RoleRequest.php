@@ -13,7 +13,7 @@ class RoleRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class RoleRequest extends Request
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:3',
+            'display_name' => 'required|min:3|unique:roles,display_name',
         ];
     }
 }

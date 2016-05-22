@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\RoleRequests;
+use App\Http\Requests\RoleRequest;
 use App\Role;
 
 class RoleController extends Controller
@@ -27,7 +27,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -36,9 +36,12 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        $role = new Role($request->all());
+        if($role->save()){
+            return redirect('roles');
+        }
     }
 
     /**
@@ -60,7 +63,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrfail($id);
+        return view('roles.edit', compact('role'));
     }
 
     /**
@@ -70,9 +74,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        //
+        $role = Role::findOrfail($id);
+        if($role->update($request->all())){
+            return redirect('roles');
+        }
     }
 
     /**
@@ -83,6 +90,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::findOrfail($id);
+        $role->delete();
+        return redirect('roles');
     }
 }

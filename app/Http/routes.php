@@ -33,3 +33,10 @@ Route::get('roles/delete/{id}', [
     'as' => 'roles.delete',
     'uses' => 'RoleController@destroy',
 ]);
+
+Route::resource('categories', 'CategoryController');
+
+Route::get('categories/delete/{id}', [
+    'as' => 'categories.delete',
+    'uses' => 'CategoryController@destroy',
+]);

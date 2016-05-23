@@ -1,6 +1,11 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 
+@import url(https://fonts.googleapis.com/css?family=Lato);
+$font-family-sans-serif: 'Lato', sans-serif;
+
+@import "select2.min";
+
 .no-resize {
   resize: none;
 }

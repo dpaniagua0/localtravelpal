@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\UserRequest;
-use App\User;
-use App\Role;
+use App\Http\Requests;
+use App\Http\Requests\CategoryRequest;
+use App\Category;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
 
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
     }
+
 
     /**
      * Display a listing of the resource.
@@ -22,9 +24,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $users = User::paginate(15);
-        return view('users.index',compact('users'));
+    {  
+        $categories = Category::paginate(15);
+        return view('categories.index', compact('categories')); 
     }
 
     /**
@@ -34,8 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::lists('name','id');
-        return view('users.create', compact('roles'));
+        return view('categories.create');
     }
 
     /**
@@ -44,12 +45,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(CategoryRequest $request)
     {
-        $user = new User($request->all());
-        if($user->save() && $user->roles()->sync($request->role_list)){
-            return redirect('users');
+        $category = new Category($request->all());
+        if($category->save()){
+            return redirect('categories');
         }
+
     }
 
     /**
@@ -71,11 +73,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-       $user = User::findOrfail($id);
-        $roles = Role::lists('name', 'id');
-        if($user){
-            return view('users.edit',compact('user', 'roles'));
-        }
+        $category = Category::findOrfail($id);
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -85,13 +84,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $user = User::findOrfail($id);
-        if($user->update($request->all()) && $user->roles()->sync($request->role_list)){
-            return redirect('users');
-        } else {
-            return redirect()->route('users.edit', $id);
+        $category = Category::findOrfail($id);
+        if($category->update($request->all())){
+            return redirect('categories');
         }
     }
 
@@ -103,11 +100,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrfail($id);
-        if($user){
-            if($user->delete()){
-                return redirect('users');
-            }
+        $category = Category::findOrfail($id);
+        if($category->delete()){
+            return redirect('categories');
         }
+
     }
 }

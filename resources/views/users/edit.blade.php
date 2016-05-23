@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('page-title','Edit User')
 @section('content')
 <div class="container">
     <div class="row">

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Role;
 
 class RoleRequest extends Request
 {
@@ -23,9 +24,24 @@ class RoleRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3',
-            'display_name' => 'required|min:3|unique:roles,display_name',
-        ];
+        $role = Role::find($this->roles);
+        switch($this->method())
+        {
+            case 'POST':
+            {
+                return [
+                    'name' => 'required|min:3',
+                    'display_name' => 'required|min:3|unique:roles,name',
+                ];
+            }
+            case 'PATCH':
+            {
+                return [
+                    'name' => 'required|min:3',
+                    'display_name' => 'required|min:3|unique:roles,name,'.$role->id,
+                ];
+            }
+            default:break;
+        }
     }
 }

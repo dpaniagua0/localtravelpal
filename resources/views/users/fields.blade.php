@@ -73,8 +73,7 @@
 </div> 
 @section('app-js')
 <script type="text/javascript">
-    $(function(){
-        $("select.basic-multiple").select2();
-    });
+    $("select.basic-multiple").select2();
+    
 </script>
 @endsection

@@ -4,7 +4,13 @@
 @import url(https://fonts.googleapis.com/css?family=Lato);
 $font-family-sans-serif: 'Lato', sans-serif;
 
+$background-color:  #F9F6F4;
+
 @import "select2.min";
+
+body {
+  background-color: $background-color;
+}
 
 .no-resize {
   resize: none;

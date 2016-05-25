@@ -24,14 +24,14 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        $user = User::find($this->users);
+        $user = User::find($this);
         switch($this->method())
         {
             case 'POST':
             {
                 return [
                     'name' => 'required',
-                    'email' => 'required|email|unique:users,email',
+                    'users.*.email' => 'required|email|unique:users',
                     'password' => 'required|min:6',
                     'confirm_password' => 'required|same:password|min:6',
                     'role_list' => 'required'
@@ -41,7 +41,7 @@ class UserRequest extends Request
             {
                 return [
                     'name' => 'required',
-                    'email' => 'required|email|unique:users,email,'.$user->id,
+                    'users.*.email' => 'required|email|unique:users',
                   //  'password' => 'required|min:6',
                     //'confirm_password' => 'required|same:password|min:6'
                 ];

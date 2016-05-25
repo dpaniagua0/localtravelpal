@@ -27,6 +27,21 @@ Route::get('users/delete/{id}', [
     'uses' => 'UserController@destroy',
 ]);
 
+
+Route::get('/profile/{id?}', array(
+  "as" => "users.profile",
+  "uses" => "UserController@profile"
+));
+Route::get('/profile/{id?}/edit', array(
+    "as" => "users.profile_edit",
+    "uses" => "UserController@profileEdit"
+));
+
+Route::patch('/profile/{id?}/update', array(
+    "as" => "users.update_profile",
+    "uses" => "UserController@updateProfile"
+));
+
 Route::resource('roles', 'RoleController');
 
 Route::get('roles/delete/{id}', [

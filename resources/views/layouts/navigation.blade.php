@@ -33,9 +33,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li>
+                                <a href="{{ route('users.profile', 1)}}">
+                                    <i class="fa fa-user"></i>
+                                    {{ trans('common.profile') }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif

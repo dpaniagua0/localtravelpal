@@ -6260,6 +6260,9 @@ button.close {
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
 
+body {
+  background-color: #F9F6F4; }
+
 .no-resize {
   resize: none; }
 

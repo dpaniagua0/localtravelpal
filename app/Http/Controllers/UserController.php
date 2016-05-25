@@ -95,6 +95,34 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+    * User profile
+    * @param int $id
+    * @return response
+    */
+    public function profile($id){
+        $user = User::findOrfail($id);
+        return view('users.profile', compact('user'));
+    }
+
+    public function profileEdit($id){
+        $user = User::findOrfail($id);
+        if($user) {
+            return view('users.editProfile', compact('user'));
+        }
+    }
+
+    public function updateProfile(UserRequest $request, $id) {
+        $user = User::findOrfail($id);
+        if($user->update($request->all())){
+            return redirect()->route('users.profile', $id);
+        } else {
+            return redirect()->route('users.profile_edit', $id);
+        }
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *

@@ -16,6 +16,7 @@ return [
     'save' => 'save',
     'no_records' => 'Empty records on the database',
     'create' => 'create',
-    'cancel' => 'cancel'
+    'cancel' => 'cancel',
+    'profile' => 'profile'
 
 ];

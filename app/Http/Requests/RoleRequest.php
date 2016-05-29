@@ -24,21 +24,23 @@ class RoleRequest extends Request
      */
     public function rules()
     {
-        $role = Role::find($this->roles);
+        //$role = Role::find($this->roles);
         switch($this->method())
         {
             case 'POST':
             {
                 return [
                     'name' => 'required|min:3',
-                    'display_name' => 'required|min:3|unique:roles,name',
+                    'role.*.name' => 'required|min:3|unique:roles',
+                    'display_name' => 'required|min:3'
                 ];
             }
             case 'PATCH':
             {
                 return [
                     'name' => 'required|min:3',
-                    'display_name' => 'required|min:3|unique:roles,name,'.$role->id,
+                    'roles.*.name' => 'required|min:3|unique:roles',
+                    'display_name' => 'required|min:3'
                 ];
             }
             default:break;

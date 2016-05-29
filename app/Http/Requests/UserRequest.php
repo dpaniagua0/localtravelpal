@@ -24,7 +24,7 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        $user = User::find($this);
+        //$user = User::find($this);
         switch($this->method())
         {
             case 'POST':

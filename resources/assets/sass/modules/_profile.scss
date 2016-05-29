@@ -1,0 +1,28 @@
+$list-bg-default: #F7F7F7;
+$update-image-btn: #405661;
+
+
+.list-bg-default {
+  background-color: $list-bg-default;
+}
+
+.profile-image {
+  position: relative;
+}
+.update-profile-image {
+  background-color: $update-image-btn;
+  text-align: center;
+  color: #fff !important;
+  visibility: none;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  text-decoration: none !important;
+}
+
+.profile-image:hover > .update-profile-image {
+  visibility: visible;
+  opacity: 0.5;
+}

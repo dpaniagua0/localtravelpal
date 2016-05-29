@@ -25,22 +25,32 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
+                <li><a href="#">Request a trip</a></li>
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
+                    <li><a href="{{ route('experiences.create') }}">Create an experience</a></li>
+                
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             <li>
-                                <a href="{{ route('users.profile', 1)}}">
-                                    <i class="fa fa-user"></i>
+                                <a href="{{ route('messages.index') }}">
+                                    <i class="fa fa-btn fa-inbox" aria-hidden="true"></i>
+                                    {{ trans('common.inbox') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.profile', Auth::user()->id)}}">
+                                    <i class="fa fa-btn fa-user" aria-hidden="true"></i>
                                     {{ trans('common.profile') }}
                                 </a>
                             </li>
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                           
                         </ul>
                     </li>
                 @endif

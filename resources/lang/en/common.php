@@ -17,6 +17,8 @@ return [
     'no_records' => 'Empty records on the database',
     'create' => 'create',
     'cancel' => 'cancel',
-    'profile' => 'profile'
+    'profile' => 'profile',
+    'inbox' => 'inbox',
+    'joined_on' => 'Joined on'
 
 ];

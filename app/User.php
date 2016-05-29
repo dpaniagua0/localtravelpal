@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Storage;
 
 class User extends Authenticatable
 {
@@ -12,7 +13,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','bio'
+        'name', 'email', 'password','bio', 'video_url',
+        'video_alien_id','img_path','img_type'
     ];
 
     /**
@@ -30,12 +32,20 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-       /**
+    /**
      * The roles that belong to the user.
      */
     public function roles()
     {
         return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
+    }
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function experiences()
+    {
+        return $this->hasMany('App\Experience', 'owner_id');
     }
 
     /**
@@ -57,5 +67,9 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function getProfileImage(){
+        return Storage::url('app/avatars/'.$this->id.'/'.md5($this->id).'.jpg');
     }
 }

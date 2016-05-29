@@ -28,7 +28,7 @@ Route::get('users/delete/{id}', [
 ]);
 
 
-Route::get('/profile/{id?}', array(
+Route::get('/profile/{id}', array(
   "as" => "users.profile",
   "uses" => "UserController@profile"
 ));
@@ -54,4 +54,18 @@ Route::resource('categories', 'CategoryController');
 Route::get('categories/delete/{id}', [
     'as' => 'categories.delete',
     'uses' => 'CategoryController@destroy',
+]);
+
+Route::resource('experiences', 'ExperienceController');
+
+Route::get('experiences/delete/{id}', [
+    'as' => 'experiences.delete',
+    'uses' => 'ExperienceController@destroy',
+]);
+
+Route::resource('messages', 'MessageController');
+
+Route::get('messages/delete/{id}', [
+    'as' => 'messages.delete',
+    'uses' => 'MessageController@destroy'
 ]);

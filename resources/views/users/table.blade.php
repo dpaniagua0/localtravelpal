@@ -27,7 +27,7 @@
                     </li>
                     <li>
                         <a class="btn btn-danger confirm-btn"  href="{!! route('users.delete', [$user->id]) !!}"
-                         data-title="Are you sure?" data-message="Deleting this program,this will delete everything related to it">
+                         data-title="Are you sure?" data-message="Deleting this user,this will delete everything related to it">
                          <i class="fa fa-trash"></i>
                      </a>
                  </li>

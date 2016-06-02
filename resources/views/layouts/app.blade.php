@@ -33,6 +33,7 @@
 
     <script src="{{ elixir('js/all.js') }}"></script>
 
+
     @yield('app-js')
 </body>
 </html>

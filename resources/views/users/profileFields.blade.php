@@ -2,8 +2,17 @@
 <div class="form-group {{ $errors->has('profile_image') ? ' has-error' : '' }}">
     {!! Form::label('profile_image', 'Profile Image', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-
-        {!! Form::file('profile_image', null, ['class' => 'form-control', 'placeholder' => 'Name' ]) !!}
+        <div style="max-width:150px">
+        @if(isset($user->img_path) && $user->img_path != "" )
+        
+            <img class="img-thumbnail preview-thumbnail" src="{{ asset($user->img_path)}}" style="width: 150px;height:150px;">
+       
+        @endif
+            <span class="btn btn-default btn-file btn-block">
+            Browse <input class="preview-img" type="file" id="profile_image" name="profile_image">
+        
+            </span>
+        </div>
 
         @if ($errors->has('profile_image'))
             <span class="help-block">
@@ -83,9 +92,3 @@
         <a href="{!! route('users.profile', $user->id) !!}" class="btn btn-default">Cancel</a>
     </div>
 </div>
-@section('app-js')
-    <script type="text/javascript">
-        $("select.basic-multiple").select2();
-
-    </script>
-@endsection

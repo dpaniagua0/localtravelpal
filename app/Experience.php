@@ -20,4 +20,13 @@ class Experience extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+    * Get a list of categories ids
+    * @return array
+    */
+
+    public function getCategoriesListAttribute(){
+        return $this->categories->lists('id')->toArray();
+    }
 }

@@ -44,3 +44,26 @@
         </div>
     </div>
 @endsection
+@section('app-js')
+    <script type="text/javascript">
+        $("select.basic-multiple").select2();
+        
+        $("#profile_image").change(function () {
+          previewProfile(this);
+        
+        });
+        function previewProfile(input) {
+        
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $('.preview-thumbnail').attr('src', e.target.result);
+            }
+
+          reader.readAsDataURL(input.files[0]);
+        
+          }
+        }
+
+    </script>
+@endsection

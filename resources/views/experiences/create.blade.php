@@ -14,7 +14,7 @@
                             'class' => 'form-horizontal',
                             'method' => 'POST'
                           ]) !!}
-
+                          @include('experiences.fields')
                        
                       {!! Form::close() !!}
                       

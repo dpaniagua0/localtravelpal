@@ -4,20 +4,22 @@
 window.$ = window.jQuery = require('jquery')
 require('bootstrap-sass');
 
+var APP = APP || {};
 
 // IIFE - Immediately Invoked Function Expression
 (function($, window, document) {
 
     // The $ is now locally scoped 
-
     // Listen for the jQuery ready event on the document
     $(function() {
-
+        
+    
         APP.confirm();
-
+    
     });
 
-    var APP = APP || {};
+
+    
 
     APP.confirm = function(){
         var btn = $(".confirm-btn");
@@ -86,3 +88,4 @@ require('bootstrap-sass');
 
 }(window.jQuery, window, document));
 // The global jQuery object is passed as a parameter
+

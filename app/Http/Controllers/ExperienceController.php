@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\ExperienceRequest;
+use App\Http\Requests\ExperienceRequest;
 use App\Experience;
+use App\Category;
 
 class ExperienceController extends Controller
 {
@@ -27,7 +28,8 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        return view('experiences.create');
+        $categories = Category::lists('name','id');
+        return view('experiences.create', compact('categories'));
     }
 
     /**

@@ -1,4 +1,4 @@
-
+ 
  {!! Form::hidden('owner_id', Auth::user()->id) !!}
  <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
     {!! Form::label('title', 'Title*', ['class' => 'col-sm-2 control-label']) !!}   

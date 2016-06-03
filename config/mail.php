@@ -107,8 +107,8 @@ return [
     |
     */
 
-    //'sendmail' => '/usr/sbin/sendmail -bs',
+    'sendmail' => '/usr/sbin/sendmail -bs',
 
-    'sendmail' => '/usr/sbin/sendmail -t',
+    //'sendmail' => '/usr/sbin/sendmail -t',
 
 ];

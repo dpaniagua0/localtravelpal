@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.a2plcpnl0647.prod.iad2.secureserver.net'),
 
     /*
     |--------------------------------------------------------------------------

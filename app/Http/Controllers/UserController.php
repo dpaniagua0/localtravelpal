@@ -15,6 +15,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['profile']]);
+        $this->middleware('admin',['only' => ['view', 'edit']]);
     }
 
     /**

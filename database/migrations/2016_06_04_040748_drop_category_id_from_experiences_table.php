@@ -13,6 +13,7 @@ class DropCategoryIdFromExperiencesTable extends Migration
     public function up()
     {
         Schema::table('experiences', function($table){
+            $table->dropForeign('category_id');
             $table->dropColumn('category_id');
         });
     }

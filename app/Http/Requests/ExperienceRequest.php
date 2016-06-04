@@ -26,9 +26,8 @@ class ExperienceRequest extends Request
         return [
             'title' => 'required|min:3',
             'location' => 'required',
-            'summary' => 'required|min:30',
+            'description' => 'required|min:30',
             'price' => 'required|numeric',
-            'category_id' => 'required',
             'owner_id' => 'required',
             'min_capacity' => 'required|integer',
             'max_capacity' => 'required|integer',

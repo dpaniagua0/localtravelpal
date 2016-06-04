@@ -26,9 +26,7 @@ class ExperiencesTable extends Migration
 
             $table->string('location', 264);
 
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
-
+          
 
             $table->timestamps();
         });

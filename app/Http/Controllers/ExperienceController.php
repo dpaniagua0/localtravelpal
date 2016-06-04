@@ -18,7 +18,8 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        //
+        $experiences = Experience::paginate('15');
+        return view('experiences.index', compact('experiences'));
     }
 
     /**
@@ -40,7 +41,10 @@ class ExperienceController extends Controller
      */
     public function store(ExperienceRequest $request)
     {
-        //
+        $experience = new Experience($request->all());
+        if($experience->save() && $experience->categories()->sync($request->category_list)){
+            return redirect('experiences');
+        }
     }
 
     /**
@@ -86,6 +90,11 @@ class ExperienceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $experience = Experience::findOrfail($id);
+        if($experience){
+            if($experience->delete()){
+                return redirect('experiences');
+            }
+        }
     }
 }

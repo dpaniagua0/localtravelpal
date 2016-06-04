@@ -78,14 +78,14 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('summary') ? ' has-error' : '' }}">
+<div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
     {!! Form::label('description', 'Summary*', ['class' => 'col-sm-2 control-label']) !!}   
     <div class="col-sm-10">
         {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Summary*' ]) !!}
         
         @if ($errors->has('summary'))
         <span class="help-block">
-            <strong>{{ $errors->first('summary') }}</strong>
+            <strong>{{ $errors->first('description') }}</strong>
         </span>
         @endif
     </div>
@@ -94,10 +94,10 @@
 <div class="form-group {{ $errors->has('category_list') ? ' has-error' : '' }}">
     {!! Form::label('category_list', 'Categories', ['class' => 'col-sm-2 control-label']) !!}
    <div class="col-sm-10">
-        @if(!isset($category))
+        @if(!isset($experience))
             {!! Form::select('category_list[]', $categories, null, ['class' =>'form-control basic-multiple' ,'multiple']); !!}
         @else
-            {!! Form::select('category_list[]', $roles, $category->category_list, ['class' =>'form-control basic-multiple','multiple']); !!}
+            {!! Form::select('category_list[]', $categories, $experience->categories, ['class' =>'form-control basic-multiple','multiple']); !!}
         @endif
         @if ($errors->has('category_list'))
         <span class="help-block">

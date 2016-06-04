@@ -14,4 +14,12 @@ class Category extends Model
     protected $fillable = [
         'name', 'description'
     ];
+
+    /**
+    * The experiences that belong to the category.
+    */
+    public function experiences()
+    {
+        return $this->belongsToMany('App\Experience');
+    }
 }

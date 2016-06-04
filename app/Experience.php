@@ -29,4 +29,14 @@ class Experience extends Model
     public function getCategoriesListAttribute(){
         return $this->categories->lists('id')->toArray();
     }
+
+
+    /**
+     * The categories that belong to the experience.
+     */
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category', 'category_experience','experience_id','category_id');
+    }
+
 }

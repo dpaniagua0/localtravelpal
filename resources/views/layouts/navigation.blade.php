@@ -25,7 +25,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                @if(Auth::user()->hasRole('super_admin'))
+                @if(Auth::check() && Auth::user()->hasRole('super_admin'))
                     @include('layouts.adminmenu')
                 @endif
                 <li><a href="#">Request a trip</a></li>

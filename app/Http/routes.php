@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+
+Route::post('/upload/images',[
+    'as' => 'home.uploadImages',
+    'uses' => 'HomeController@uploadImages'
+]);
 
 
 Route::resource('users', 'UserController');
@@ -56,11 +58,16 @@ Route::get('categories/delete/{id}', [
     'uses' => 'CategoryController@destroy',
 ]);
 
-Route::resource('experiences', 'ExperienceController');
+Route::resource('destinations', 'DestinationController');
 
-Route::get('experiences/delete/{id}', [
-    'as' => 'experiences.delete',
-    'uses' => 'ExperienceController@destroy',
+Route::get('destinations/delete/{id}', [
+    'as' => 'destinations.delete',
+    'uses' => 'DestinationController@destroy',
+]);
+
+Route::any('destinations/search', [
+    'as' => 'destinations.search',
+    'uses' => 'DestinationController@search'
 ]);
 
 Route::resource('messages', 'MessageController');
@@ -69,3 +76,8 @@ Route::get('messages/delete/{id}', [
     'as' => 'messages.delete',
     'uses' => 'MessageController@destroy'
 ]);
+
+
+
+
+

@@ -11,7 +11,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/home') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 Local Travel Pal
             </a>
         </div>
@@ -28,12 +28,11 @@
                 @if(Auth::check() && Auth::user()->hasRole('super_admin'))
                     @include('layouts.adminmenu')
                 @endif
-                <li><a href="#">Request a trip</a></li>
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
-                    <li><a href="{{ route('experiences.create') }}">Create an experience</a></li>
+                    <li><a href="{{ route('destinations.create') }}">List a destination</a></li>
                
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -56,6 +55,11 @@
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                            
                         </ul>
+                    </li>
+                    <li>
+                        <a class="whish-list-nav">
+                            My whish list
+                        </a>
                     </li>
                 @endif
             </ul>

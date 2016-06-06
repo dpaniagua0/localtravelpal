@@ -111,7 +111,7 @@
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-        <a href="{!! route('users.index') !!}" class="btn btn-default">Cancel</a>
+        <a href="{!! route('destinations.index') !!}" class="btn btn-default">Cancel</a>
   </div>
 </div> 
 @section('app-js')

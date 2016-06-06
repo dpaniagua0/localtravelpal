@@ -13,9 +13,20 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+
+    mix.copy('vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css', 
+      'resources/assets/sass/vendor/_fileinput.min.scss');
+
+    mix.copy('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js', 
+      'resources/assets/js/fileinput.min.js');
+
+    mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/','public/build/fonts/bootstrap'); 
+
+
     mix.browserify('app.js').scripts([
         'eModal.min.js',
-        'select2.full.min.js'
+        'select2.full.min.js',
+        'fileinput.min.js'
     ]);
     mix.version(["css/app.css", "js/app.js", "js/all.js"]);
 });

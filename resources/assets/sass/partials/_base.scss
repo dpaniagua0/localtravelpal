@@ -24,3 +24,21 @@ body {
     cursor: inherit;
     display: block;
 }
+.container {
+    margin-top: 20px;
+}
+.navbar {
+    margin-bottom: 0px;
+}
+.navbar .container {
+    margin: 0px;
+}
+.whish-list-nav {
+    background-color: #47BBCC;
+    border: 1px solid #47BBCC;
+    border-radius: 3px;
+    color: #fff !important;
+    padding: 5px !important;
+    margin-top: 10%;
+    cursor: pointer;
+}

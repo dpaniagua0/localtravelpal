@@ -43,9 +43,9 @@ class User extends Authenticatable
     /**
      * The roles that belong to the user.
      */
-    public function experiences()
+    public function destinations()
     {
-        return $this->hasMany('App\Experience', 'owner_id');
+        return $this->hasMany('App\Destination', 'owner_id');
     }
 
     /**

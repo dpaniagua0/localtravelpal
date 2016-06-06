@@ -16,7 +16,7 @@
             <td class="text-center" style="width:15%">
                 <ul class="list-inline">
                     <li>
-                        <a class="btn btn-success" href="{{ route('users.show', $user->id) }}">
+                        <a class="btn btn-success" href="{{ route('users.profile', $user->id) }}">
                             <i class="fa fa-eye"></i>
                         </a>
                     </li>

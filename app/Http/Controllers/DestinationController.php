@@ -5,12 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Requests\ExperienceRequest;
-use App\Experience;
+use App\Http\Requests\DestinationRequest;
+use App\Destination;
 use App\Category;
 
-class ExperienceController extends Controller
+class DestinationController extends Controller
 {
+
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['search']]);
+
+        $this->middleware('admin', ['except' => ['search']]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +33,8 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $experiences = Experience::paginate('15');
-        return view('experiences.index', compact('experiences'));
+        $destinations = Destination::paginate('15');
+        return view('destinations.index', compact('destinations'));
     }
 
     /**
@@ -30,7 +45,7 @@ class ExperienceController extends Controller
     public function create()
     {
         $categories = Category::lists('name','id');
-        return view('experiences.create', compact('categories'));
+        return view('destinations.create', compact('categories'));
     }
 
     /**
@@ -39,11 +54,11 @@ class ExperienceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ExperienceRequest $request)
+    public function store(DestinationRequest $request)
     {
-        $experience = new Experience($request->all());
-        if($experience->save() && $experience->categories()->sync($request->category_list)){
-            return redirect('experiences');
+        $destination = new Destination($request->all());
+        if($destination->save() && $destination->categories()->sync($request->category_list)){
+            return redirect('destinations');
         }
     }
 
@@ -55,8 +70,8 @@ class ExperienceController extends Controller
      */
     public function show($id)
     {
-        $experience = Experience::findOrfail($id);
-        return view('experiences.show', compact('experience'));
+        $destination = Destination::findOrfail($id);
+        return view('destinations.show', compact('destination'));
     }
 
     /**
@@ -77,9 +92,16 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ExperienceRequest $request, $id)
+    public function update(DestinationRequest $request, $id)
     {
         //
+    }
+
+    public function search(Request $request) {
+      
+        $query = $request->search;
+        $destinations = Destination::byLocation($request->search)->get();
+        return view('destinations.search', compact('destinations', 'query'));
     }
 
     /**
@@ -90,10 +112,10 @@ class ExperienceController extends Controller
      */
     public function destroy($id)
     {
-        $experience = Experience::findOrfail($id);
-        if($experience){
-            if($experience->delete()){
-                return redirect('experiences');
+        $destination = Destination::findOrfail($id);
+        if($destination){
+            if($destination->delete()){
+                return redirect('destinations');
             }
         }
     }

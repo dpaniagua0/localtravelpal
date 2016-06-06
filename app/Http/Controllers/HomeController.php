@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageRequest;
+use Storage;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 class HomeController extends Controller
 {
@@ -14,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index']]);
     }
 
     /**
@@ -24,6 +28,36 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $directory = "public/pages/home/img";
+        $temp_files = Storage::disk('local')->allFiles($directory);
+        $files = array();
+        foreach ($temp_files as $file) {
+          //  if(strpos($file, 'public')){
+                $file = str_replace("public", "storage", $file);
+                array_push($files, $file);
+            //}
+        }
+        return view('home', compact('files'));
+    }
+
+    /**
+    *  Upload images to home page carousel
+    *
+    */
+    public function uploadImages(ImageRequest $request){
+
+        
+        if($request->hasFile('images')){
+            $images = $request->file('images');
+                
+            foreach ($images as $image) {
+                $image_name = md5($image->getClientOriginalName());
+                $tmp_image = Image::make($image->getRealPath())->resize(1280,500);
+                $tmp_image->save(storage_path("app/public/pages/home/img/{$image_name}.jpg"));
+            }
+
+            return redirect('/');
+        }
+
     }
 }

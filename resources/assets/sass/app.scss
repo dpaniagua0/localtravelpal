@@ -1,8 +1,8 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 
-@import url(https://fonts.googleapis.com/css?family=Lato);
-$font-family-sans-serif: 'Lato', sans-serif;
+//@import url(https://fonts.googleapis.com/css?family=Lato);
+//$font-family-sans-serif: 'Lato', sans-serif;
 
 $background-color:  #F9F6F4;
 
@@ -11,9 +11,13 @@ $background-color:  #F9F6F4;
 
 @import "partials/base";
 
+@import "modules/landingpage";
+
 .no-resize {
   resize: none;
 }
 
 
 @import "vendor/select2.min";
+
+@import "vendor/fileinput.min";

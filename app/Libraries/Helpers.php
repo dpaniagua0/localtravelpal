@@ -24,4 +24,8 @@ class Helpers {
   public static function home_slider($images){
     return view('helpers.slider', compact('images'))->render();
   }
+
+  public static function render_destinations($destinations){
+    return view('helpers.destinations_preview', compact('destinations'))->render();
+  }
 }

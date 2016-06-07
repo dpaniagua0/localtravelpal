@@ -19,9 +19,9 @@ class DestinationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['search']]);
+        $this->middleware('auth', ['except' => ['search', 'show']]);
 
-        $this->middleware('admin', ['except' => ['search']]);
+        $this->middleware('admin', ['except' => ['search', 'show']]);
     }
 
 

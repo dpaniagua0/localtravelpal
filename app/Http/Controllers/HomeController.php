@@ -60,4 +60,16 @@ class HomeController extends Controller
         }
 
     }
+
+    public function deleteImage(Request $request) {
+      $path = $request->path;
+      
+      if(Storage::delete($path)) {
+        return redirect('/');
+        //echo $path;
+        //exit;
+      } else {
+        echo "false";
+      }
+    }
 }

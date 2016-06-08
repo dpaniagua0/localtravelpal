@@ -1,9 +1,9 @@
 <div id="home-carousel" class="carousel slide" data-ride="carousel">
 
   @if(Auth::check() && Auth::user()->hasRole('super_admin'))
-    <div class="upload-controls">
-      <a data-target="#upload-slider" class="btn btn-primary" data-toggle="modal">Upload images</a>
-    </div>
+  <div class="upload-controls">
+    <a data-target="#upload-slider" class="btn btn-primary" data-toggle="modal">Upload images</a>
+  </div>
   @endif
   <!-- Indicators
   <ol class="carousel-indicators">
@@ -12,18 +12,25 @@
     <li data-target="home-carousel" data-slide-to="2"></li>
   </ol>
 -->
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+<!-- Wrapper for slides -->
+<div class="carousel-inner" role="listbox">
+
+  @if(count($images) > 0)
     <?php $index = 0; ?>
     @foreach($images as $img)
-      {{--*/ $slide_src = (isset($img) && $img != "") ? $img : 'http://placehold.it/1280x500'; /*--}}
-      {{--*/ $active = ($index < 1)? 'active' : ''; /*--}}
-      <div class="item {{ $active }}">
-        <img src="{{ $slide_src }}" class="" alt="{{$img}}">
-      </div>
+    {{--*/ $slide_src = (isset($img) && $img != "") ? $img : 'http://placehold.it/1280x500'; /*--}}
+    {{--*/ $active = ($index < 1)? 'active' : ''; /*--}}
+    <div class="item {{ $active }}">
+      <img src="{{ $slide_src }}" class="" alt="{{$img}}">
+    </div>
     <?php $index++; ?>
     @endforeach
-  </div>
+  @else 
+    <div class="item active">
+      <img src="http://placehold.it/1280x500" class="" alt="place_holder">
+    </div>
+  @endif
+</div>
 
   <!-- Controls 
   <a class="left carousel-control" href="#home-carousel" role="button" data-slide="prev">
@@ -36,26 +43,25 @@
   </a>
 </div>
 -->
-  <!-- Search form -->
-  <div class="search-destinations pt-5 pb-5">
-    {!! Form::open([
-      'route' => 'destinations.search',
-      'class' => 'form-inline',
-      'method' => 'post'
+<!-- Search form -->
+<div class="search-destinations pt-5 pb-5">
+  {!! Form::open([
+  'route' => 'destinations.search',
+  'class' => 'form-inline',
+  'method' => 'post'
+  ]) !!}
+  <div class="form-group pl-5 pr-5" style="width:100%">
+    {!! Form::text('search', null, [
+    'placeholder' => 'Enter your new destination to find local experiences', 'class' => 'form-control pull-left mr-5',
+    'style' => 'width:86%'
     ]) !!}
-    <div class="form-group pl-5 pr-5" style="width:100%">
-          {!! Form::text('search', null, [
-              'placeholder' => 'Enter your new destination to find local experiences', 'class' => 'form-control pull-left mr-5',
-              'style' => 'width:86%'
+    <button type="submit" class="btn btn-default pull-rigth ml-15">Search</button>
 
-          ]) !!}
-          <button type="submit" class="btn btn-default pull-rigth ml-15">Search</button>
-   
-    </div>
-   
-
-    {!! Form::close() !!}
   </div>
+
+
+  {!! Form::close() !!}
+</div>
 
 </div>
 
@@ -66,31 +72,60 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Upload images</h4>
+        <h4 class="modal-title" id="myModalLabel">Carousel images</h4>
       </div>
       {!! Form::open([
-          'route' => 'home.uploadImages',
-          'class' => 'form-horizontal',
-          'method' => 'POST',
-          'files' => true
+      'route' => 'home.uploadImages',
+      'class' => 'form-horizontal',
+      'method' => 'POST',
+      'files' => true
       ]) !!}
       <div class="modal-body">
-        <div class="form-group {{ $errors->has('images') ? ' has-error' : '' }}">
-            {!! Form::label('images', 'Images', ['class' => 'col-sm-2 control-label']) !!}   
-            <div class="col-sm-10">
-            {!! Form::file('images[]',array(
-              'multiple'=>true, 'class' => 'file file-loading',
-              'data-show-upload' => true
-              )); 
-            !!}
-            </div>
+        @if(count($images) > 0)
+          <legend>Current images</legend>
+          <div class="form-group ">
+            <?php $index = 0; ?>
+            @foreach($images as $img)
+              {{--*/ $slide_src = (isset($img) && $img != "") ? $img : 'http://placehold.it/1280x500'; /*--}}
+              {{--*/ $active = ($index < 1)? 'active' : ''; /*--}}
+              <div class="col-md-3 mb-5">
+                <div class="thumbnail">
+                  <img src="{{ $slide_src }}"  alt="{{$img}}">
+                  <div class="caption">
+                    {!! Form::open([ 'url' => 'home/deleteimg/']) !!}
+                      
+                      {{--*/ $path = str_replace('storage', 'public', $img) /*--}}
+                      
+                      {!! Form::hidden('path', $path) !!}
+                    <button type="ubmit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="delete image">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                    {!! Form::close() !!}
+                  </div>
+                </div>
+              </div>
+              <?php $index++; ?>
+            @endforeach
+          </div>
+        @endif
+
+
+      <div class="form-group {{ $errors->has('images') ? ' has-error' : '' }}">
+        {!! Form::label('images', 'Upload images', ['class' => 'col-sm-2 control-label']) !!}   
+        <div class="col-sm-10">
+          {!! Form::file('images[]',array(
+          'multiple'=>true, 'class' => 'file file-loading',
+          'data-show-upload' => true
+          )); 
+          !!}
         </div>
       </div>
-      <div class="modal-footer">
-      </div>
-      {!! Form::close() !!}
     </div>
+    <div class="modal-footer">
+    </div>
+    {!! Form::close() !!}
   </div>
+</div>
 </div>
 @endif
 

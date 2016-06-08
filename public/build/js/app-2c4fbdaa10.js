@@ -12225,6 +12225,8 @@ var APP = APP || {};
     // Listen for the jQuery ready event on the document
     $(function () {
 
+        $('[data-toggle="tooltip"]').tooltip();
+
         APP.confirm();
     });
 

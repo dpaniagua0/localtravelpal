@@ -21,6 +21,11 @@ Route::post('/upload/images',[
     'uses' => 'HomeController@uploadImages'
 ]);
 
+Route::post('home/deleteimg', [
+    'as' => 'home.deleteImage',
+    'uses' => 'HomeController@deleteImage'
+]);
+
 
 Route::resource('users', 'UserController');
 

@@ -31,7 +31,10 @@ class DestinationRequest extends Request
             'owner_id' => 'required',
             'min_capacity' => 'required|integer',
             'max_capacity' => 'required|integer',
-            'category_list' => 'required'
+            'category_list' => 'required',
+            'price_rate' => 'required',
+            'duration' => 'required|integer',
+            'duration_type' => 'required'
         ];
     }
 }

@@ -82,7 +82,8 @@ class DestinationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $destination = Destination::findOrfail($id);
+        return view('destinations.edit', compact('destination'));
     }
 
     /**
@@ -98,10 +99,17 @@ class DestinationController extends Controller
     }
 
     public function search(Request $request) {
-      
-        $query = $request->search;
-        $destinations = Destination::byLocation($request->search)->get();
-        return view('destinations.search', compact('destinations', 'query'));
+
+        $categories = Category::all();
+
+        
+        $query = (isset($request))? $request : "";
+        if(!$request->search){
+            $destinations = Destination::all();
+        } else {
+            $destinations = Destination::byLocation($request->search)->get();
+        }
+        return view('destinations.search', compact('destinations', 'query', 'categories'));
     }
 
     /**

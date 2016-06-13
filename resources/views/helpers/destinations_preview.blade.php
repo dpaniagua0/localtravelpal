@@ -1,5 +1,4 @@
 @if(count($destinations) > 0)
-<legend>Featured guides</legend>
 <div class="featured-guides">
     <div class="row">
 

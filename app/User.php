@@ -41,11 +41,18 @@ class User extends Authenticatable
     }
 
     /**
-     * The roles that belong to the user.
+     * The destinations that belong to the user.
      */
     public function destinations()
     {
         return $this->hasMany('App\Destination', 'owner_id');
+    }
+
+    /**
+    * Get user whis lists
+    */
+    public function wishlists(){
+        return $this->hasMany('App\WishList', 'owner_id');
     }
 
     /**

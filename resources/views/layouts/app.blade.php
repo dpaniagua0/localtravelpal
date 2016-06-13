@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     @yield('meta-tags')
 
     <title>Local Travel Pal - @yield('page-title')</title>
 
@@ -24,6 +25,7 @@
     </style>
 </head>
 <body id="app-layout">
+    @yield('facebook_sdk')
 
     @include('layouts.navigation')
 

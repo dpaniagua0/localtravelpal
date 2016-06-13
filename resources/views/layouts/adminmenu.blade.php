@@ -44,7 +44,7 @@
       </a>
       <a href="{{ route('categories.create') }}">
         <i class="fa fa-btn fa-plus" aria-hidden="true"></i>
-        Add User
+        Add Category
       </a>
     </li>
   </ul>

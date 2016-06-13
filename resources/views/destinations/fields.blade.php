@@ -59,13 +59,13 @@
 
 <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
     {!! Form::label('price', 'Price*', ['class' => 'col-sm-2 control-label']) !!}   
-    <div class="col-sm-3">
+    <div class="col-sm-3 {{ $errors->has('price') ? ' has-error' : ''}}">
         <div class="input-group">
           <span class="input-group-addon">$</span>
            {!! Form::text('price', null, ['class' => 'form-control', 
            'placeholder' => 'Price*', 'aria-label' => 'Amount (to the nearest dollar)' ]) !!}
        
-          <span class="input-group-addon">.00</span>
+          <span class="input-group-addon">USD</span>
         </div>
 
 
@@ -75,6 +75,45 @@
             <strong>{{ $errors->first('price') }}</strong>
         </span>
         @endif
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('price_rate') ? ' has-error' : '' }}">
+    {!! Form::label('price_rate', 'Price Rate', ['class' => 'col-sm-2 control-label']) !!}
+   <div class="col-sm-3">
+        
+        {!! Form::select('price_rate', array(1 => 'person', 2 => 'flat rate'), null, ['class' =>'form-control basic-multiple']); !!}
+        
+        @if ($errors->has('price_rate'))
+        <span class="help-block">
+            <strong>{{ $errors->first('price_rate') }}</strong>
+        </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('duration') || $errors->has('duration_type') ? ' has-error' : '' }}">
+    {!! Form::label('duration', 'Duration', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-md-10">
+
+        <div class="col-md-3 form-group">
+            {!! Form::text('duration', null, ['class' => 'form-control col-md-5']) !!}
+            @if ($errors->has('duration'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('duration') }}</strong>
+                </span>
+            @endif
+        </div>
+        <div class="col-md-3 form-group">
+            
+            {!! Form::select('duration_type', array(0 => 'minutes',1 => 'hours', 2 => 'days'), null, ['class' =>'form-control basic-single']); !!}
+       
+            @if($errors->has('duration_type'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('duration_type') }}</strong>
+                </span>
+            @endif
+        </div>
     </div>
 </div>
 
@@ -116,7 +155,10 @@
 </div> 
 @section('app-js')
 <script type="text/javascript">
-    $("select.basic-multiple").select2();
+    $("select.basic-multiple,select.basic-single").select2({
+         theme: "bootstrap"
+    });
+
     
 </script>
 @endsection

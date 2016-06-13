@@ -26,7 +26,6 @@ Route::post('home/deleteimg', [
     'uses' => 'HomeController@deleteImage'
 ]);
 
-
 Route::resource('users', 'UserController');
 
 Route::get('users/delete/{id}', [
@@ -34,11 +33,23 @@ Route::get('users/delete/{id}', [
     'uses' => 'UserController@destroy',
 ]);
 
+Route::get('users/{user_id}/wishlists/{list_id}', [
+    'as' => 'users.listcontent',
+    'uses' => 'UserController@wishListContent' 
+]);
+
+Route::get('users/{id}/wishlists/', [
+    'as' => 'users.whishlists',
+    'uses' => 'UserController@wishlists'
+]);
+
+
 
 Route::get('/profile/{id}', array(
   "as" => "users.profile",
   "uses" => "UserController@profile"
 ));
+
 Route::get('/profile/{id?}/edit', array(
     "as" => "users.profile_edit",
     "uses" => "UserController@profileEdit"
@@ -63,6 +74,12 @@ Route::get('categories/delete/{id}', [
     'uses' => 'CategoryController@destroy',
 ]);
 
+
+Route::any('destinations/search', [
+    'as' => 'destinations.search',
+    'uses' => 'DestinationController@search'
+]);
+
 Route::resource('destinations', 'DestinationController');
 
 Route::get('destinations/delete/{id}', [
@@ -70,10 +87,7 @@ Route::get('destinations/delete/{id}', [
     'uses' => 'DestinationController@destroy',
 ]);
 
-Route::any('destinations/search', [
-    'as' => 'destinations.search',
-    'uses' => 'DestinationController@search'
-]);
+
 
 Route::resource('messages', 'MessageController');
 

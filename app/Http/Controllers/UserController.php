@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\User;
 use App\Role;
+use App\WishList;
 use Storage;
 
 class UserController extends Controller
@@ -188,6 +189,26 @@ class UserController extends Controller
         }
     }
 
+    /**
+    * Get all the user whish lists
+    * @param int $user_id
+    * @return response
+    */
+    public function wishlists($user_id){
+        $user = User::findOrfail($user_id)->load('wishlists');
+        return view('users.wish_lists', compact('user'));
+    }
+
+    /**
+    * Return wish list content [ Destinations ]
+    * @param int $id wish list id
+    * @return response
+    */
+    public function wishListContent(Request $request){
+
+        $wish_list = WishList::find($request->list_id);
+        return view('users.list_content', compact('wish_list'));
+    }
 
     /**
      * Remove the specified resource from storage.

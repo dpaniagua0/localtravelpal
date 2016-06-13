@@ -57,7 +57,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="whish-list-nav">
+                        <a class="whish-list-nav" href="{{ route('users.whishlists', Auth::user()->id  )}}">
                             My whish list
                         </a>
                     </li>

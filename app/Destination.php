@@ -13,7 +13,8 @@ class Destination extends Model
      */
     protected $fillable = [
        'title','description','price','min_capacity',
-       'owner_id','location','max_capacity','category_id'
+       'owner_id','location','max_capacity','category_id',
+       'price', 'price_rate', 'duration', 'duration_type'
     ];
 
     public function owner()
@@ -37,6 +38,10 @@ class Destination extends Model
 
     public function scopebyLocation($query, $string){
         return $query->where('location', 'like', "%{$string}%");
+    }
+
+    public function wishlists(){
+        return $this->belongsToMany('App\WishList', 'wish_lists_destination','destination_id', 'wish_list_id');
     }
 
 

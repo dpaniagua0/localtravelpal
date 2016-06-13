@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-      @if(count($destinations) > 0) 
+    
       <div class="row">
         <div class="col-md-12">
          <div class="search-destinations pt-5 pb-5">
@@ -27,25 +27,58 @@
 
           {!! Form::close() !!}
         </div>
-        <hr>
-        @if($query != "")
-        <h2>Results for: {{ $query }}</h2>
-        {{ count($destinations) }}
-        @else 
-        <h2>All results</h2>
-        @endif
+       
 
         <div class="row">
-          {!! Helpers::render_destinations($destinations) !!}
+        
+          <div class="col-md-12">
+            <div class="row">
+              <hr>
+              <div class="col-md-3">
+                <h4>Interested in:</h4>
+                <div class="interest-categories">
+                  @foreach($categories as $category)
+                    <a class="btn btn-default btn-xs">
+                      {{ $category->name }}
+                    </a>
+                  @endforeach
+                </div>
+              </div>
+
+              <div class="col-md-9">
+                  @if(count($destinations) > 0) 
+                 
+                  @if($query != "")
+                    <h4>Results for: {{ count($destinations) }}</h4>
+                    
+                  @else 
+                    <h4>All results</h4>
+                  @endif
+                  
+                  {!! Helpers::render_destinations($destinations) !!}
+              </div>
+
+            </div>  
+           
+          </div>
         </div>
+        @endif
       </div>
     </div>
-    @else 
+    @if(count($destinations) <= 0)
     <h1 class="alert alert-info text-center">We can't find this place right now.</h1>
     @endif
   </div>
 </div>
 </div>
+@endsection
+
+@section('app-js')
+<script type="text/javascript">
+  $(function(){
+    $("select.basic-multiple").select2();
+  });
+</script>
 @endsection
 
 

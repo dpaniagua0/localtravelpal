@@ -11,7 +11,8 @@
         "laravelcollective/html": "5.2.*",
         "intervention/image": "^2.3",
         "doctrine/dbal": "^2.5",
-        "kartik-v/bootstrap-fileinput": "@dev"
+        "kartik-v/bootstrap-fileinput": "@dev",
+        "intervention/imagecache": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

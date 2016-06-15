@@ -42,3 +42,55 @@ body {
     margin-top: 10%;
     cursor: pointer;
 }
+.pull-top {
+    margin-top: -170px;
+}
+.section {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.section {
+    z-index: 5;
+    position: relative;
+}
+.section-top {
+    position: relative;
+    width: 100%;
+    padding-top: 144px;
+    margin: 0 auto;
+    min-height: 200px;
+    display: block;
+}
+.has-pull-top {
+    min-height: 220px;
+}
+.section-top:before {
+    clear: both;
+    height: 50px;
+}
+div.destination-details {
+   width: 70%;
+   float:left;
+   height: 100%; 
+   display: block;
+}
+div.destination-actions {
+   min-height: 100px; 
+}
+div.destination-banner {
+    width: 30%;
+    float: right;
+    height: 100%;
+    display:block;
+}
+div.destination-title {
+    height: 134px;
+}
+div.destination-title h3 {
+    color: #e4e4e4;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+div.destination-title h1, div.destination-title small{
+    color: #fff;
+}

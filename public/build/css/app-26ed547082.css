@@ -5911,11 +5911,14 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  background-color: #f4f3ee; }
+  background-color: #f4f3ee;
+  min-height: 100%;
+  margin-bottom: 90px; }
 
 .section-inner {
   max-width: 1140px;
-  padding: 0 30px;
+  padding-left: 30px;
+  padding-right: 30px;
   position: relative;
   margin: auto; }
 
@@ -5923,11 +5926,20 @@ body {
 * Footer styles
 */
 .footer {
-  position: relative;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  min-height: 90px;
   /* Set the fixed height of the footer here */
   background-color: #367bf4; }
+
+.footer-rside {
+  float: right;
+  display: block; }
+
+.footer-lside {
+  float: left;
+  display: block; }
 
 .footer > .container {
   color: #fff; }
@@ -5935,7 +5947,8 @@ body {
 .pre-footer {
   background-color: #93d6ff;
   color: #fff;
-  width: 100%; }
+  width: 100%;
+  position: relative; }
 
 .terms-list {
   margin-bottom: 0; }
@@ -6027,7 +6040,8 @@ div.destination-title h1, div.destination-title small {
   text-align: center;
   line-height: 25px;
   vertical-align: middle;
-  padding: 13px; }
+  padding: 13px;
+  font-size: 24px; }
 
 .upload-controls {
   position: absolute;
@@ -6054,7 +6068,7 @@ div.destination-title h1, div.destination-title small {
   z-index: 2 !important;
   top: 0;
   color: #fff !important;
-  width: 50%;
+  width: 700px;
   right: 0;
   min-height: 100%;
   padding-top: 10%;
@@ -6066,19 +6080,19 @@ div.destination-title h1, div.destination-title small {
   background-color: RGBA(255, 255, 255, 0.3); }
 
 .search-form input {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   border: 1px solid #fff !important;
   color: #606060;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075);
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
 
 .search-form button {
-  padding-top: 10px;
+  padding-top: 15px;
   color: #fff;
   border: 1px solid #367bf4;
   background-color: #367bf4;
-  padding-bottom: 10px; }
+  padding-bottom: 15px; }
 
 div.categories-container {
   margin: 20px -10px; }
@@ -7375,5 +7389,48 @@ div.category h3 {
 
 .form-inline .select2-container--bootstrap {
   display: inline-block; }
+
+/**
+* Responsive site utitlities
+*/
+@media only screen and (min-width: 768px) {
+  /* tablets and desktop */ }
+
+@media only screen and (max-width: 767px) {
+  /* phones */
+  .section {
+    padding-left: 5%;
+    padding-right: 5%; }
+  div.category {
+    width: 50%; }
+  #home-carousel > .search-destinations {
+    width: 90%;
+    right: 0;
+    left: 0;
+    padding-right: 0; } }
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+  /* portrait phones */ }
+
+@media (max-width: 567px) {
+  .section {
+    padding-left: 0;
+    padding-right: 0; }
+  #home-carousel > .search-destinations {
+    width: 90%;
+    padding: 0;
+    right: 0;
+    left: 0; }
+  .search-destinations h1 {
+    margin-bottom: 0;
+    margin-top: 5px; }
+  .search-destinations h4 {
+    margin-top: 0; }
+  div.category {
+    width: 100%; }
+  .footer-lside, .footer-rside {
+    float: none;
+    width: 100%;
+    text-align: center; } }
 
 /*# sourceMappingURL=app.css.map */

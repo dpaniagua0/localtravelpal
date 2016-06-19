@@ -37,10 +37,13 @@ html {
 body {
   /* Margin bottom by footer height */
   background-color: $background-color;
+  min-height: 100%;
+  margin-bottom: 90px;
 }
 .section-inner {
     max-width: 1140px;
-    padding: 0 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     position:relative;
     margin: auto;
 }
@@ -48,12 +51,21 @@ body {
 * Footer styles
 */
 .footer {
-  position: relative;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  min-height: 90px;
   /* Set the fixed height of the footer here */
   background-color: #367bf4;
 }
+.footer-rside {
+    float: right;
+    display: block;
+}
+.footer-lside {
+    float: left;
+    display: block;
+} 
 .footer > .container {
    color: #fff;
 }
@@ -61,6 +73,7 @@ body {
     background-color: #93d6ff;
     color: #fff;
     width: 100%;
+    position: relative;
 }
 .terms-list {
     margin-bottom: 0;
@@ -154,4 +167,5 @@ div.destination-title h1, div.destination-title small{
     line-height: 25px;
     vertical-align: middle;
     padding: 13px;
+    font-size: 24px;
 }

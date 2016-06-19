@@ -5,8 +5,11 @@
         <div style="max-width:150px">
         @if(isset($user->img_path) && $user->img_path != "" )
         
-            <img class="img-thumbnail preview-thumbnail" src="{{ asset($user->img_path)}}" style="width: 150px;height:150px;">
+            <img class="img-thumbnail preview-thumbnail" src="{{ asset($user->img_path.'/original/'.$user->img_file)}}" style="width: 150px;height:150px;">
        
+        @else
+            <img class="img-thumbnail preview-thumbnail" src="http://placehold.it/150x150" style="width: 150px;height:150px;">
+      
         @endif
             <span class="btn btn-default btn-file btn-block">
             Browse <input class="preview-img" type="file" id="profile_image" name="profile_image">

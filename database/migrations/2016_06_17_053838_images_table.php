@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropCategoryIdFromExperiencesTable extends Migration
+class ImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,12 @@ class DropCategoryIdFromExperiencesTable extends Migration
      */
     public function up()
     {
-        Schema::table('experiences', function($table){
-            if(Schema::hasColumn('experiences','category_id')){
-
-
-                $table->dropForeign('category_id');
-                $table->dropColumn('category_id');
-            }
+        Schema::create('images', function($table){
+            $table->bigIncrements('id');
+            $table->string('img_path');
+            $table->string('img_file');
+            $table->string('status');
+            $table->timestamps();
         });
     }
 

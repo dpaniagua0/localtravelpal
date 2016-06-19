@@ -150,7 +150,11 @@
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-        <a href="{!! route('destinations.index') !!}" class="btn btn-default">Cancel</a>
+        @if(Auth::user()->hasRole('super_admin'))
+            <a href="{!! route('destinations.index') !!}" class="btn btn-default">Cancel</a>
+        @else
+            <a href="{!! route('destinations.search') !!}" class="btn btn-default">Cancel</a>
+        @endif
   </div>
 </div> 
 @section('app-js')

@@ -43,6 +43,11 @@ Route::get('users/{id}/wishlists/', [
     'uses' => 'UserController@wishlists'
 ]);
 
+Route::get('users/{id}/guides', [
+    'as' => 'users.guides',
+    'uses' => 'UserController@userGuides'
+]); 
+
 
 
 Route::get('/profile/{id}', array(
@@ -95,7 +100,6 @@ Route::get('messages/delete/{id}', [
     'as' => 'messages.delete',
     'uses' => 'MessageController@destroy'
 ]);
-
 
 
 

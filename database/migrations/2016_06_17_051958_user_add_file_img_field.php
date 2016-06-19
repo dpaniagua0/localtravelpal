@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropCategoryIdFromExperiencesTable extends Migration
+class UserAddFileImgField extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,8 @@ class DropCategoryIdFromExperiencesTable extends Migration
      */
     public function up()
     {
-        Schema::table('experiences', function($table){
-            if(Schema::hasColumn('experiences','category_id')){
-
-
-                $table->dropForeign('category_id');
-                $table->dropColumn('category_id');
-            }
+        Schema::table('users',function($table){
+            $table->renameColumn('img_type', 'img_file');
         });
     }
 

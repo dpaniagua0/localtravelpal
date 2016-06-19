@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageRequest;
 use Storage;
+use App\Category;
 use Intervention\Image\ImageManagerStatic as Image;
 
 
@@ -29,7 +30,8 @@ class HomeController extends Controller
     public function index()
     {
         $directory = "public/pages/home/img";
-        $temp_files = Storage::disk('local')->allFiles($directory);
+        $categories = Category::all();
+        $temp_files = Storage::disk('local')->files($directory);
         $files = array();
         foreach ($temp_files as $file) {
           //  if(strpos($file, 'public')){
@@ -37,7 +39,7 @@ class HomeController extends Controller
                 array_push($files, $file);
             //}
         }
-        return view('home', compact('files'));
+        return view('home', compact('files', 'categories'));
     }
 
     /**

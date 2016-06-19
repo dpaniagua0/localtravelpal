@@ -31,11 +31,39 @@
 
     @yield('content')
 
+    @yield('app-js')
+
+   
+    @yield('pre-footer')
+
+    <footer class="footer">
+      <div class="section pt-30 pb-15">
+        <div class="section-inner clearfix">
+            <div class="pull-left">
+                <ul class="list-inline terms-list ">
+                    <li>License information</li>
+                    <li>Terms of use</li>
+                    <li>Privacy policy</li>
+                </ul>
+                <h5 class="copyright">&copy;2016 LocoPal</h5>
+            </div>
+            <div class="pull-right">
+                <ul class="social-list list-inline">
+                    <li><i class="fa fa-facebook circle-icon" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-google-plus circle-icon" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-instagram circle-icon" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-twitter circle-icon" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-pinterest circle-icon" aria-hidden="true"></i></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </footer>
+
     <script src="{{ elixir('js/app.js') }}"></script>
 
     <script src="{{ elixir('js/all.js') }}"></script>
 
 
-    @yield('app-js')
 </body>
 </html>

@@ -12,14 +12,18 @@ class CreateRoleUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_user', function ($table) {
+        if (Schema::hasTable('role_user')) {
 
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('role_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('roles');
+            Schema::drop('role_user');
+            Schema::create('role_user', function ($table) {
 
-        });
+                $table->integer('user_id')->unsigned();
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->bigInteger('role_id')->unsigned();
+                $table->foreign('role_id')->references('id')->on('roles');
+
+            });
+        }
     }
 
     /**

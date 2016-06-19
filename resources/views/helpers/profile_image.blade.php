@@ -1,6 +1,6 @@
 
 @if(isset($user->img_path) && $user->img_path != "")
-  {{--*/ $image_source = asset($user->img_path) /*--}}
+  {{--*/ $image_source = asset($user->img_path.'/original/'.$user->img_file) /*--}}
 @else
   {{--*/ $image_source = "http://placehold.it/250x250" /*--}}
 @endif

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\DestinationRequest;
 use App\Destination;
 use App\Category;
+use App\Image;
 
 class DestinationController extends Controller
 {
@@ -21,7 +22,7 @@ class DestinationController extends Controller
     {
         $this->middleware('auth', ['except' => ['search', 'show']]);
 
-        $this->middleware('admin', ['except' => ['search', 'show']]);
+        $this->middleware('admin', ['except' => ['search', 'show','create']]);
     }
 
 

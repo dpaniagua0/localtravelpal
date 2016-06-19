@@ -44,19 +44,22 @@
 </div>
 -->
 <!-- Search form -->
-<div class="search-destinations pt-5 pb-5">
+<div class="search-destinations">
+  <h1 class="text-right">Find A Local Pal</h1>
+  <h4 class="text-right">Dsicover unique experiences offered by locals</h4>
   {!! Form::open([
   'route' => 'destinations.search',
-  'class' => 'form-inline',
+  'class' => 'search-form pt-15 pb-15 pr-15 pl-15',
   'method' => 'post'
   ]) !!}
-  <div class="form-group pl-5 pr-5" style="width:100%">
+  <div class="input-group">
     {!! Form::text('search', null, [
-    'placeholder' => 'Enter your new destination to find local experiences', 'class' => 'form-control pull-left mr-5',
-    'style' => 'width:86%'
-    ]) !!}
-    <button type="submit" class="btn btn-default pull-rigth ml-15">Search</button>
+    'placeholder' => 'Enter your destination to find local experiences.', 'class' => 'form-control',
 
+    ]) !!}
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit">GO</button>
+    </span>
   </div>
 
 

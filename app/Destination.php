@@ -53,4 +53,11 @@ class Destination extends Model
         return $this->belongsToMany('App\Category', 'category_destination','destination_id','category_id');
     }
 
+    /**
+    * Return all the destination images
+    */
+    public function destinations(){
+        return $this->belongsToMany('App\Image');
+    }
+
 }

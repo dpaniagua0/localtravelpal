@@ -9,6 +9,7 @@ use App\User;
 use App\Role;
 use App\WishList;
 use Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -124,7 +125,10 @@ class UserController extends Controller
 
         $user->video_source = $video["source"];
         $user->alien_video_id = $video["alien_id"];
-        $user->img_path = $this->uploadProfileImage($request, $user->id);
+        $image_upload = $this->uploadProfileImage($request, $user->id);
+
+        $user->img_path = (!empty($image_upload['path']))? $image_upload['path'] : $user->img_path;
+        $user->img_file =  (!empty($image_upload['file']))? $image_upload['file'] : $user->img_file;
 
         if($user->update($request->all())){
             return redirect()->route('users.profile', $id);
@@ -147,6 +151,14 @@ class UserController extends Controller
       //  $file->move('profile_images/'.$user_id,$file_name);
         //return 
         if($request->hasFile('profile_image')){
+            $image = $request->file('profile_image');
+            $image_name = md5($user_id);
+            $tmp_image = Image::make($image->getRealPath())->resize(250,250);
+            $tmp_image->save(storage_path("app/public/upload/images/{$image_name}.jpg"));
+            return array('file' => "{$image_name}.jpg", 'path' => 'upload/images');
+        }
+
+       /* if($request->hasFile('profile_image')){
             Storage::put(
                 "public/avatars/{$user_id}/".md5($user_id).".jpg",
                 file_get_contents($request->file('profile_image')->getRealPath())
@@ -156,9 +168,9 @@ class UserController extends Controller
             if(Storage::url("avatars/{$user_id}/".md5($user_id).".jpg")){
                return Storage::url("avatars/{$user_id}/".md5($user_id).".jpg"); 
            } else {
-                return "";
+                return "http://placehold.it/250x250";
            }
-        }
+        }*/
     }
 
 
@@ -208,6 +220,17 @@ class UserController extends Controller
 
         $wish_list = WishList::find($request->list_id);
         return view('users.list_content', compact('wish_list'));
+    }
+
+    /**
+    * Return user guides
+    * @param int $id user id
+    * @return response
+    */
+    public function userGuides($id){
+        $user = User::with('destinations')->whereId($id)->firstOrfail();
+        $guides = $user->destinations()->paginate(4);
+        return view('destinations.guides', compact('guides'));
     }
 
     /**

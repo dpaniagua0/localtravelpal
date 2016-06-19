@@ -52,6 +52,14 @@
                                     {{ trans('common.profile') }}
                                 </a>
                             </li>
+                            <li class="dropdown-header">Local provider</li>
+                            <li>
+                                <a href="{{ route('users.guides', Auth::user()->id)}}">
+                                    <i class="fa fa-btn fa-user" aria-hidden="true"></i>
+                                   My guides
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                            
                         </ul>

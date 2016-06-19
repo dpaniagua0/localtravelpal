@@ -35,11 +35,3 @@
 	</div>
 </div>
 @endsection
-
-@section('pre-footer')
-<div class="section pre-footer pt-15 pb-15">
-	<div class="section-inner">
-		<h1 class="mt-15 mb-15">Guides to your Favorite Destinations</h1>
-	</div>
-</div>
-@endsection

@@ -31,7 +31,11 @@
 
     @yield('content')
 
-    @yield('pre-footer')
+    <div class="section pre-footer pt-15 pb-15">
+        <div class="section-inner">
+            <h1 class="mt-15 mb-15">Guides to your Favorite Destinations</h1>
+        </div>
+    </div>
     <footer class="footer">
       <div class="section">
         <div class="section-inner  pt-15 pb-15 clearfix">

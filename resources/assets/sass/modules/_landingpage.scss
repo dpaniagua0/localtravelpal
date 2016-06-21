@@ -27,12 +27,12 @@
   position: absolute;
   z-index: 2 !important;
   top: 0;
+  left: 0; 
   color: #fff !important;
   width: 700px;
   right: 0;
   min-height: 100%;
-  padding-top: 10%;
-  padding-right: 5%;
+  padding-top: 5%;
   margin: 0 auto;
 }
 .search-form {
@@ -50,22 +50,33 @@
 .search-form button {
   padding-top: 15px;
   color: #fff;
-  border: 1px solid #367bf4;
-  background-color: #367bf4;
+  border: 1px solid $light-blue;
+  background-color: $light-blue;
   padding-bottom: 15px;
 }
-div.categories-container {
+div.destinations-container {
   margin: 20px -10px;
 }
-div.category {
+div.destination {
   position: relative;
   float: left;
   width: 33.3333%;
   padding: 10px;
 }
-div.category h3 {
+.destination p {
+  background: #fff;
+  padding: 10px 10px 5px 10px;
+}
+.destination a.link-to-destination {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+div.destination h3 {
   position: absolute;
-  background-color: #367bf4;
+  background-color: $light-blue;
   color: #fff;
   padding: 5px 10px;
   bottom: 10%;

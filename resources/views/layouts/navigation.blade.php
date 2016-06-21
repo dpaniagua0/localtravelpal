@@ -13,7 +13,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Local Travel Pal
+                    <img class="brand-logo" src="{{ asset('storage/upload/images/locopal.png') }}">
                 </a>
             </div>
 

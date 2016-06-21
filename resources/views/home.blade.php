@@ -19,14 +19,17 @@
 
 <div class="section">
 	<div class="section-inner">
-		@if(count($categories) > 0)
-			<div class="categories-container clearfix">
-			@foreach($categories as $category)
-				<div class="category">
-					<a>
+		@if(count($destinations) > 0)
+			<div class="destinations-container clearfix">
+			@foreach($destinations as $destination)
+				<div class="destination">
+					<a class="link-to-destination">
 						<img style="width: 100%" src="http://placehold.it/300x300" alt="http://placehold.it/350x150">
-						<h3>{{ $category->name}}</h3>
+						<h3>{{ $destination->title}}</h3>
 					</a>
+					<p>
+						{{ $destination->description}}
+					</p>
 				</div>
 			
 			@endforeach

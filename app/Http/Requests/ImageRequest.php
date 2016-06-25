@@ -24,7 +24,7 @@ class ImageRequest extends Request
     public function rules()
     {
         return [
-            'images' => 'required'
+            'images' => 'required',
         ];
     }
 }

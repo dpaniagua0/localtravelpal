@@ -1,0 +1,49 @@
+.rewards-section {
+	padding: 40px 80px 0px 80px;
+	text-align: justify;
+}
+.insider-reward {
+	display: inline-block;
+	width: 350px;
+}
+.rewards-section:after {
+	content: " ";
+	width: 100%;
+	display: inline-block;
+}
+.insider-gets {
+	padding: 20px 40px 20px 80px;
+	text-align: justify;
+}
+.insider-gets div {
+	display: inline-block;
+	width: 400px;
+	position: relative;
+}
+.insider-gets div > h4 {
+	position: absolute;
+	top: 5px;
+	margin: 0px;
+}
+.insider-btn {
+	margin: 10px auto;
+	width: 270px;
+	display: block;
+	font-size: 18px;
+	padding: 10px;
+}
+.insider-gets:after {
+	display: inline-block;
+	width: 350px;
+}
+.testimonials-section {
+	background-color: #efefef;
+	padding-bottom: 45px;
+	margin-top: 50px;
+}
+.testimonial-content {
+	padding-left: 50px;
+	padding-top: 15px;
+	background: url('/upload/images/original/quote.png') no-repeat top left;
+	background-size: 40px;
+}

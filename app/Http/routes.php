@@ -92,6 +92,10 @@ Route::get('destinations/delete/{id}', [
     'uses' => 'DestinationController@destroy',
 ]);
 
+Route::get('list-an-experience',[
+    'as' => 'destinations.details',
+    'uses' => 'DestinationController@details'
+]);
 
 
 Route::resource('messages', 'MessageController');

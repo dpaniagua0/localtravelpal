@@ -14,7 +14,8 @@ class Destination extends Model
     protected $fillable = [
        'title','description','price','min_capacity',
        'owner_id','location','max_capacity','category_id',
-       'price', 'price_rate', 'duration', 'duration_type'
+       'price', 'price_rate', 'duration', 'duration_type',
+       'video_url'
     ];
 
     public function owner()
@@ -56,8 +57,8 @@ class Destination extends Model
     /**
     * Return all the destination images
     */
-    public function destinations(){
-        return $this->belongsToMany('App\Image');
+    public function images(){
+        return $this->hasMany('App\Image');
     }
 
 }

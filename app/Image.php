@@ -10,4 +10,12 @@ class Image extends Model
     	'img_file', 'img_path',
     	'status', 'destination_id'
     ];
+
+     /**
+     * Get the destination that owns the image.
+     */
+    public function destination()
+    {
+        return $this->belongsTo('App\Destination');
+    }
 }

@@ -63,7 +63,7 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('bio') ? ' has-error' : '' }}">
+<div class="form-group {{ $errors->has('video_url') ? ' has-error' : '' }}">
     {!! Form::label('video_url', 'Video Biography', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
 

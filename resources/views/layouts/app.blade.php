@@ -59,9 +59,9 @@
         </div>
       </div>
     </footer>
-
     <script src="{{ elixir('js/app.js') }}"></script>
     <script src="{{ elixir('js/all.js') }}"></script>
+    
     @yield('app-js')
 </body>
 </html>

@@ -34,7 +34,8 @@ class DestinationRequest extends Request
             'category_list' => 'required',
             'price_rate' => 'required',
             'duration' => 'required|integer',
-            'duration_type' => 'required'
+            'duration_type' => 'required',
+            'video_url' => 'required',
         ];
     }
 }

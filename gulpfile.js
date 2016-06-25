@@ -26,7 +26,15 @@ elixir(function(mix) {
     mix.browserify('app.js').scripts([
         'eModal.min.js',
         'select2.full.min.js',
-        'fileinput.min.js'
+        'fileinput.min.js', 
+        'jquery.bootstrap.wizard.min.js',
+        'formValidation.min.js',
+        'framework/bootstrap.min.js'
     ]);
+
+/*    mix.scripts([
+       
+    ],  'public/js/form_validation.js', 'resources/assets/js');*/
+
     mix.version(["css/app.css", "js/app.js", "js/all.js"]);
 });

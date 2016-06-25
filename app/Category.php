@@ -18,8 +18,8 @@ class Category extends Model
     /**
     * The experiences that belong to the category.
     */
-    public function experiences()
+    public function destinations()
     {
-        return $this->belongsToMany('App\Experience');
+        return $this->belongsToMany('App\Destination');
     }
 }

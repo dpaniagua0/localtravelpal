@@ -4,12 +4,16 @@
 class Helpers {
 
 
-  public static function render_video($video){
+ /* public static function render_video($video){
     return view('helpers.video_player', compact('video'))->render();
-  }
+  }*/
 
   public static function user_video($user){
     return view('helpers.video_user', compact('user'))->render();
+  }
+
+  public static function render_video($source, $video_id){
+    return view('helpers.video_player', compact('source', 'video_id'))->render();
   }
 
   public static function user_experiences($user){

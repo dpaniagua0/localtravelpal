@@ -8,7 +8,8 @@ use App\Http\Requests;
 use App\Http\Requests\DestinationRequest;
 use App\Destination;
 use App\Category;
-use App\Image;
+//use App\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class DestinationController extends Controller
 {
@@ -20,9 +21,9 @@ class DestinationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['search', 'show']]);
+        $this->middleware('auth', ['except' => ['search', 'show', 'details']]);
 
-        $this->middleware('admin', ['except' => ['search', 'show','create']]);
+        $this->middleware('admin', ['except' => ['search', 'show','create','details']]);
     }
 
 
@@ -58,6 +59,11 @@ class DestinationController extends Controller
     public function store(DestinationRequest $request)
     {
         $destination = new Destination($request->all());
+
+        $video = $this->getVideoInfo($request->video_url);
+        $destination->video_source = $video["source"];
+        $destination->alien_video_id = $video["alien_id"];
+
         if($destination->save() && $destination->categories()->sync($request->category_list)){
             return redirect('destinations');
         }
@@ -84,7 +90,9 @@ class DestinationController extends Controller
     public function edit($id)
     {
         $destination = Destination::findOrfail($id);
-        return view('destinations.edit', compact('destination'));
+
+        $categories = Category::lists('name','id');
+        return view('destinations.edit', compact('destination', 'categories'));
     }
 
     /**
@@ -96,14 +104,49 @@ class DestinationController extends Controller
      */
     public function update(DestinationRequest $request, $id)
     {
-        //
+        $destination = Destination::findOrfail($id);
+        $video = $this->getVideoInfo($request->video_url);
+        $destination->video_source = $video["source"];
+        $destination->alien_video_id = $video["alien_id"];
+
+        $uploaded_images = $this->uploadPhotos($request);
+        if(count($uploaded_images) > 0){
+            foreach ($uploaded_images as $image) {
+                $tmp_image = new \App\Image();
+                $tmp_image->img_path = $image["path"];
+                $tmp_image->img_file = $image["file"];
+                $tmp_image->destination_id = $destination->id;
+                $destination->images()->save($tmp_image);
+            }
+        }   
+
+        if($destination->update($request->all()) && $destination->categories()->sync($request->category_list)){
+            return redirect()->route('destinations.edit', $id);
+        }
+    }
+
+    /**
+    * Upload destination photos
+    *
+    */
+    public function uploadPhotos(Request $request){
+
+        if($request->hasFile('photos')){
+            $photos = $request->file('photos');
+            $uploaded_images = array();
+            foreach ($photos as $photo) {
+                $image_name = md5($photo->getClientOriginalName()."".date("YmdHis"));
+                $tmp_image = Image::make($photo->getRealPath())->resize(1280,500);
+                $tmp_image->save(storage_path("app/public/upload/images/{$image_name}.jpg"));
+                array_push($uploaded_images, array('file' => "{$image_name}.jpg", 'path' => 'upload/images')); 
+            }
+            return $uploaded_images;
+        }
     }
 
     public function search(Request $request) {
 
         $categories = Category::all();
-
-        
         $query = (isset($request))? $request : "";
         if(!$request->search){
             $destinations = Destination::all();
@@ -112,6 +155,41 @@ class DestinationController extends Controller
         }
         return view('destinations.search', compact('destinations', 'query', 'categories'));
     }
+
+    /**
+    * Show details about create an experience
+    */
+    public function details(){
+        return view('destinations.details');
+    }
+
+     /**
+    * get video  info
+    * @param string url $url [youtube or vimeo]
+    * @return array
+    */
+    public function getVideoInfo($url){
+        if(isset($url) && $url != ""){
+            $video = parse_url($url);
+            if(strpos($url,"youtube") !== false){
+                $video_source = "youtube";
+            } else if(strpos($url, "vimeo") !== false){
+                $video_source = "vimeo";
+            }
+            if($video_source == "youtube") {
+                $video_url = parse_str($video['query'], $url_parameters);
+                $alien_video_id = $url_parameters['v'];
+            } else if($video_source == "vimeo") {
+                $video_url = preg_replace("@[/\\\]@", "", $video['path']);
+                $alien_video_id = $video_url;
+            } 
+            return array(
+                'source' => $video_source,
+                'alien_id' => $alien_video_id
+            );
+        }
+    }
+
 
     /**
      * Remove the specified resource from storage.

@@ -1,3 +1,8 @@
+$btn-default-bg: #28c0da;
+$btn-default-color: #fff;
+$btn-default-border: #28c0da;
+
+
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 
@@ -17,6 +22,8 @@ $light-blue: #28c0da;
 
 @import "modules/landingpage";
 
+@import "modules/listexperience";
+
 .no-resize {
   resize: none;
 }
@@ -25,6 +32,7 @@ $light-blue: #28c0da;
 @import "vendor/select2.min";
 @import "vendor/fileinput.min";
 @import "vendor/select2bootstrap.min";
+@import "vendor/formValidation.min";
 
 
 @import "partials/responsive";

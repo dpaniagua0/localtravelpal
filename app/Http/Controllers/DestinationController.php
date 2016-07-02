@@ -198,7 +198,6 @@ class DestinationController extends Controller
     public function setCover(Request $request){
         //check if destination has a cover
         $destination = Destination::findOrfail($request->destination_id);
-        $images = $destination->images()->where('is_cover', 0)->paginate(6);
         if($destination->hasCover()){
             //Find the image with cover set as 1
             $image = Images::findOrfail($destination->hasCover()->id);
@@ -209,6 +208,8 @@ class DestinationController extends Controller
         $new_cover = Images::findOrfail($request->image_id);
         $new_cover->is_cover = 1;
         if($new_cover->save()){
+
+            $images = $destination->images()->where('is_cover', 0)->paginate(6);
             return view('destinations.destinationImages', compact('destination', 'images'));
         } 
         return false;

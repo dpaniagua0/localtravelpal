@@ -35,6 +35,7 @@
 
 @section('app-js')
 <script type="text/javascript">
+var body = $("body");
 $(function() {
   $("select.basic-multiple,select.basic-single").select2({
    theme: "bootstrap"
@@ -50,6 +51,43 @@ $(function() {
             $iframe.height($body.height());
         }
     }
+
+    //Redirect to images tab on pagination
+    // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    } 
+
+    function setCover(imageId, destinationId) {
+      var data = {};
+      data["image_id"] = imageId;
+      data["destination_id"] = destinationId;
+      data["_token"] = "{{ csrf_token() }}";
+      return $.ajax({
+        url: "/destination/setcover",
+        type: "post",
+        data: data,
+        beforeSend : function(){
+          $("div.destination-images").html("");
+          $("div.destination-images").html('<div class="loader" style="margin: 0 auto"></div>');
+        }
+      });
+    }
+    //Destination image cover action
+    var coverBtn = $(".cover-btn");
+    $(body).on("click", ".cover-btn", function(){
+      var imageId = $(this).attr("image-id");
+      var destinationId = $(this).attr("destination-id");
+      var coverResponse = setCover(imageId, destinationId);
+      showCoverResponse(coverResponse);
+    });
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+    
 
     $('#destination-form')
     .formValidation({
@@ -110,6 +148,14 @@ function validateTab(index) {
         return true;
     }
 });
+
+function showCoverResponse(response){
+  response.done(function(data){
+    setTimeout(function(){
+        $("div.destination-images").html(data);
+    }, 800);
+  });
+}
 </script>
 @endsection
 

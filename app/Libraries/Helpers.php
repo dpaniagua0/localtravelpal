@@ -37,4 +37,8 @@ class Helpers {
     $lists = $lists->load('destinations');
     return view('helpers.user_wishlists', compact('lists'))->render();
   }
+
+  public static function destination_cover($destination){
+    return view('helpers.destination_cover', compact('destination'))->render();
+  }
 }

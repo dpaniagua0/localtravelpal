@@ -92,6 +92,11 @@ Route::get('destinations/delete/{id}', [
     'uses' => 'DestinationController@destroy',
 ]);
 
+Route::post('destination/setcover',[
+    'as' => 'destination.setcover',
+    'uses' => 'DestinationController@setCover'
+]);
+
 Route::get('list-an-experience',[
     'as' => 'destinations.details',
     'uses' => 'DestinationController@details'
@@ -105,6 +110,11 @@ Route::get('messages/delete/{id}', [
     'uses' => 'MessageController@destroy'
 ]);
 
+//Custom image size on url
+Route::get('upload/images/{width}x{height}/{file}',[
+    'as' => 'image.resize',
+    'uses' => 'ImageController@resize'
+]);
 
 
 

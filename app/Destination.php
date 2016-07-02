@@ -54,6 +54,10 @@ class Destination extends Model
         return $this->belongsToMany('App\Category', 'category_destination','destination_id','category_id');
     }
 
+    public function hasCover(){
+        return $this->images()->where('is_cover', '=', '1')->first();
+    }
+
     /**
     * Return all the destination images
     */

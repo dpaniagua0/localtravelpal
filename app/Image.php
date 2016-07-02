@@ -8,7 +8,8 @@ class Image extends Model
 {
     protected $fillable = [
     	'img_file', 'img_path',
-    	'status', 'destination_id'
+    	'status', 'destination_id',
+        'is_cover'
     ];
 
      /**

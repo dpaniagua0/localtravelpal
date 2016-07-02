@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\DestinationRequest;
 use App\Destination;
 use App\Category;
-//use App\Image;
+use App\Image as Images;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class DestinationController extends Controller
@@ -90,9 +90,10 @@ class DestinationController extends Controller
     public function edit($id)
     {
         $destination = Destination::findOrfail($id);
+        $images = $destination->images()->where('is_cover', 0)->paginate(6);
 
         $categories = Category::lists('name','id');
-        return view('destinations.edit', compact('destination', 'categories'));
+        return view('destinations.edit', compact('destination', 'categories', 'images'));
     }
 
     /**
@@ -190,6 +191,28 @@ class DestinationController extends Controller
         }
     }
 
+    /**
+    * Set destination cover image
+    * @param \Illuminate\Http\Request  $request
+    */
+    public function setCover(Request $request){
+        //check if destination has a cover
+        $destination = Destination::findOrfail($request->destination_id);
+        $images = $destination->images()->where('is_cover', 0)->paginate(6);
+        if($destination->hasCover()){
+            //Find the image with cover set as 1
+            $image = Images::findOrfail($destination->hasCover()->id);
+            $image->is_cover = 0;
+            $image->save();
+        }
+        //Set the new cover
+        $new_cover = Images::findOrfail($request->image_id);
+        $new_cover->is_cover = 1;
+        if($new_cover->save()){
+            return view('destinations.destinationImages', compact('destination', 'images'));
+        } 
+        return false;
+    }
 
     /**
      * Remove the specified resource from storage.

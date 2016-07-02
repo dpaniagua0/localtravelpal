@@ -239,7 +239,7 @@
                 @endif
             </div>
         </div>
-
+        <hr>
         <div class="form-group {{ $errors->has('photos') ? ' has-error' : '' }}">
             {!! Form::label('photos', 'Photos', ['class' => 'col-sm-2 control-label']) !!}
             <div class="col-sm-10">
@@ -255,13 +255,37 @@
                 </span>
                 @endif
                 <br>
-                @if(isset($destination) && count($destination->images) > 0)
+                @if(isset($destination) && count($images) > 0)
+                    
+                    <div class="destination-images clearfix">
+                        {!! Helpers::destination_cover($destination) !!}
+                      
+                        @foreach($images as $image)
+                        <div class="destination-image">
+                            <img src="/{{$image->img_path}}/medium/{{$image->img_file}}" alt="...">
+                            <div class="image-actions">
+                                <ul class="list-inline">
+                                    <li><a class="btn btn-danger btn-xs">Delete</a></li>
+                                    <li>
+                                        <a class="btn btn-primary btn-xs" href="/{{$image->img_path}}/original/{{$image->img_file}}" target="_blank">
+                                            Show
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-success cover-btn btn-xs"
+                                        destination-id="{{ $destination->id }}" 
+                                        image-id="{{ $image->id }}"
+                                        data-token="{{ csrf_token() }}">
+                                            Cover
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endforeach
 
-                    @foreach($destination->images as $image)
-                        <a href="#" class="thumbnail col-md-3">
-                          <img src="/{{$image->img_path}}/medium/{{$image->img_file}}" alt="...">
-                        </a>
-                    @endforeach
+                        {!! $images->fragment('images-tab')->render() !!}
+                    </div>
                 @endif
             </div>
         </div>

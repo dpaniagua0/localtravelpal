@@ -6064,6 +6064,25 @@ div.destination-title h1, div.destination-title small {
   width: 25px;
   display: inline-block; }
 
+/**
+* Global loader spin
+*/
+.loader {
+  border: 16px solid #f3f3f3;
+  /* Light grey */
+  border-top: 16px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .upload-controls {
   position: absolute;
   right: 10px;
@@ -6194,6 +6213,54 @@ div.destination h3 {
   padding-top: 15px;
   background: url("/upload/images/original/quote.png") no-repeat top left;
   background-size: 40px; }
+
+.destination-images {
+  margin: 20px -10px; }
+
+.destination-image {
+  position: relative;
+  float: left;
+  width: 33.3333%;
+  padding: 0px 20px;
+  margin-bottom: 20px;
+  display: block;
+  overflow: hidden; }
+
+.destination-image .image-actions {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  margin: 0 auto;
+  visibility: hidden;
+  cursor: pointer;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear; }
+
+.destination-image:hover > .image-actions {
+  visibility: visible;
+  opacity: 1; }
+
+.destination-image > .image-actions > ul {
+  margin: 30% auto;
+  width: 70%;
+  text-align: left;
+  display: block; }
+
+.destination-cover {
+  width: 100%;
+  padding-right: 0;
+  padding-left: 20px; }
+
+.destination-cover img {
+  width: 100%; }
+
+.destination-cover > .image-actions > ul {
+  margin: 20% auto;
+  width: 90%;
+  text-align: center;
+  display: block; }
 
 .no-resize {
   resize: none; }

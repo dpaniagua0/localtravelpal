@@ -216,6 +216,7 @@
 </div>  -->
     </div>
 <!-- Imges tab -->
+@if(isset($destination))
     <div id="images-tab" class="tab-pane">
         <div class="form-group {{ $errors->has('video_url') ? ' has-error' : '' }}">
             {!! Form::label('video_url', 'Video', ['class' => 'col-sm-2 control-label']) !!}
@@ -292,7 +293,7 @@
 
 
     </div>
-
+@endif
 
     <!-- Previous/Next buttons -->
     <ul class="pager wizard">

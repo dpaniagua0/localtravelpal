@@ -18,7 +18,6 @@
                           ]) !!}
                            <ul class="nav nav-tabs">
                             <li class="active"><a href="#basic-tab" data-toggle="tab">Bacis</a></li>
-                            <li><a href="#images-tab" data-toggle="tab">Images / Video</a></li>
                           </ul>
                           
                           @include('destinations.fields')

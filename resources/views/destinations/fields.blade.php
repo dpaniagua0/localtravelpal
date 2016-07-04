@@ -266,7 +266,7 @@
                             <img src="/{{$image->img_path}}/medium/{{$image->img_file}}" alt="...">
                             <div class="image-actions">
                                 <ul class="list-inline">
-                                    <li><a class="btn btn-danger btn-xs">Delete</a></li>
+                               <!--     <li><a class="btn btn-danger btn-xs">Delete</a></li> -->
                                     <li>
                                         <a class="btn btn-primary btn-xs" href="/{{$image->img_path}}/original/{{$image->img_file}}" target="_blank">
                                             Show

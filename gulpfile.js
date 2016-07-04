@@ -28,6 +28,7 @@ elixir(function(mix) {
         'select2.full.min.js',
         'fileinput.min.js', 
         'jquery.bootstrap.wizard.min.js',
+        'jquery.form.min.js',
         'formValidation.min.js',
         'framework/bootstrap.min.js'
     ]);

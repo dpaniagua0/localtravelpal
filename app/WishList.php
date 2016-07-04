@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class WishList extends Model
 {
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'owner_id', 'name'
+    ];
+
+
+
     public function users()
     {
         return $this->belongsToMany('App\User');

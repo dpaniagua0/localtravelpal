@@ -110,11 +110,20 @@ Route::get('messages/delete/{id}', [
     'uses' => 'MessageController@destroy'
 ]);
 
+Route::resource('wishlists', 'WishListController');
+
 //Custom image size on url
 Route::get('upload/images/{width}x{height}/{file}',[
     'as' => 'image.resize',
     'uses' => 'ImageController@resize'
 ]);
 
+
+Route::resource('images', 'ImageController');
+
+Route::get('images/upload', [
+    'as' => 'images.upload',
+    'uses' => 'ImageController@create'
+]);
 
 

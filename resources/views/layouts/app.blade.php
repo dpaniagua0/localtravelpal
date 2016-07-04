@@ -28,9 +28,9 @@
     @yield('facebook_sdk')
 
     @include('layouts.navigation')
-
+    <div class="page-wrap">
     @yield('content')
-
+</div>
     <div class="section pre-footer pt-15 pb-15">
         <div class="section-inner">
             <h1 class="mt-15 mb-15">Guides to your Favorite Destinations</h1>
@@ -59,6 +59,7 @@
         </div>
       </div>
     </footer>
+    
     <script src="{{ elixir('js/app.js') }}"></script>
     <script src="{{ elixir('js/all.js') }}"></script>
     

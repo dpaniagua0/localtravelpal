@@ -24,6 +24,15 @@
                 </ul>-->
 
                 <!-- Right Side Of Navbar -->
+                <!-- Show wishlist button only to logged users -->
+                @if(Auth::check())
+                <div class="wish-list-nav">
+                    <button class="wish-list-btn" href="{{ route('users.whishlists', Auth::user()->id  )}}">
+                        My whish list
+                    </button>
+                </div>
+                @endif
+                <!-- -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     <li><a href="{{ route('destinations.details') }}">List a destination</a></li>
@@ -37,6 +46,7 @@
                     @else
                     
                         <li class="dropdown">
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
@@ -62,17 +72,15 @@
                                     </a>
                                 </li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li>
+                                    <a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a>
+                                </li>
                                
                             </ul>
                         </li>
-                        <li>
-                            <a class="whish-list-nav" href="{{ route('users.whishlists', Auth::user()->id  )}}">
-                                My whish list
-                            </a>
-                        </li>
                     @endif
                 </ul>
+               
             </div>
         </div>
     </div>

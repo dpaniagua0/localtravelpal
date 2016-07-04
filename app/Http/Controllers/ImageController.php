@@ -11,12 +11,12 @@ use Intervention\Image\ImageManagerStatic as Image;
 class ImageController extends Controller
 {
 
-	public $width;
-	public $height;
-	public $file;
+	private $width;
+	private $height;
+	private $file;
 
     /**
-    * 
+    *  Resize and return the image requested
     */
     public function resize(Request $request) {
 
@@ -29,4 +29,18 @@ class ImageController extends Controller
 	    }, 43200, true);
 	    return $img->response('jpg');
     }
+
+
+    /**
+    * 
+    */
+    public function create(){
+    	return view('images.create');
+    }
+
+    public function upload($images){
+
+    }
+
+
 }

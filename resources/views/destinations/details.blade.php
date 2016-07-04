@@ -1,6 +1,18 @@
 @extends('layouts.app')
 @section('page-title','List an experience')
 @section('content')
+
+<style>
+  .destination-bg {
+    background: url('http://placehold.it/1200x350') no-repeat;
+    background-position: center center;
+    background-size: cover; 
+  }
+</style>
+<div class="section-top destination-bg">
+  <div class="has-pull-top"></div>
+</div>
+
     <div class="section">
         <div class="section-inner">
             <h1>Why be a Locopal Insider?</h1>

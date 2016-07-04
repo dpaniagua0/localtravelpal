@@ -1,5 +1,11 @@
 @import "partials/helpers";
 
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
 .btn-file {
     position: relative;
     overflow: hidden;
@@ -63,6 +69,18 @@ body {
 /** 
 * Footer styles
 */
+.page-wrap:after {
+  height: 142px; 
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -142px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
 .footer {
   position: relative;
   bottom: 0;
@@ -105,15 +123,28 @@ body {
     font-weight: 300;
 }
 /** End Footer styles **/
+.wish-list-nav {
+    height: 20px;
+    padding: 15px  5px;
+    margin-bottom: 5px;
+    width: 50%;
+    float: right;
+}
 
-.whish-list-nav {
+.wish-list-btn {
     background-color: #47BBCC;
     border: 1px solid #47BBCC;
     border-radius: 3px;
     color: #fff !important;
     padding: 5px !important;
-    margin-top: 10%;
     cursor: pointer;
+    display:block;
+    position: relative;
+    float:right;
+}
+.wish-list-nav:after {
+    content: " ";
+   clear: both;
 }
 .pull-top {
     margin-top: -170px;
@@ -149,7 +180,8 @@ div.destination-actions {
    min-height: 100px; 
 }
 div.destination-banner {
-    width: 30%;
+    width: auto;
+    margin-top: 75px;
     float: right;
     height: 100%;
     display:block;

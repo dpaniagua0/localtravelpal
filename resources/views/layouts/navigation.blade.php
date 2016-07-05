@@ -25,13 +25,13 @@
 
                 <!-- Right Side Of Navbar -->
                 <!-- Show wishlist button only to logged users -->
-                @if(Auth::check())
                 <div class="wish-list-nav">
-                    <button class="wish-list-btn" href="{{ route('users.whishlists', Auth::user()->id  )}}">
-                        My whish list
-                    </button>
+                    @if(Auth::check())
+                        <button class="wish-list-btn" href="{{ route('users.whishlists', Auth::user()->id  )}}">
+                            My whish list
+                        </button>
+                    @endif
                 </div>
-                @endif
                 <!-- -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->

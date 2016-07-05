@@ -24,12 +24,25 @@
 			@foreach($destinations as $destination)
 				<div class="destination">
 					<a class="link-to-destination">
-						<img style="width: 100%" src="http://placehold.it/300x300" alt="http://placehold.it/350x150">
+						{{--*/$cover = $destination->hasCover();/*--}}
+						@if(isset($cover))
+							{{--*/$cover_path = "$cover->img_path";/*--}}
+							{{--*/$cover_file = "$cover->img_file";/*--}}
+							{{--*/$cover_image = "/$cover_path/300x300/$cover_file";/*--}}
+						@else 
+							{{--*/ $cover_image = "http://placehold.it/300x300"; /*--}}
+						@endif
+						<img style="width: 100%" src="{{ $cover_image}}" alt="{{$destination->title}}">
 						<h3>{{ $destination->title}}</h3>
 					</a>
-					<p>
-						{{ $destination->description}}
-					</p>
+					<div class="short-description">
+						<p>
+							{{ str_limit($destination->description, 220) }}
+						</p>
+
+						<a class="see-more mb-5" href="{{ route('destinations.show', $destination->id)}}">See more</a>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 			
 			@endforeach

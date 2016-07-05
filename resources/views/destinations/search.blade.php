@@ -37,11 +37,11 @@
               <div class="col-md-3">
                 <h4>Interested in:</h4>
                 <div class="interest-categories">
-                  @foreach($categories as $category)
-                    <a class="btn btn-default btn-xs">
-                      {{ $category->name }}
-                    </a>
-                  @endforeach
+                    @foreach($categories as $category)
+                      <input type="checkbox" autocomplete="off"> {{ $category->name }}
+                      <br>
+                    @endforeach
+                   
                 </div>
               </div>
 

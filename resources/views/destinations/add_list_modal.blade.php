@@ -16,7 +16,7 @@
         ]) !!}
        
        {!! Form::hidden('owner_id', Auth::user()->id);  !!}
-         
+         {!! Form::hidden('destination_id', $destination->id) !!}
       <div class="modal-body">
 
          <div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">

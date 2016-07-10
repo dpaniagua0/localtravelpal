@@ -14,12 +14,13 @@
             @endsection
             <div class="col-sm- col-md-3">
                 <div class="thumbnail">
+                    {{$item}}
                     <img src="http://placehold.it/242x200" alt="...">
                     <div class="caption">
                         <h5 class="pull-left">{{ $item->name }}</h5>
 
                         <div class="pull-right fb-share-button" 
-                          data-href="http://www.localtravelpal.com/users/1/wishlists/{{$item->id}}" 
+                          data-href="http://www.locopal.com/users/1/wishlists/{{$item->id}}" 
                           data-mobile_iframe="true"
                           data-layout="button"
                           data-title="Testing">

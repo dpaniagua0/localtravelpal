@@ -3,7 +3,16 @@ $btn-default-color: #fff;
 $btn-default-border: #28c0da;
 
 
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+@import "node_modules/font-awesome/scss/variables";
+
+$input-border-color: #000;
+@import "node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox";
+
+
 
 
 //@import url(https://fonts.googleapis.com/css?family=Lato);
@@ -23,6 +32,11 @@ $light-blue: #28c0da;
 @import "modules/landingpage";
 
 @import "modules/listexperience";
+
+@import "modules/destinations";
+ 
+
+
 
 .no-resize {
   resize: none;

@@ -19,6 +19,26 @@
     background-size: cover; 
   }
 </style>
+@section('facebook_sdk')
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '150683558679229',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+@endsection
+
 <div class="section-top destination-bg">
   <div class="has-pull-top"></div>
 </div>
@@ -65,10 +85,18 @@
         </div>
         @endif
     </div>
+
     <div class="destination-description">
       <p>
         {{ $destination->description}}
       </p>
+      <div class="social-shares">
+        <!-- Facebook share button code -->
+        <div class="fb-share-button" 
+          data-href="http://www.locopal.com/destinations/{{$destination->id}}" 
+          data-layout="button_count">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -102,7 +130,8 @@
   $("form#wishlist-form").formValidation();
 
   $("form#wishlist-form").ajaxForm({
-    target: ".form-response"
+    target: ".modal-body",
+
   });
 
  }); 

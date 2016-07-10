@@ -6099,6 +6099,11 @@ div.destination-title h1, div.destination-title small {
 .destination-preview .thumbnail {
   padding: 0px; }
 
+.abc-checkbox label:after {
+  padding-left: 4px;
+  padding-top: 2px;
+  font-size: 9px; }
+
 /**
 * Global loader spin
 */
@@ -6305,6 +6310,15 @@ a.see-more {
   width: 90%;
   text-align: center;
   display: block; }
+
+.destination-description {
+  position: relative; }
+
+div.social-shares {
+  position: absolute;
+  display: block;
+  top: -20px;
+  right: -20px; }
 
 .no-resize {
   resize: none; }

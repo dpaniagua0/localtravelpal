@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\WishListRequest;
 use App\WishList;
+use App\User;
 
 class WishListController extends Controller
 {
@@ -39,11 +40,13 @@ class WishListController extends Controller
     public function store(WishListRequest $request)
     {
         $wish_list = new WishList($request->all());   
+        $user = User::findOrfail($request->owner_id);
         if($request->ajax()){
             if($wish_list->save()){
-                return "list added";
+                $wish_list->destinations()->attach($request->destination_id);
+                return "<p class='alert alert-success'>Added to List</p>";
             } else {
-                return "Oops! something is wrong please try again later.";
+                return "<p class='alert alert-danger'>Oops! something is wrong please try again later.</p>";
             }
         }   
     }

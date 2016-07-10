@@ -38,8 +38,10 @@
                 <h4>Interested in:</h4>
                 <div class="interest-categories">
                     @foreach($categories as $category)
-                      <input type="checkbox" autocomplete="off"> {{ $category->name }}
-                      <br>
+                     <div class="radio radio-info radio-inline">
+                        <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
+                        <label for="inlineRadio1"> Inline One </label>
+                    </div>
                     @endforeach
                    
                 </div>

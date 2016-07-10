@@ -228,7 +228,14 @@ div.destination-title h1, div.destination-title small{
     padding: 0px;
 }
 
-
+$font-family-icon: 'Glyphicons Halflings';
+$check-icon: "\e013";
+ 
+.abc-checkbox label:after {
+    padding-left: 4px;
+    padding-top: 2px;
+    font-size: 9px;
+}
 
 /**
 * Global loader spin

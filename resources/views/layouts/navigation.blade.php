@@ -27,9 +27,9 @@
                 <!-- Show wishlist button only to logged users -->
                 <div class="wish-list-nav">
                     @if(Auth::check())
-                        <button class="wish-list-btn" href="{{ route('users.whishlists', Auth::user()->id  )}}">
+                        <a class="wish-list-btn" href="{{ route('users.whishlists', Auth::user()->id  )}}">
                             My whish list
-                        </button>
+                        </a>
                     @endif
                 </div>
                 <!-- -->

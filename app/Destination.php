@@ -57,7 +57,7 @@ class Destination extends Model
     public function hasCover(){
         return $this->images()->where('is_cover', '=', '1')->first();
     }
-
+    
     /**
     * Return all the destination images
     */

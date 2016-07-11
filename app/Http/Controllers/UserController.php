@@ -207,7 +207,7 @@ class UserController extends Controller
     * @return response
     */
     public function wishlists($user_id){
-        $user = User::findOrfail($user_id)->load('wishlists');
+        $user = User::findOrfail($user_id);
         return view('users.wish_lists', compact('user'));
     }
 

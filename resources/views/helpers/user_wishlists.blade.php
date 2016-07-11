@@ -2,31 +2,36 @@
 <div class="featured-guides">
     <div class="row">
 
-        @foreach($lists as $item)
+        @foreach($lists as $list)
 
-            @section('page-title',$item->name)
             @section('meta-tags')
-                <meta property="og:url"           content="http://www.localtravelpal.com/users/1/wishlists/{{$item->id}}" />
+                <meta property="og:url"           content="http://www.locopal.com/users/1/wishlists/{{$list->id}}" />
                 <meta property="og:type"          content="website" />
-                <meta property="og:title"         content="Your Website Title" />
-                <meta property="og:description"   content="Your description" />
-                <meta property="og:image"         content="http://www.localtravelpal.com/users/1/wishlists/{{$item->id}}" />
+                <meta property="og:title"         content="Locopal" />
+                <meta property="og:description"   content="Share wishlist" />
+                <meta property="og:image"         content="http://www.locopal.com/users/1/wishlists/{{$list->id}}" />
             @endsection
             <div class="col-sm- col-md-3">
+                @if($list->destinations()->first() && $list->destinations()->first()->hasCover() != null)
+                    {{--*/$cover_file = $list->destinations()->first()->hasCover()->img_file; /*--}} 
+                    {{--*/$cover_path = $list->destinations()->first()->hasCover()->img_path; /*--}}
+                    {{--*/$cover_image = "/{$cover_path}/240x200/{$cover_file}";/*--}}
+                @else 
+                    {{--*/$cover_image = "http://placehold.it/240x200"; /*--}}
+                @endif
                 <div class="thumbnail">
-                    {{$item}}
-                    <img src="http://placehold.it/242x200" alt="...">
+                    <img src="{{$cover_image}}" alt="cover">
                     <div class="caption">
-                        <h5 class="pull-left">{{ $item->name }}</h5>
+                        <h5 class="pull-left">{{ $list->name }}</h5>
 
                         <div class="pull-right fb-share-button" 
-                          data-href="http://www.locopal.com/users/1/wishlists/{{$item->id}}" 
+                          data-href="http://www.locopal.com/users/1/wishlists/{{$list->id}}" 
                           data-mobile_iframe="true"
                           data-layout="button"
                           data-title="Testing">
                         </div>
                         <div class="clearfix"></div>
-                        <a href="{{ route('users.listcontent', [ 'user_id' => 1, 'list_id' => $item->id]) }}" class="btn btn-primary btn-lg btn-block" role="button">View</a>
+                        <a href="{{ route('users.listcontent', [ 'user_id' => 1, 'list_id' => $list->id]) }}" class="btn btn-primary btn-lg btn-block" role="button">View</a>
                     </div>
                 </div>
             </div>

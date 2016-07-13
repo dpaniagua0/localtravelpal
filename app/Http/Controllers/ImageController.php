@@ -46,7 +46,7 @@ class ImageController extends Controller
             foreach ($photos as $photo) {
                 $image_name = $photo->getClientOriginalName();
                 $tmp_image = Image::make($photo->getRealPath())->resize(1280,500);
-                $tmp_image->save(storage_path("app/public/upload/images/{$image_name}.jpg"));
+                $tmp_image->save(storage_path("app/public/upload/images/{$image_name}"));
                 array_push($uploaded_images, array('file' => "{$image_name}.jpg", 'path' => 'resources')); 
             }
             return "true";

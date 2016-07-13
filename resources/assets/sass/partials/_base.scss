@@ -200,6 +200,20 @@ div.destination-title h1, div.destination-title small{
 .inline-block {
     display: inline-block;
 }
+a.read-more {
+    color: #005b6b;
+    border-bottom: 1px solid #005b6b;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-bottom: 1px;
+    font-weight: bolder;
+}
+a.read-more:after {
+    content: ">>";
+    width:50px;
+    padding-left: 5px;
+    font-size: 18px;
+}
 /**
 * Custom social icons
 */

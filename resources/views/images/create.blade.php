@@ -16,11 +16,10 @@
                       @include('common.errors')
                      
                         {!! Form::open([
-                            'route' => 'images.store',
                             'class' => 'form-horizontal',
                             'method' => 'POST',
                             'id' => 'destination-form',
-                            'files' => true
+                            'files' => true,
                           ]) !!}
 
                            <div class="form-group">
@@ -51,10 +50,16 @@ $(function() {
    theme: "bootstrap"
   });
 
+   $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('input[name="_token"]').attr('content') }
+    });
+
   $("#images").fileinput({
+    uploadUrl: "/images/upload",
     uploadAsync: true,
     maxFileCount: 5,
-    showCaption: false
+    showCaption: false,
+    allowedFileExtensions: ['png', 'jpg', 'jpeg']
   });
 
    

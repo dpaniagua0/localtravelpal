@@ -4,13 +4,28 @@
 
 <style>
   .destination-bg {
-    background: url('http://placehold.it/1200x350') no-repeat;
+    background: url('/upload/images/original/list_experience_header.jpg') no-repeat;
     background-position: center center;
     background-size: cover; 
+    padding-top: 100px;
+    position: relative;
+    padding-left: 10%;
+    padding-right: 10%;
   }
 </style>
 <div class="section-top destination-bg">
   <div class="has-pull-top"></div>
+  <div class="experience-banner clearfix">
+    <div>
+        <h1>List an Experience</h1>
+        <p>
+            Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+            Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+            Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+        </p>
+        <a class="read-more">learn more</a>
+    </div>
+  </div>
 </div>
 
     <div class="section">
@@ -21,18 +36,42 @@
             </p>
 
             <div class="rewards-section clearfix">
-                @for($i = 0; $i < 4; $i++)
-                    <div class="insider-reward">
-                        <img src="http://placehold.it/350x150" alt="http://placehold.it/350x150">
-                        <div class="pt-15 pb-15">
-                            <h4>Meet Great People</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet molestie augue. Nam auctor tristique tellus, id finibus diam tincidunt in
-                            </p>
-                        </div>
+                <div class="insider-reward">
+                    <img src="/upload/images/350x150/meet_people.jpg" alt="/upload/images/350x150/meet_people.jpg">
+                    <div class="pt-15 pb-15">
+                        <h4>Meet Great People</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet molestie augue. Nam auctor tristique tellus, id finibus diam tincidunt in
+                        </p>
                     </div>
-                @endfor
-             
+                </div>
+                <div class="insider-reward">
+                    <img src="/upload/images/350x150/earn_money.jpg" alt="/upload/images/350x150/earn_money.jpg">
+                    <div class="pt-15 pb-15">
+                        <h4>Earn Money</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet molestie augue. Nam auctor tristique tellus, id finibus diam tincidunt in
+                        </p>
+                    </div>
+                </div>
+                <div class="insider-reward">
+                    <img src="/upload/images/350x150/share_world.jpg" alt="/upload/images/350x150/share_world.jpg">
+                    <div class="pt-15 pb-15">
+                        <h4>Share Your World</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet molestie augue. Nam auctor tristique tellus, id finibus diam tincidunt in
+                        </p>
+                    </div>
+                </div>
+                <div class="insider-reward">
+                    <img src="/upload/images/350x150/notoriety.jpg" alt="/upload/images/350x150/notoriety.jpg">
+                    <div class="pt-15 pb-15">
+                        <h4>Gain Notoriety</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet molestie augue. Nam auctor tristique tellus, id finibus diam tincidunt in
+                        </p>
+                    </div>
+                </div>   
             </div>
 
         </div>  

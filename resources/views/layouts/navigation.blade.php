@@ -28,7 +28,7 @@
                 <div class="wish-list-nav">
                     @if(Auth::check())
                         <a class="wish-list-btn" href="{{ route('users.whishlists', Auth::user()->id  )}}">
-                            My whish list
+                            Whishlist
                         </a>
                     @endif
                 </div>
@@ -48,7 +48,7 @@
                         <li class="dropdown">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                Hi! {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">

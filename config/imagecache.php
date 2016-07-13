@@ -38,6 +38,7 @@ return array(
         'storage/pages/home/img',
         'storage/upload/images',
         'storage/avatars/{id?}',
+        'storage/resources',
         public_path('img')
     ),
 

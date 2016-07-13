@@ -38,7 +38,22 @@ class ImageController extends Controller
     	return view('images.create');
     }
 
-    public function upload($images){
+   
+   public function store(Request $request){
+        if($request->hasFile('images')){
+            $photos = $request->file('images');
+            $uploaded_images = array();
+            foreach ($photos as $photo) {
+                $image_name = $photo->getClientOriginalName();
+                $tmp_image = Image::make($photo->getRealPath())->resize(1280,500);
+                $tmp_image->save(storage_path("app/public/upload/images/{$image_name}.jpg"));
+                array_push($uploaded_images, array('file' => "{$image_name}.jpg", 'path' => 'resources')); 
+            }
+            return "true";
+        }
+   }
+
+    public function show(){
 
     }
 

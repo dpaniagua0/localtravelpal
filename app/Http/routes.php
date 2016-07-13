@@ -118,12 +118,13 @@ Route::get('upload/images/{width}x{height}/{file}',[
     'uses' => 'ImageController@resize'
 ]);
 
-
-Route::resource('images', 'ImageController');
-
 Route::get('images/upload', [
     'as' => 'images.upload',
     'uses' => 'ImageController@create'
 ]);
+
+Route::post('images/upload', 'ImageController@store');
+
+Route::resource('images', 'ImageController');
 
 

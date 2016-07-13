@@ -58,7 +58,7 @@
 
     ]) !!}
     <span class="input-group-btn">
-      <button class="btn btn-default" type="submit">GO</button>
+      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
     </span>
   </div>
 

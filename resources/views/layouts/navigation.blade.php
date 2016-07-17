@@ -41,7 +41,7 @@
                         @include('layouts.adminmenu')
                     @endif
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="#" data-target="#login-modal" data-toggle="modal">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                     

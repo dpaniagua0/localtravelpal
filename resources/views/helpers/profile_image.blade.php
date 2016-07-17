@@ -4,7 +4,10 @@
 @else
   {{--*/ $image_source = "http://placehold.it/250x250" /*--}}
 @endif
-                 
+         
+@if(isset($user->avatar))
+	{{--*/ $image_source = $user->avatar;/*--}}
+@endif                 
 <div class="profile-image">
   <img class="img-thumbnail" style="width: 100%" src="{{ $image_source }}">
   @if(Auth::check() && Auth::user()->id == $user->id)

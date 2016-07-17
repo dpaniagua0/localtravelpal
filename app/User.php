@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Storage;
+use Socialite;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -14,7 +16,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password','bio', 'video_url',
-        'video_alien_id','img_path','img_type'
+        'video_alien_id','img_path','img_type', 'avatar'
     ];
 
     /**
@@ -72,11 +74,31 @@ class User extends Authenticatable
                 return true;
             }
         }
-
         return false;
     }
 
     public function getProfileImage(){
         return Storage::url('app/avatars/'.$this->id.'/'.md5($this->id).'.jpg');
     }
+
+    public static function findByEmailOrCreate($userData){
+        return User::firstOrCreate([
+            'name' => $userData->name,
+            'email' => $userData->email,
+            'avatar' => $userData->avatar_original
+        ]);
+    }  
+
+    public function execute($hasCode, $listener) {
+
+        if(!$hasCode) return $this->redirectToProvider();
+        $user = User::findByEmailOrCreate($this->getFacebookUser());
+        Auth::login($user, true);
+        return redirect('/');
+    }
+
+    public function getFacebookUser() {
+        return Socialite::driver('facebook')->user();
+    }
+
 }

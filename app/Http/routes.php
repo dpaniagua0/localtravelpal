@@ -127,4 +127,6 @@ Route::post('images/upload', 'ImageController@store');
 
 Route::resource('images', 'ImageController');
 
+Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
 

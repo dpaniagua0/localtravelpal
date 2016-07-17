@@ -16,7 +16,6 @@ var APP = APP || {};
         $('[data-toggle="tooltip"]').tooltip();
     
         APP.confirm();
-    
     });
 
 
@@ -42,7 +41,6 @@ var APP = APP || {};
                     });
         });
     };
-
 
     APP.loadModal = function(options){
         var settings = $.extend({

@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
-
     <style>
         body {
             font-family: 'Lato';
@@ -23,6 +22,14 @@
             margin-right: 6px;
         }
     </style>
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.7&appId=150683558679229";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </head>
 <body id="app-layout">
     @yield('facebook_sdk')
@@ -30,7 +37,11 @@
     @include('layouts.navigation')
     <div class="page-wrap">
     @yield('content')
-</div>
+
+    @if(!Auth::check())
+        @include("layouts.login")
+    @endif
+    </div>
     <div class="section pre-footer pt-15 pb-15">
         <div class="section-inner">
             <h1 class="mt-15 mb-15">Guides to your Favorite Destinations</h1>

@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Role;
+use Auth;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Socialite;
 
 class AuthController extends Controller
 {
@@ -78,5 +81,26 @@ class AuthController extends Controller
 
         return $create;
 
+    }
+
+
+     /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback(User $authenticateUser, Request $request)
+    {
+       return $authenticateUser->execute($request->has('code'), $this);
     }
 }

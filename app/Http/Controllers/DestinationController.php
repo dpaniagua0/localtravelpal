@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\DestinationRequest;
 use App\Destination;
 use App\Category;
+use Auth;
 use App\Image as Images;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -23,7 +24,7 @@ class DestinationController extends Controller
     {
         $this->middleware('auth', ['except' => ['search', 'show', 'details']]);
 
-        $this->middleware('admin', ['except' => ['search', 'show','create','details']]);
+        $this->middleware('admin', ['except' => ['search', 'show','create','details', 'edit', 'store']]);
     }
 
 
@@ -65,7 +66,11 @@ class DestinationController extends Controller
         $destination->alien_video_id = $video["alien_id"];
 
         if($destination->save() && $destination->categories()->sync($request->category_list)){
-            return redirect('destinations');
+            if(Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('admin')){
+                return redirect('destinations');
+            } else {
+                return redirect()->route('destinations.edit', $destination->id);
+            }
         }
     }
 

@@ -5,7 +5,7 @@
   {{--*/ $image_source = "http://placehold.it/250x250" /*--}}
 @endif
          
-@if(isset($user->avatar))
+@if(!empty($user->avatar))
 	{{--*/ $image_source = $user->avatar;/*--}}
 @endif                 
 <div class="profile-image">

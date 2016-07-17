@@ -1,4 +1,3 @@
-@import "partials/helpers";
 
 * {
     margin: 0;
@@ -196,6 +195,7 @@ div.destination-title h3 {
 }
 div.destination-title h1, div.destination-title small{
     color: #fff;
+    font-size: 29px;
 }
 .inline-block {
     display: inline-block;

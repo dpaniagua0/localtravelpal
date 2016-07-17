@@ -104,11 +104,15 @@
 {{--*/$user_img_file = $destination->owner->img_file; /*--}} 
 {{--*/$user_img_path = $destination->owner->img_path; /*--}}
 
-@if(isset($user_img_path) && isset($user_img_file))
+@if(!empty($user_img_path) && !empty($user_img_file))
   {{--*/$user_profile_img = "/{$user_img_path}/150x150/{$user_img_file}"; /*--}}
 @else
   {{--*/$user_profile_img = "http://placehold.it/150x150"; /*--}}
 @endif
+
+@if(!empty($user->avatar))
+  {{--*/ $user_profile_img = $destination->owner->avatar;/*--}}
+@endif 
   <div class="destination-banner">
     <img class="thumbnail" src="{{$user_profile_img}}">
   </div>

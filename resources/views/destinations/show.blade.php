@@ -114,7 +114,9 @@
   {{--*/ $user_profile_img = $destination->owner->avatar;/*--}}
 @endif 
   <div class="destination-banner">
+    <a href="{{ route('users.profile', $destination->owner->id)}}">
     <img class="thumbnail" src="{{$user_profile_img}}">
+    </a>
   </div>
 </div>
 

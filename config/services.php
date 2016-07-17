@@ -35,8 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'facebook' => [
-        'client_id' => env('FACEBOOK_APP_ID'),
-        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'client_id' => '150683558679229',
+        'client_secret' => 'd2fb703a412f8890c8bd14a38ad0c197',
         'redirect' => 'http://locopal.com/auth/facebook/callback'
     ],
 

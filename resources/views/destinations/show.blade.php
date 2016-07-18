@@ -75,7 +75,7 @@
             @if(count($user_wishlists) > 0) 
               @foreach($user_wishlists as $list)
               <li>
-                <a id="{{$list->id}}"  class="wish-list add-to-list" href="#">
+                <a id="{{$list->id}}" data-destination="{{ $destination->id }}" class="wish-list add-to-list" href="#">
                   {{ $list->name}}
                 </a>
               </li>
@@ -86,19 +86,24 @@
         @endif
     </div>
 
-    <div class="destination-description">
-      <p>
-        {{ $destination->description}}
-      </p>
-      <div class="social-shares">
-        <!-- Facebook share button code -->
-        <div class="fb-share-button" 
-          data-href="http://www.locopal.com/destinations/{{$destination->id}}" 
-          data-layout="button_count">
-        </div>
+    <ul class="destination-tabs list-inline">
+      <li role="presentation" class="active"><a href="#details" aria-controls="home" role="tab" data-toggle="tab">Details</a></li>
+      <li role="presentation"><a href="#reservations" aria-controls="home" role="tab" data-toggle="tab">Reservations</a></li>
+    </ul>
+
+    <div  class="tab-content">
+      <div id="details" class="destination-description tab-pane active" role="tabpanel">
+        <p>
+          {{ $destination->description}}
+        </p>
+        
+      </div>
+      <div id="reservations" class="tab-pane" role="tabpanel">
+      [[ FORM HERE ]]
       </div>
     </div>
   </div>
+
 
 
 {{--*/$user_img_file = $destination->owner->img_file; /*--}} 
@@ -117,10 +122,34 @@
     <a href="{{ route('users.profile', $destination->owner->id)}}">
     <img class="thumbnail" src="{{$user_profile_img}}">
     </a>
-  </div>
-</div>
 
+    <div class="social-shares">
+      <!-- Facebook share button code -->
+      <div class="fb-share-button" 
+        data-href="http://www.locopal.com/destinations/{{$destination->id}}" 
+        data-layout="button_count">
+      </div>
+    </div>
+   
+  </div>
+  <div class="clearfix"></div>
+  
+</div>
+<div class="gallery-section">
+
+  @foreach($images as $image)
+  <div class="gallery-item">
+    <a href="#"> 
+      <img src="/{{$image->img_path}}/250x250/{{$image->img_file}}" alt="...">
+    </a>
+     <div class="img-overlay"></div>
+  </div>
+  @endforeach
+</div>
 <div class="clearfix"></div>
+
+
+
 @if(Auth::check())
   @include("destinations.add_list_modal")
 @endif
@@ -137,8 +166,32 @@
 
   $("form#wishlist-form").ajaxForm({
     target: ".modal-body",
-
   });
+
+  var addListBtn = $(".add-to-list");
+  $(addListBtn).on("click", function(){
+    var listId = $(this).attr("id");
+    var listDestination = $(this).attr("data-destination");
+    addToList(listId, listDestination).done(function(response){
+      if(response == "true"){
+        eModal.alert("Destination added.");
+      }
+    });
+  });
+
+  function addToList(listId, destinationId){
+    var data = {};
+    var token = "{{ csrf_token()}}";
+    data["list_id"] = listId;
+    data["destination_id"] = destinationId;
+    data["_token"] = token;
+    return $.ajax({
+      url: "/addToList",
+      type: "post",
+      data: data
+    });
+  }
+
 
  }); 
 </script>

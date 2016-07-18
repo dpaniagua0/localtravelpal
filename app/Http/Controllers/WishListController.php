@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\WishListRequest;
 use App\WishList;
 use App\User;
+use App\Destination;
 
 class WishListController extends Controller
 {
@@ -94,5 +95,16 @@ class WishListController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addTo(Request $request) {
+        $wish_list = WishList::find($request->list_id);
+        $destination = Destination::find($request->destination_id);
+        if($wish_list && $destination){
+            $wish_list->destinations()->sync([ $request->destination_id ]);
+                return "true";
+            
+        }
+        return "false";
     }
 }

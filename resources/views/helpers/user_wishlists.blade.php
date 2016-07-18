@@ -12,9 +12,9 @@
                 <meta property="og:image"         content="http://www.locopal.com/users/1/wishlists/{{$list->id}}" />
             @endsection
             <div class="col-sm- col-md-3">
-                @if($list->destinations()->first() && $list->destinations()->first()->hasCover() != null)
-                    {{--*/$cover_file = $list->destinations()->first()->hasCover()->img_file; /*--}} 
-                    {{--*/$cover_path = $list->destinations()->first()->hasCover()->img_path; /*--}}
+                @if($list->destinations()->where('has_cover', '=' ,'1')->first())
+                    {{--*/$cover_file = $list->destinations()->where('has_cover', '=' ,'1')->first()->hasCover()->img_file; /*--}} 
+                    {{--*/$cover_path = $list->destinations()->where('has_cover', '=' ,'1')->first()->hasCover()->img_path; /*--}}
                     {{--*/$cover_image = "/{$cover_path}/240x200/{$cover_file}";/*--}}
                 @else 
                     {{--*/$cover_image = "http://placehold.it/240x200"; /*--}}

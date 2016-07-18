@@ -125,9 +125,8 @@ body {
 .wish-list-nav {
     height: 20px;
     padding: 15px  5px;
-    margin-bottom: 5px;
-    width: 50%;
-    float: right;
+    margin-bottom: 18px;
+    width: 100%;
 }
 
 .wish-list-btn {
@@ -168,34 +167,6 @@ body {
 .section-top:before {
     clear: both;
     height: 50px;
-}
-div.destination-details {
-   width: 70%;
-   float:left;
-   height: 100%; 
-   display: block;
-}
-div.destination-actions {
-   min-height: 100px; 
-}
-div.destination-banner {
-    width: auto;
-    margin-top: 75px;
-    float: right;
-    height: 100%;
-    display:block;
-}
-div.destination-title {
-    height: 134px;
-}
-div.destination-title h3 {
-    color: #e4e4e4;
-    margin-top: 0;
-    text-transform: uppercase;
-}
-div.destination-title h1, div.destination-title small{
-    color: #fff;
-    font-size: 29px;
 }
 .inline-block {
     display: inline-block;

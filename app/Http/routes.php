@@ -48,8 +48,6 @@ Route::get('users/{id}/guides', [
     'uses' => 'UserController@userGuides'
 ]); 
 
-
-
 Route::get('/profile/{id}', array(
   "as" => "users.profile",
   "uses" => "UserController@profile"
@@ -130,3 +128,5 @@ Route::resource('images', 'ImageController');
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
 
+
+Route::post('addToList', 'WishListController@addTo');

@@ -83,7 +83,9 @@ class DestinationController extends Controller
     public function show($id)
     {
         $destination = Destination::findOrfail($id);
-        return view('destinations.show', compact('destination'));
+        $images = $destination->images()->paginate(6);
+
+        return view('destinations.show', compact('destination', 'images'));
     }
 
     /**
@@ -208,6 +210,7 @@ class DestinationController extends Controller
             $image = Images::findOrfail($destination->hasCover()->id);
             $image->is_cover = 0;
             $image->save();
+            $destination->update(['has_cover' => 1]);
         }
         //Set the new cover
         $new_cover = Images::findOrfail($request->image_id);
@@ -230,6 +233,8 @@ class DestinationController extends Controller
     {
         $destination = Destination::findOrfail($id);
         if($destination){
+            $destination->categories()->detach();
+            $destination->wishlists()->detach();
             if($destination->delete()){
                 return redirect('destinations');
             }

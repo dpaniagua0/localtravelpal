@@ -5883,9 +5883,8 @@ body {
 .wish-list-nav {
   height: 20px;
   padding: 15px  5px;
-  margin-bottom: 5px;
-  width: 50%;
-  float: right; }
+  margin-bottom: 18px;
+  width: 100%; }
 
 .wish-list-btn {
   background-color: #47BBCC;
@@ -5925,34 +5924,6 @@ body {
 .section-top:before {
   clear: both;
   height: 50px; }
-
-div.destination-details {
-  width: 70%;
-  float: left;
-  height: 100%;
-  display: block; }
-
-div.destination-actions {
-  min-height: 100px; }
-
-div.destination-banner {
-  width: auto;
-  margin-top: 75px;
-  float: right;
-  height: 100%;
-  display: block; }
-
-div.destination-title {
-  height: 134px; }
-
-div.destination-title h3 {
-  color: #e4e4e4;
-  margin-top: 0;
-  text-transform: uppercase; }
-
-div.destination-title h1, div.destination-title small {
-  color: #fff;
-  font-size: 29px; }
 
 .inline-block {
   display: inline-block; }
@@ -6404,10 +6375,8 @@ a.see-more {
   position: relative; }
 
 div.social-shares {
-  position: absolute;
-  display: block;
-  top: -20px;
-  right: -20px; }
+  position: relative;
+  display: block; }
 
 .experience-banner {
   position: relative;
@@ -6415,6 +6384,79 @@ div.social-shares {
   display: block;
   width: 100%;
   text-align: right; }
+
+div.destination-details {
+  width: 70%;
+  float: left;
+  height: 100%;
+  display: block; }
+
+div.destination-actions {
+  min-height: 100px; }
+
+div.destination-title {
+  height: 134px; }
+
+div.destination-title h3 {
+  color: #e4e4e4;
+  margin-top: 0;
+  text-transform: uppercase; }
+
+div.destination-title h1, div.destination-title small {
+  color: #fff;
+  font-size: 29px; }
+
+.destination-banner {
+  width: 25%;
+  margin-top: 75px;
+  float: right;
+  height: 100%;
+  display: block;
+  position: relative; }
+
+.destination-tabs li a {
+  color: #afafaf;
+  text-decoration: none;
+  padding-bottom: 2px; }
+
+.destination-tabs li.active {
+  border-bottom: 2px solid #b3c0eb; }
+
+.destination-tabs li:hover {
+  border-bottom: 2px solid #b3c0eb; }
+
+.gallery-section {
+  background-color: #fafafa !important;
+  width: 100%;
+  text-align: center; }
+
+.gallery-item {
+  float: left;
+  width: 20%;
+  position: relative;
+  cursor: pointer; }
+
+.gallery-item > a > img {
+  max-width: 100%;
+  width: 100%; }
+
+.img-overlay {
+  position: absolute;
+  background: transparent;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: all 0.2s ease-in-out 0s; }
+
+.gallery-item:hover > .img-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0.5;
+  filter: Alpha(Opacity=0.5); }
+
+.gallery-section > a > img {
+  width: 100%;
+  height: auto; }
 
 .experience-banner div {
   background-color: rgba(40, 192, 218, 0.65);

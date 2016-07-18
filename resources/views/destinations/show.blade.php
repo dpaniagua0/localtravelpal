@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('page-title','Destination')
+@section('page-title',"$destination->title")
 @section('content')
 
 @if($destination->hasCover())

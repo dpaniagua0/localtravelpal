@@ -22,9 +22,13 @@ class DestinationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['search', 'show', 'details']]);
+        $this->middleware('auth', [
+            'except' => ['search', 'show', 'details','searchByCategory']
+        ]);
 
-        $this->middleware('admin', ['except' => ['search', 'show','create','details', 'edit', 'store']]);
+        $this->middleware('admin', [
+            'except' => ['search', 'show','create','details', 'edit', 'store', 'searchByCategory']
+        ]);
     }
 
 
@@ -239,5 +243,15 @@ class DestinationController extends Controller
                 return redirect('destinations');
             }
         }
+    }
+
+    public function searchByCategory(Request $request){
+        $categories = $request->categories;
+        if($categories != -1){
+            $destinations = Destination::byCategory($categories);
+        } else {
+            $destinations = Destination::all();
+        }
+        return view('helpers.destinations_preview', compact('destinations'));
     }
 }

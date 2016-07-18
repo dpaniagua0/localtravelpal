@@ -30,7 +30,8 @@ elixir(function(mix) {
         'jquery.bootstrap.wizard.min.js',
         'jquery.form.min.js',
         'formValidation.min.js',
-        'framework/bootstrap.min.js'
+        'framework/bootstrap.min.js',
+        'destinations.js'
     ]);
 
 /*    mix.scripts([

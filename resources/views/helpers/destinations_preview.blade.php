@@ -25,4 +25,6 @@
         @endforeach
     </div>
 </div>
+@else 
+<h1 class="alert alert-info text-center">We can't find destinations now.</h1>
 @endif

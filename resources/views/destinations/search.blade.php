@@ -39,7 +39,9 @@
                 <div class="interest-categories">
                   @foreach($categories as $category)
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox{{$category->id}}" type="checkbox" name="byCategory[]">
+                        <input class="search-category" id="checkbox{{$category->id}}" 
+                        type="checkbox" name="byCategory[]"
+                        value="{{$category->id}}">
                         <label for="checkbox{{$category->id}}">
                             {{$category->name}}
                         </label>
@@ -52,13 +54,14 @@
                   @if(count($destinations) > 0) 
                  
                   @if($query != "")
-                    <h4>Results for: {{ count($destinations) }}</h4>
+                    <h4>Destinations</h4>
                     
                   @else 
                     <h4>All results</h4>
                   @endif
-                  
-                  {!! Helpers::render_destinations($destinations) !!}
+                  <div class="result-destinations"> 
+                    {!! Helpers::render_destinations($destinations) !!}
+                  </div>
               </div>
 
             </div>  
@@ -68,9 +71,6 @@
         @endif
       </div>
     </div>
-    @if(count($destinations) <= 0)
-    <h1 class="alert alert-info text-center">We can't find this place right now.</h1>
-    @endif
   </div>
 </div>
 </div>
@@ -80,6 +80,16 @@
 <script type="text/javascript">
   $(function(){
     $("select.basic-multiple").select2();
+
+    var categoryFilters = $(".search-category");
+    $(categoryFilters).on("change", function(){
+      var categories = [];
+      $(".search-category:checked").each(function(){
+        var category = $(this).val();
+        categories.push(category);
+      });
+      DESTINATIONS.searchByCategory(categories);
+    });
   });
 </script>
 @endsection

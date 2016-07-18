@@ -12261,6 +12261,11 @@ var APP = APP || {};
             eModal.alert(err);
         }
     };
+
+    APP.searchDestination = function (query) {
+        var data = {};
+        console.log("loading-search");
+    };
 })(window.jQuery, window, document);
 // The global jQuery object is passed as a parameter
 

@@ -65,4 +65,14 @@ class Destination extends Model
         return $this->hasMany('App\Image');
     }
 
+    /**
+    * Search by category
+    * @param array $categories
+    */
+    public function scopeByCategory($query, $categories){
+        return $query->whereHas('categories', function ($q) use ($categories) {
+              $q->whereIn('id', $categories);
+        })->get();
+    }
+
 }

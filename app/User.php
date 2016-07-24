@@ -101,4 +101,12 @@ class User extends Authenticatable
         return Socialite::driver('facebook')->user();
     }
 
+    public function isProvider(){
+        if($this->destinations()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

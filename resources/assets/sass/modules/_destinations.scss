@@ -120,4 +120,24 @@ div.destination-title h1, div.destination-title small{
 	text-align: justify;
 	text-align-last: end;
 	font-family: 'Pontano Sans', sans-serif;
+} 
+.thumb-footer {
+	position: absolute; 
+	bottom: 10px;
+	width: 95%;
+	font-size: 30px; 
+}
+.thumb-footer div {
+	padding: 0px;
+}
+.thumb-footer span {
+	font-size: 30px;
+}
+.thumb-footer span:before {
+	font-family: "Glyphicons Halflings";
+	font-size: 18px;
+	position: absolute;
+	margin-top: 5px;
+	margin-left: -15px;
+	content: "\e148";
 }

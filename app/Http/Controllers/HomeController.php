@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         $directory = "public/pages/home/img";
-        $destinations = Destination::all();
+        $destinations = Destination::take('9')->get();
         $temp_files = Storage::disk('local')->files($directory);
         $files = array();
         foreach ($temp_files as $file) {

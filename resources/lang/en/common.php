@@ -18,7 +18,9 @@ return [
     'create' => 'create',
     'cancel' => 'cancel',
     'profile' => 'profile',
-    'inbox' => 'inbox',
-    'joined_on' => 'Joined on'
+    'inbox' => 'messages',
+    'joined_on' => 'Joined on',
+    'reservations' => 'reservations',
+    'userguides' => 'my guides'
 
 ];

@@ -48,32 +48,36 @@
                         <li class="dropdown">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Hi! {{ Auth::user()->name }} <span class="caret"></span>
+                                Hi! <span class="username-span">{{ Auth::user()->name }}</span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                 <li>
+                                    <a href="{{ route('users.profile', Auth::user()->id)}}">
+                                        {{ ucfirst(trans('common.profile')) }}
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ route('messages.index') }}">
-                                        <i class="fa fa-btn fa-inbox" aria-hidden="true"></i>
-                                        {{ trans('common.inbox') }}
+                                        {{ ucfirst(trans('common.inbox')) }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('users.profile', Auth::user()->id)}}">
-                                        <i class="fa fa-btn fa-user" aria-hidden="true"></i>
-                                        {{ trans('common.profile') }}
+                                    <a href="{{ route('messages.index') }}">
+                                        {{ ucfirst(trans('common.reservations')) }}
                                     </a>
                                 </li>
+                                @if(Auth::user()->isProvider())
                                 <li class="dropdown-header">Local provider</li>
                                 <li>
                                     <a href="{{ route('users.guides', Auth::user()->id)}}">
-                                        <i class="fa fa-btn fa-user" aria-hidden="true"></i>
-                                       My guides
+                                       {{ ucfirst(trans('common.userguides')) }}
                                     </a>
                                 </li>
+                                @endif
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a>
+                                    <a href="{{ url('/logout') }}">Sign Out</a>
                                 </li>
                                
                             </ul>

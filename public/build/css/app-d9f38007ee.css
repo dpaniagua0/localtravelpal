@@ -5764,6 +5764,20 @@ button.close {
 html, body {
   height: 100%; }
 
+/**
+* Custom boostrap css
+*/
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background: transparent;
+  color: #47BBCC; }
+
+.dropdown-menu {
+  top: 85%; }
+
+.username-span {
+  color: #47BBCC; }
+
+/***/
 .btn-file {
   position: relative;
   overflow: hidden; }
@@ -5991,6 +6005,54 @@ a.read-more:after {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+
+/**
+* Rating stars
+*/
+.rating {
+  font-size: 20px;
+  unicode-bidi: bidi-override; }
+
+.rating span.star {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px; }
+
+.rating span.half-star {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  color: #28c0da;
+  content: "\f123";
+  font-size: 20px; }
+
+.rating span.star:hover {
+  cursor: pointer; }
+
+.rating span.star::before {
+  color: #777;
+  content: "\f124";
+  padding-right: 5px; }
+
+.rating span.star::before, .rating span.star ~ span.star::before {
+  color: #28c0da;
+  content: ""; }
+
+.rating span.half-star::before, .rating span.half-star ~ span.half-star::before {
+  color: #28c0da;
+  content: "\f123"; }
+
+.total-reviews {
+  color: #fbaf5d;
+  padding-left: 10px;
+  text-decoration: underline; }
+
+.destination-preview .thumbnail {
+  height: 600px;
+  max-hegiht: 600px; }
 
 /**
 * Login modal form scss
@@ -6485,6 +6547,26 @@ div.destination-title h1, div.destination-title small {
   -moz-text-align-last: end;
   text-align-last: end;
   font-family: 'Pontano Sans', sans-serif; }
+
+.thumb-footer {
+  position: absolute;
+  bottom: 10px;
+  width: 95%;
+  font-size: 30px; }
+
+.thumb-footer div {
+  padding: 0px; }
+
+.thumb-footer span {
+  font-size: 30px; }
+
+.thumb-footer span:before {
+  font-family: "Glyphicons Halflings";
+  font-size: 18px;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -15px;
+  content: "\e148"; }
 
 .checkbox {
   padding-left: 20px; }

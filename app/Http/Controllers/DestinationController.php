@@ -159,13 +159,22 @@ class DestinationController extends Controller
     public function search(Request $request) {
 
         $categories = Category::all();
+        $sort_by = [
+            '1' => 'popularity',
+            '2' => 'reviews',
+            '3' => 'last expensive',
+            '4' => 'most expensive',
+            '5' => 'newset',
+            '6' => 'oldest'
+        ];
+
         $query = (isset($request))? $request : "";
         if(!$request->search){
             $destinations = Destination::all();
         } else {
             $destinations = Destination::byLocation($request->search)->get();
         }
-        return view('destinations.search', compact('destinations', 'query', 'categories'));
+        return view('destinations.search', compact('destinations', 'query', 'categories', 'sort_by'));
     }
 
     /**
@@ -247,10 +256,20 @@ class DestinationController extends Controller
 
     public function searchByCategory(Request $request){
         $categories = $request->categories;
+        $sort_option = $request->sort;
         if($categories != -1){
-            $destinations = Destination::byCategory($categories);
+            if($sort_option != -1){
+                $destinations = Destination::byCategory($categories)->sortedBy($sort_option)->paginate(6);
+            } else {
+                $destinations = Destination::byCategory($categories)->paginate(6);
+            }
         } else {
-            $destinations = Destination::all();
+            if($sort_option != -1){
+                $destinations = Destination::sortedBy($sort_option)->paginate(6);
+            } else {
+                $destinations = Destination::paginate(6);
+
+            }
         }
         return view('helpers.destinations_preview', compact('destinations'));
     }

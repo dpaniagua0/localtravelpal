@@ -72,7 +72,35 @@ class Destination extends Model
     public function scopeByCategory($query, $categories){
         return $query->whereHas('categories', function ($q) use ($categories) {
               $q->whereIn('id', $categories);
-        })->get();
+        });
     }
 
+
+    public function scopeSortedBy($query, $option) {
+      switch ($option) {
+        case 1:
+          # code...
+          break;
+        case 2:
+          break;
+
+        case 3:
+          return $query->orderBy('price', 'ASC');
+          break;
+        case 4: 
+          return $query->orderBy('price', 'DESC');
+          break;
+        case 5:
+          return $query->orderBy('created_at', 'DESC');
+          break;
+
+        case 6: 
+          return $query->orderBy('created_at', 'ASC');
+          break;
+
+        default:
+          # code...
+          break;
+      }
+    }
 }

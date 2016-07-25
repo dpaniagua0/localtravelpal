@@ -120,7 +120,10 @@ div.destination-title h1, div.destination-title small{
 	text-align: justify;
 	text-align-last: end;
 	font-family: 'Pontano Sans', sans-serif;
-} 
+}
+.destination-preview  a {
+	text-decoration: none !important;
+}
 .thumb-footer {
 	position: absolute; 
 	bottom: 10px;
@@ -140,4 +143,27 @@ div.destination-title h1, div.destination-title small{
 	margin-top: 5px;
 	margin-left: -15px;
 	content: "\e148";
+}
+.book-btn {
+	left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    width: 50%;
+    top: 48%;
+    font-size: 1.3em;
+    background-colo: #47BBCC;
+    boder: 1px solid #47BBCC;
+}
+.search-bar {
+	display: block;
+	margin: 0 auto;
+	width: 700px;
+}
+.search-bar > form.search-form {
+	width: 700px;
+}
+.search-bar > form.search-form > .input-group > .input-group-btn {
+	width: 1%;
 }

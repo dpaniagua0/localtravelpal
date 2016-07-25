@@ -8,23 +8,21 @@
     
       <div class="row">
         <div class="col-md-12">
-         <div class="search-destinations pt-5 pb-5">
+         <div class="search-bar pt-5 pb-5">
           {!! Form::open([
           'route' => 'destinations.search',
-          'class' => 'form-inline',
+          'class' => 'search-form form-inline',
           'method' => 'post'
           ]) !!}
-          <div class="form-group pl-5 pr-5" style="width:100%">
+           <div class="input-group">
             {!! Form::text('search', null, [
-            'placeholder' => 'Enter your new destination to find local experiences', 'class' => 'form-control pull-left mr-5',
-            'style' => 'width:86%'
+            'placeholder' => 'Enter your destination to find local experiences.', 'class' => 'form-control',
 
             ]) !!}
-            <button type="submit" class="btn btn-default pull-rigth ml-15">Search</button>
-            
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+            </span>
           </div>
-          
-
           {!! Form::close() !!}
         </div>
        
@@ -47,6 +45,19 @@
                         </label>
                     </div>
                   @endforeach 
+                </div>
+                <h4 class="mt-30"> Sort By: </h4>
+                <div>
+                  @foreach($sort_by as $v => $k)
+                    <div class="radio radio-primary">
+                        <input class="sort-by" id="radio{{$v}}" 
+                        type="radio" name="sortBy[]"
+                        value="{{$v}}">
+                        <label for="radio{{$v}}">
+                            {{ ucwords($k) }}
+                        </label>
+                    </div>
+                  @endforeach
                 </div>
               </div>
 
@@ -82,15 +93,42 @@
     $("select.basic-multiple").select2();
 
     var categoryFilters = $(".search-category");
+    var sortFilters = $(".sort-by");
     $(categoryFilters).on("change", function(){
-      var categories = [];
+      var categories = getCategories();
+      var sortBy = getSortOption();
+      DESTINATIONS.searchByCategory(categories, sortBy);
+    });
+
+    $(sortFilters).on("change", function(){
+      var categories = getCategories();
+      var sortBy = getSortOption();
+      DESTINATIONS.searchByCategory(categories, sortBy);
+    });
+
+    var searchForm = $("form.search-form");
+   /* $(searchForm).on("submit", function(e){
+      e.preventDefault();
+      var categories = getCategories();
+
+      alert(categories);
+    });*/
+  });
+
+  function getCategories(){
+    var categories = [];
       $(".search-category:checked").each(function(){
         var category = $(this).val();
         categories.push(category);
       });
-      DESTINATIONS.searchByCategory(categories);
-    });
-  });
+    return categories;  
+  }
+
+  function getSortOption(){
+    var option = $(".sort-by:checked").val();
+    return option;
+  }
+
 </script>
 @endsection
 

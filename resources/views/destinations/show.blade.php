@@ -140,7 +140,8 @@
 <div class="gallery-section">
 
   @foreach($images as $image)
-  <div class="gallery-item">
+  <div class="gallery-item" href="/{{$image->img_path}}/750x550/{{$image->img_file}}" 
+    data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $destination->title }}">
     <a href="#"> 
       <img src="/{{$image->img_path}}/250x250/{{$image->img_file}}" alt="...">
     </a>
@@ -170,22 +171,34 @@
   $("form#wishlist-form").formValidation();
 
   $("form#wishlist-form").ajaxForm({
-    target: ".modal-body",
+    resetForm: true,
+    success: function(){
+      $("body").find(".modal").modal('hide');
+      eModal.alert("Destination added to list.");
+    }
   });
 
   $("form#reviews-form").formValidation();
 
   $("form#reviews-form").ajaxForm({
-    target: ".modal-body",
+    resetForm: true,
+    success: function(){
+      $("body").find(".modal").modal('hide');
+      eModal.alert("Destination added to list.");
+    }
   });
+
+
+  DESTINATIONS.loadGallery();
 
   var addListBtn = $(".add-to-list");
   $(addListBtn).on("click", function(){
     var listId = $(this).attr("id");
     var listDestination = $(this).attr("data-destination");
     addToList(listId, listDestination).done(function(response){
+      console.log("added");
       if(response == "true"){
-        eModal.alert("Destination added.");
+        eModal.alert("Destination added to list.");
       }
     });
   });

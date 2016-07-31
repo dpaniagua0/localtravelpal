@@ -74,6 +74,10 @@ div.destination-title h1, div.destination-title small{
 	position: relative;
 	cursor: pointer;
 }
+.gallery-item a {
+	hegiht: auto;
+	display: block;
+}
 .gallery-item > a > img  {
 	max-width: 100%;
 	width: 100%;
@@ -176,7 +180,8 @@ div.destination-title h1, div.destination-title small{
 }
 .review-container {
 	padding-bottom: 5px;
-	border-bottom: 1px solid #28c0da;
+	padding-top: 5px;
+	border-bottom: 1px solid #6e6e6e;
 	margin-left: 0px;
 	margin-right: 0px;
 }
@@ -193,6 +198,7 @@ div.destination-title h1, div.destination-title small{
 	text-align: center;
 	width: 100%;
 	display: table;
+	color: #6e6e6e;
 }
 .reviews-header:before, .reviews-header:after {
 	background-image: url('/upload/images/original/legend_bg.png');
@@ -206,4 +212,28 @@ div.destination-title h1, div.destination-title small{
 	white-space: nowrap;
     padding: 0 9px;
     display: table-cell;
+}
+.ekko-lightbox .modal-content {
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+}
+.ekko-lightbox .modal-header {
+	/*color: #46b8da;*/
+	color: #fff;
+	border-bottom: 3px solid #46b8da;
+	padding-bottom: 0px;
+}
+.ekko-lightbox .modal-header > .modal-title {
+	font-size: 2em;
+}
+.ekko-lightbox .modal-header > .close {
+	/*color: #46b8da;*/
+	color: #fff;
+	opacity: 1;
+	text-shadow: 0 1px 0 #fff;
+	font-size: 38px;
+}
+.ekko-lightbox  .modal-content > .modal-body {
+	padding: 0px;
 }

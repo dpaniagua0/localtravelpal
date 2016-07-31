@@ -31,7 +31,8 @@ elixir(function(mix) {
         'jquery.form.min.js',
         'formValidation.min.js',
         'framework/bootstrap.min.js',
-        'destinations.js'
+        'destinations.js',
+        'ekkolightbox.min.js' 
     ]);
 
 /*    mix.scripts([

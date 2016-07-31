@@ -26,7 +26,9 @@
 			</div>
 	    @endforeach
 	    <div class="row pt-15 text-center">
-		    <a class="btn btn-default inline-block">Review Destination</a>
+	    	@if(Auth::check())
+		    	<a class="btn btn-default inline-block">Review Destination</a>
+		    @endif
 		    <a class="btn btn-default inline-block">Show More</a>
 	    </div>
     </div>

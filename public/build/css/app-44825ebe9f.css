@@ -6526,6 +6526,10 @@ div.destination-title h1, div.destination-title small {
   position: relative;
   cursor: pointer; }
 
+.gallery-item a {
+  hegiht: auto;
+  display: block; }
+
 .gallery-item > a > img {
   max-width: 100%;
   width: 100%; }
@@ -6624,7 +6628,8 @@ div.destination-title h1, div.destination-title small {
 
 .review-container {
   padding-bottom: 5px;
-  border-bottom: 1px solid #28c0da;
+  padding-top: 5px;
+  border-bottom: 1px solid #6e6e6e;
   margin-left: 0px;
   margin-right: 0px; }
 
@@ -6640,7 +6645,8 @@ div.destination-title h1, div.destination-title small {
 .reviews-header {
   text-align: center;
   width: 100%;
-  display: table; }
+  display: table;
+  color: #6e6e6e; }
 
 .reviews-header:before, .reviews-header:after {
   background-image: url("/upload/images/original/legend_bg.png");
@@ -6654,6 +6660,30 @@ div.destination-title h1, div.destination-title small {
   white-space: nowrap;
   padding: 0 9px;
   display: table-cell; }
+
+.ekko-lightbox .modal-content {
+  background-color: transparent;
+  box-shadow: none;
+  border: none; }
+
+.ekko-lightbox .modal-header {
+  /*color: #46b8da;*/
+  color: #fff;
+  border-bottom: 3px solid #46b8da;
+  padding-bottom: 0px; }
+
+.ekko-lightbox .modal-header > .modal-title {
+  font-size: 2em; }
+
+.ekko-lightbox .modal-header > .close {
+  /*color: #46b8da;*/
+  color: #fff;
+  opacity: 1;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 38px; }
+
+.ekko-lightbox .modal-content > .modal-body {
+  padding: 0px; }
 
 .checkbox {
   padding-left: 20px; }
@@ -8222,6 +8252,58 @@ div.destination-title h1, div.destination-title small {
 
 .fv-form-uikit .fv-has-error .fv-control-feedback, .fv-form-uikit .fv-has-error .uk-form-label, .fv-form-uikit .fv-has-error label {
   color: #D85030; }
+
+/*!
+ * Lightbox for Bootstrap 3 by @ashleydw
+ * https://github.com/ashleydw/lightbox
+ *
+ * License: https://github.com/ashleydw/lightbox/blob/master/LICENSE
+ */
+.ekko-lightbox-container {
+  position: relative; }
+
+.ekko-lightbox-nav-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%; }
+
+.ekko-lightbox-nav-overlay a {
+  z-index: 100;
+  display: block;
+  width: 49%;
+  height: 100%;
+  font-size: 30px;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
+  opacity: 0;
+  -webkit-filter: dropshadow(color=#000000, offx=2, offy=2);
+  filter: dropshadow(color=#000000, offx=2, offy=2);
+  transition: opacity .5s; }
+
+.ekko-lightbox-nav-overlay a:empty {
+  width: 49%; }
+
+.ekko-lightbox a:hover {
+  text-decoration: none;
+  opacity: 1; }
+
+.ekko-lightbox .glyphicon-chevron-left {
+  left: 0;
+  float: left;
+  padding-left: 15px;
+  text-align: left; }
+
+.ekko-lightbox .glyphicon-chevron-right {
+  right: 0;
+  float: right;
+  padding-right: 15px;
+  text-align: right; }
+
+.ekko-lightbox .modal-footer {
+  text-align: left; }
 
 /**
 * Responsive site utitlities

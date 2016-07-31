@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\DestinationRequest;
 use App\Destination;
 use App\Category;
+use App\Review;
 use Auth;
 use App\Image as Images;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -27,7 +28,11 @@ class DestinationController extends Controller
         ]);
 
         $this->middleware('admin', [
-            'except' => ['search', 'show','create','details', 'edit', 'store', 'searchByCategory']
+            'except' => [
+                'search', 'show','create','details', 
+                'edit', 'store', 'searchByCategory',
+                'storeReview'
+            ]
         ]);
     }
 
@@ -75,6 +80,22 @@ class DestinationController extends Controller
             } else {
                 return redirect()->route('destinations.edit', $destination->id);
             }
+        }
+    }
+
+    /**
+    * Store a new review
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function storeReview(Request $request){
+        $destination = Destination::findOrfail($request->destination_id);
+        if($destination){
+            $review = new Review;
+            $review->user_id = $request->user_id;
+            $review->comment = $request->comment;
+
+            $destination->reviews()->save($review);
         }
     }
 

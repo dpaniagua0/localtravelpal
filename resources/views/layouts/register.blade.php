@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-md4" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -10,12 +10,22 @@
   </a>
         <br>
         <legend>OR</legend>
-         <form role="form" method="POST" action="{{ url('/login') }}">
+         <form role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
+                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <input type="text" class="form-control name-icon" name="name"
+                                placeholder="Name">
+
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <input type="email" class="form-control email-icon" name="email" value="{{ old('email') }}"
-                                placeholder="Email">
+                                <input type="email" class="form-control email-icon" name="email" placeholder="Email">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -36,13 +46,13 @@
                         </div>
 
                        
-                        <div class="form-group">
+                        <div class="form-group mb-5">
                                 <button type="submit" class="btn btn-default btn-block">
-                                    LOGIN
+                                    SIGN UP
                                 </button>
 
-                                <a class="btn btn-link forgot-password" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                         </div>
+                        <p class="terms-text">By creating an account, you confirm that you accept out <a>TERMS OF SERVICE</a></p>
                     </form>
       </div>
     </div>

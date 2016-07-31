@@ -41,4 +41,9 @@ class Helpers {
   public static function destination_cover($destination){
     return view('helpers.destination_cover', compact('destination'))->render();
   }
+
+  public static function destination_reviews($destination){
+    $reviews = $destination->reviews()->paginate(6);
+    return view('helpers.destination_reviews', compact('reviews'))->render();
+  }
 }

@@ -9,6 +9,13 @@ use App\Review;
 
 class ReviewController extends Controller
 {
+
+
+     public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['profile']]);
+        $this->middleware('admin',['only' => ['view', 'index', 'edit']]);
+    }
     /**
      * Display a listing of the resource.
      *

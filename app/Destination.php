@@ -45,6 +45,13 @@ class Destination extends Model
         return $this->belongsToMany('App\WishList', 'wish_lists_destination','destination_id', 'wish_list_id');
     }
 
+    /**
+    * Return all the destination reviews
+    */ 
+    public function reviews(){
+       return $this->morphMany('App\Review', 'reviewable');
+    }
+
 
     /**
      * The categories that belong to the experience.

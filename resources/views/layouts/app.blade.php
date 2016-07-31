@@ -40,6 +40,7 @@
 
     @if(!Auth::check())
         @include("layouts.login")
+        @include("layouts.register")
     @endif
     </div>
     <div class="section pre-footer pt-15 pb-15">

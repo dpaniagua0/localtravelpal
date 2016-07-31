@@ -12,6 +12,19 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
-       'comment'
+       'comment',
+       'user_id',
+       'reviewable_id',
+       'reviewable_type'
     ];
+
+
+    public function reviewable()
+    {
+        return $this->morphTo();
+    }
+
+    public function owner() {
+      return $this->belongsTo('App\User', 'user_id');
+    }
 }

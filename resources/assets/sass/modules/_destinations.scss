@@ -57,9 +57,16 @@ div.destination-title h1, div.destination-title small{
 	border-bottom: 2px solid #b3c0eb;
 }
 .gallery-section {
-	background-color: #fafafa !important;
+	/*background-color: #fafafa !important;*/
 	width: 100%;
 	text-align: center;
+	margin-top: 15px;
+}
+.gallery-section:after {
+	clear: both; 
+	content: " ";
+	width: 100%;
+	display: block;
 }
 .gallery-item {
 	float: left;
@@ -166,4 +173,37 @@ div.destination-title h1, div.destination-title small{
 }
 .search-bar > form.search-form > .input-group > .input-group-btn {
 	width: 1%;
+}
+.review-container {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #28c0da;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.review-container div {
+	padding-left: 0px;
+}
+.review-container h3 {
+	color: #28c0da;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-transform: capitalize;
+}
+.reviews-header {
+	text-align: center;
+	width: 100%;
+	display: table;
+}
+.reviews-header:before, .reviews-header:after {
+	background-image: url('/upload/images/original/legend_bg.png');
+	background-repeat: repeat-x;
+	background-position: center;
+	width: 50%;
+	display: table-cell;
+	content: " ";
+}
+.reviews-header span {
+	white-space: nowrap;
+    padding: 0 9px;
+    display: table-cell;
 }

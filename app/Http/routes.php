@@ -95,6 +95,11 @@ Route::post('destination/setcover',[
     'uses' => 'DestinationController@setCover'
 ]);
 
+Route::post('destination/storeReview',[
+    'as' => 'destination.storeReview',
+    'uses' => 'DestinationController@storeReview'
+]);
+
 Route::get('list-an-experience',[
     'as' => 'destinations.details',
     'uses' => 'DestinationController@details'
@@ -109,6 +114,8 @@ Route::get('messages/delete/{id}', [
 ]);
 
 Route::resource('wishlists', 'WishListController');
+
+Route::resource('reviews', 'WishListController');
 
 //Custom image size on url
 Route::get('upload/images/{width}x{height}/{file}',[

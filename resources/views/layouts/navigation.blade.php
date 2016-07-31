@@ -42,7 +42,7 @@
                     @endif
                     @if (Auth::guest())
                         <li><a href="#" data-target="#login-modal" data-toggle="modal">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="#" data-target="#register-modal" data-toggle="modal">Register</a></li>
                     @else
                     
                         <li class="dropdown">

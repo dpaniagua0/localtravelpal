@@ -2,19 +2,19 @@
 * Login modal form scss
 */
 
-#login-modal .modal-content {
+#login-modal .modal-content, #register-modal .modal-content {
 	border-radius: 2px !important;
 	border-color: #898989 !important; 
 	padding: 0px 15px;
 }
-#login-modal .modal-body {
+#login-modal .modal-body, #register-modal .modal-body {
 	padding-bottom: 0px;
 }
-#login-modal h1 {
+#login-modal h1, #register-modal h1 {
 	margin: 0px;
 }
 
-#login-modal {
+#login-modal, #register-modal{
 	background-color: rgba(253,253,252,0.3) !important;
 }
 .modal-md4 {
@@ -28,18 +28,29 @@
 	display: block;
 	font-weight: 350;
 }
-#login-modal  legend {
+#login-modal  legend, #register-modal legend {
 	text-align: center;
 	color: #000;
 	border: none;
 }
-#login-modal .form-control, #login-modal .form-control:focus {
+#login-modal .form-control, #login-modal .form-control:focus,
+#register-modal .form-control, #register-modal .form-control:focus {
 	border-color: #b6b6b6 !important;
-	height: 45px;
+	height: 50px;
 	color: #bebebe !important;
 	font-size: 16px;
 	padding: 15px 45px;
-	background: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRXnei22CekAtIuMiS3L0cq-cIDXFyb2r-5pTbfrk-L-V9E-i0C") no-repeat 10px center;
+}
+#login-modal .email-icon, #register-modal .email-icon {
+	background: url("/upload/images/original/email.png") no-repeat 10px center;
+	background-size: 30px;
+}
+#login-modal .password-icon, #register-modal .password-icon {
+	background: url("/upload/images/original/password.png") no-repeat 10px center;
+	background-size: 30px;
+}
+ #register-modal .name-icon {
+	background: url("/upload/images/original/name.png") no-repeat 10px center;
 	background-size: 30px;
 }
 .fb-login-btn {
@@ -68,4 +79,15 @@
 	margin: 5px 15px;
 	padding: 0px 15px 0px 0px; 
 	border-right: 1px solid #385289;
+}
+.terms-text {
+	text-align: center;
+	font-size: 14px;
+	width: 250px;
+	margin: 0 auto 20px auto;
+	color: #000;
+}
+.terms-text a {
+	color: #28c0da;
+	text-decoration: none;
 }

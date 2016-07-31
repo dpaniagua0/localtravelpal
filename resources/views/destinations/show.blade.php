@@ -110,9 +110,9 @@
 {{--*/$user_img_path = $destination->owner->img_path; /*--}}
 
 @if(!empty($user_img_path) && !empty($user_img_file))
-  {{--*/$user_profile_img = "/{$user_img_path}/150x150/{$user_img_file}"; /*--}}
+  {{--*/$user_profile_img = "/{$user_img_path}/245x250/{$user_img_file}"; /*--}}
 @else
-  {{--*/$user_profile_img = "http://placehold.it/150x150"; /*--}}
+  {{--*/$user_profile_img = "http://placehold.it/255x250"; /*--}}
 @endif
 
 @if(!empty($user->avatar))
@@ -130,11 +130,13 @@
         data-layout="button_count">
       </div>
     </div>
-   
+    <br>
+    <a class="btn btn-info btn-block" data-toggle="modal" data-target="#add-review">Review Destination</a>
   </div>
   <div class="clearfix"></div>
   
 </div>
+<div class="clearfix"></div>
 <div class="gallery-section">
 
   @foreach($images as $image)
@@ -146,12 +148,15 @@
   </div>
   @endforeach
 </div>
-<div class="clearfix"></div>
+
+  {!! Helpers::destination_reviews($destination) !!}
+
 
 
 
 @if(Auth::check())
   @include("destinations.add_list_modal")
+  @include("destinations.add_review_modal")
 @endif
 @endsection
 
@@ -165,6 +170,12 @@
   $("form#wishlist-form").formValidation();
 
   $("form#wishlist-form").ajaxForm({
+    target: ".modal-body",
+  });
+
+  $("form#reviews-form").formValidation();
+
+  $("form#reviews-form").ajaxForm({
     target: ".modal-body",
   });
 

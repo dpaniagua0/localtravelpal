@@ -38,7 +38,16 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 @endsection
-
+ <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
 <div class="section-top destination-bg">
   <div class="has-pull-top"></div>
 </div>
@@ -112,7 +121,7 @@
 @if(!empty($user_img_path) && !empty($user_img_file))
   {{--*/$user_profile_img = "/{$user_img_path}/245x250/{$user_img_file}"; /*--}}
 @else
-  {{--*/$user_profile_img = "http://placehold.it/255x250"; /*--}}
+  {{--*/$user_profile_img = "http://placehold.it/245x250"; /*--}}
 @endif
 
 @if(!empty($user->avatar))
@@ -137,20 +146,26 @@
   
 </div>
 <div class="clearfix"></div>
-<div class="gallery-section">
+@if(sizeof($images) > 0)
+  <div class="gallery-section">
 
-  @foreach($images as $image)
-  <div class="gallery-item" href="/{{$image->img_path}}/750x550/{{$image->img_file}}" 
-    data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $destination->title }}">
-    <a href="#"> 
-      <img src="/{{$image->img_path}}/250x250/{{$image->img_file}}" alt="...">
-    </a>
-     <div class="img-overlay"></div>
+    @foreach($images as $image)
+      <div class="gallery-item" href="/{{$image->img_path}}/750x550/{{$image->img_file}}" 
+        data-toggle="lightbox" data-gallery="multiimages" data-title="{{ $destination->title }}">
+        <a href="#"> 
+          <img src="/{{$image->img_path}}/250x250/{{$image->img_file}}" alt="...">
+        </a>
+         <div class="img-overlay"></div>
+      </div>
+    @endforeach
   </div>
-  @endforeach
-</div>
+@endif
 
-  {!! Helpers::destination_reviews($destination) !!}
+{!! Helpers::destination_provider($destination->owner) !!}
+
+{!! Helpers::destination_reviews($destination) !!}
+
+<div id="map" style="width:100%;height:380px;"></div>
 
 
 
@@ -165,6 +180,10 @@
 
 @section('app-js')
 <script type="text/javascript">
+  var lat = 0;
+  var lng = 0;
+  var mapLocation = "{{ $destination->location }}";
+  var destinationTitle = "{{ $destination->title }}";
  $(function(){
 
 
@@ -188,8 +207,16 @@
     }
   });
 
-
   DESTINATIONS.loadGallery();
+
+  DESTINATIONS.getGoeCode(mapLocation).done(function(response){
+    lat = response["lat"];
+    lng = response["lng"];
+    initMap(lat,lng);
+  });
+
+
+
 
   var addListBtn = $(".add-to-list");
   $(addListBtn).on("click", function(){
@@ -215,10 +242,28 @@
       data: data
     });
   }
-
-
  }); 
+
+
+  function initMap(lat,lng) { 
+
+    var myLatLng = {lat: lat, lng: lng};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: lat, lng: lng },
+      zoom: 8,
+      scrollwheel: false
+    });
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: destinationTitle
+    });
+    map.setZoom(13);
+  }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwQyNYSiMpxfOv79g1xhEN5HHESrJYprI"
+    async defer></script>
 @endsection
 
 

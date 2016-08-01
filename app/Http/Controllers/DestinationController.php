@@ -24,14 +24,14 @@ class DestinationController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => ['search', 'show', 'details','searchByCategory']
+            'except' => ['search', 'show', 'details','searchByCategory','getGeoCode']
         ]);
 
         $this->middleware('admin', [
             'except' => [
                 'search', 'show','create','details', 
                 'edit', 'store', 'searchByCategory',
-                'storeReview'
+                'storeReview','getGeoCode'
             ]
         ]);
     }
@@ -293,5 +293,33 @@ class DestinationController extends Controller
             }
         }
         return view('helpers.destinations_preview', compact('destinations'));
+    }
+
+    public function getGeoCode(Request $request){
+        $location = urlencode($request->location);
+        $geocode_data = @file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?v=3&address=$location");
+        $geocode_data = json_decode($geocode_data, true);
+
+        if (!$this->check_status($geocode_data)) {   
+            return array();
+        }
+        
+        $geocode = array(
+            'lat' => $geocode_data["results"][0]["geometry"]["location"]["lat"],
+            'lng' => $geocode_data["results"][0]["geometry"]["location"]["lng"],
+        );
+
+        return $geocode;
+    }
+
+    /* 
+    * Check if the json data from Google Geo is valid 
+    */
+
+    public function check_status($data) {
+        if ($data["status"] == "OK"){ 
+            return true;
+        }
+        return false;
     }
 }

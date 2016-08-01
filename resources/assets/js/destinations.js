@@ -23,6 +23,7 @@ DESTINATIONS.loadGallery = function(){
 	$("body").on('click','*[data-toggle="lightbox"]', function(event) {
 		event.preventDefault();
 		return $(this).ekkoLightbox({
+			loadingMessage: "<div class='loader' style='margin: 20px auto'></div>"
 		/*	onShown: function() {
 				if (window.console) {
 					return console.log('onShown event fired');
@@ -40,4 +41,14 @@ DESTINATIONS.loadGallery = function(){
 			}*/
 		});
 	});
+};
+
+DESTINATIONS.getGoeCode = function(location){
+	var data = {};
+    data["location"] = location;
+    return $.ajax({
+      url: "/getgeocode",
+      type: "post",
+      data: data
+    });
 };

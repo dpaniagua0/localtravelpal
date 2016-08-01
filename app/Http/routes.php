@@ -138,3 +138,5 @@ Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback
 
 Route::post('addToList', 'WishListController@addTo');
 Route::post('filterbycategories', 'DestinationController@searchByCategory');
+
+Route::post('getgeocode', 'DestinationController@getGeoCode');

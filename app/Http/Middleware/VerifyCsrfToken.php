@@ -14,6 +14,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         'images/upload',
         'destinations/search',
-        'filterbycategories'
+        'filterbycategories',
+        'getgeocode'
     ];
 }

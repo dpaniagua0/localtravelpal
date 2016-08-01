@@ -6685,6 +6685,9 @@ div.destination-title h1, div.destination-title small {
 .ekko-lightbox .modal-content > .modal-body {
   padding: 0px; }
 
+.locopal-section {
+  background-color: #FEFCFF; }
+
 .checkbox {
   padding-left: 20px; }
 

@@ -46,4 +46,7 @@ class Helpers {
     $reviews = $destination->reviews()->paginate(6);
     return view('helpers.destination_reviews', compact('reviews'))->render();
   }
+  public static function destination_provider($owner){
+    return view('helpers.desitnation_provider', compact('owner'))->render();
+  }
 }

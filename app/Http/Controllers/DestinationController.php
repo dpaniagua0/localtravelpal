@@ -233,6 +233,15 @@ class DestinationController extends Controller
     }
 
     /**
+    * Show reviews from destination
+    * @param int $id
+    */
+    public function reviews($id){
+        $destination = Destination::findOrfail($id);
+        return view('destinations.reviews', compact('destination'));
+    }
+
+    /**
     * Set destination cover image
     * @param \Illuminate\Http\Request  $request
     */

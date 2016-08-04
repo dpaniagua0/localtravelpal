@@ -100,11 +100,15 @@ Route::post('destination/storeReview',[
     'uses' => 'DestinationController@storeReview'
 ]);
 
+Route::get('destinations/{id}/reviews', [
+    'as' => 'destination.reviews',
+    'uses' => 'DestinationController@reviews'
+]);
+
 Route::get('list-an-experience',[
     'as' => 'destinations.details',
     'uses' => 'DestinationController@details'
 ]);
-
 
 Route::resource('messages', 'MessageController');
 

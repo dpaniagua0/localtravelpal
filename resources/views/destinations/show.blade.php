@@ -51,7 +51,7 @@
 <div class="section-top destination-bg">
   <div class="has-pull-top"></div>
 </div>
-<div class="section pull-top">
+<div class="section pull-top pb-15">
   <div class="destination-details">
     <div class="destination-title">
       <h1>{{ $destination->title }} <small>with</small> {{$destination->owner->name}}</h1>
@@ -215,7 +215,10 @@
     initMap(lat,lng);
   });
 
-
+  $('#add-review').on('hidden.bs.modal', function (e) {
+    var form = $(this).find("form");
+    $(form).find('textarea').val('');
+  });
 
 
   var addListBtn = $(".add-to-list");

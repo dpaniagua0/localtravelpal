@@ -19,8 +19,7 @@ class Review extends Model
     ];
 
 
-    public function reviewable()
-    {
+    public function reviewable(){
         return $this->morphTo();
     }
 

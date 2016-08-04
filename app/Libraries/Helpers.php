@@ -42,9 +42,9 @@ class Helpers {
     return view('helpers.destination_cover', compact('destination'))->render();
   }
 
-  public static function destination_reviews($destination){
+  public static function destination_reviews($destination, $paginate = false){
     $reviews = $destination->reviews()->paginate(6);
-    return view('helpers.destination_reviews', compact('reviews'))->render();
+    return view('helpers.destination_reviews', compact('reviews', 'paginate'))->render();
   }
   public static function destination_provider($owner){
     return view('helpers.desitnation_provider', compact('owner'))->render();

@@ -49,4 +49,7 @@ class Helpers {
   public static function destination_provider($owner){
     return view('helpers.desitnation_provider', compact('owner'))->render();
   }
+  public static function guide_status($status){
+    return view('helpers.guide_status', compact('status'))->render();
+  }
 }

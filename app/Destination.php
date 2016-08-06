@@ -41,6 +41,10 @@ class Destination extends Model
         return $query->where('location', 'like', "%{$string}%");
     }
 
+    public function scopePublished($query) {
+      return $query->where('status', '=', '1');
+    }
+
     public function wishlists(){
         return $this->belongsToMany('App\WishList', 'wish_lists_destination','destination_id', 'wish_list_id');
     }

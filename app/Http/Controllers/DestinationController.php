@@ -191,9 +191,9 @@ class DestinationController extends Controller
 
         $query = (isset($request))? $request : "";
         if(!$request->search){
-            $destinations = Destination::all();
+            $destinations = Destination::published()->get();
         } else {
-            $destinations = Destination::byLocation($request->search)->get();
+            $destinations = Destination::published()->byLocation($request->search)->get();
         }
         return view('destinations.search', compact('destinations', 'query', 'categories', 'sort_by'));
     }
@@ -289,15 +289,15 @@ class DestinationController extends Controller
         $sort_option = $request->sort;
         if($categories != -1){
             if($sort_option != -1){
-                $destinations = Destination::byCategory($categories)->sortedBy($sort_option)->paginate(6);
+                $destinations = Destination::published()->byCategory($categories)->sortedBy($sort_option)->paginate(6);
             } else {
-                $destinations = Destination::byCategory($categories)->paginate(6);
+                $destinations = Destination::published()->byCategory($categories)->paginate(6);
             }
         } else {
             if($sort_option != -1){
-                $destinations = Destination::sortedBy($sort_option)->paginate(6);
+                $destinations = Destination::published()->sortedBy($sort_option)->paginate(6);
             } else {
-                $destinations = Destination::paginate(6);
+                $destinations = Destination::published()->paginate(6);
 
             }
         }
@@ -330,5 +330,16 @@ class DestinationController extends Controller
             return true;
         }
         return false;
+    }
+
+    /**
+    * @param $id destination id
+    * @param $status integer
+    */
+    public function updateStatus(Request $request) {
+        $destination = Destination::findOrfail($request->id);
+        $destination->status = $request->status;
+        $destination->save();
+        return redirect()->route('users.guides', $destination->owner_id);
     }
 }

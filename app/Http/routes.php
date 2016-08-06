@@ -100,6 +100,11 @@ Route::post('destination/storeReview',[
     'uses' => 'DestinationController@storeReview'
 ]);
 
+Route::get('destinations/updateStatus/{id}/{status}', [
+    'as' => 'destinations.updateStatus',
+    'uses' => 'DestinationController@updateStatus'
+]);
+
 Route::get('destinations/{id}/reviews', [
     'as' => 'destination.reviews',
     'uses' => 'DestinationController@reviews'

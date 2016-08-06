@@ -1,10 +1,14 @@
 @extends('layouts.app')
 @section('page-title','Destinations')
 @section('content')
-<div class="section clearfix">
+<div class="section clearfix pt-30">
     <div class="section-inner">
 
-        <h1>My Guides</h1>
+        <h1 class="pull-left">My Guides</h1>
+        <a class="btn btn-default pull-right"  href="{{ route('destinations.create') }}">
+            <i class="fa fa-plus"></i>  Add a Destination
+        </a>
+        <div class="clearfix"></div>
         <hr>
         @if(count($guides) > 0)
         @foreach($guides as $guide)

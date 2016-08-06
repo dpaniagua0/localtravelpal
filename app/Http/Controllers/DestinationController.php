@@ -340,6 +340,9 @@ class DestinationController extends Controller
         $destination = Destination::findOrfail($request->id);
         $destination->status = $request->status;
         $destination->save();
+        if(Auth::user()->hasRole('super_admin')){
+            return redirect('destinations');
+        }
         return redirect()->route('users.guides', $destination->owner_id);
     }
 }

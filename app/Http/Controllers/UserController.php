@@ -27,7 +27,11 @@ class UserController extends Controller
      */
     public function index()
     {
+      if(Auth::user()->hasRole('super_admin')){
         $users = User::paginate(15);
+      } else {
+        $user = User::published()->paginate(15);
+      }
         return view('users.index',compact('users'));
     }
 
@@ -230,6 +234,9 @@ class UserController extends Controller
     public function userGuides($id){
         $user = User::with('destinations')->whereId($id)->firstOrfail();
         $guides = $user->destinations()->paginate(4);
+        if($user->hasRole('super_admin')){
+          return view('destinations.guides', compact('guides'));
+        } 
         return view('destinations.guides', compact('guides'));
     }
 

@@ -110,6 +110,11 @@ Route::get('destinations/{id}/reviews', [
     'uses' => 'DestinationController@reviews'
 ]);
 
+Route::any('destinations/uploadImages/{id}', [
+    'as' => 'destinations.uploadImages',
+    'uses' => 'DestinationController@uploadPhotos'
+]);
+
 Route::get('list-an-experience',[
     'as' => 'destinations.details',
     'uses' => 'DestinationController@details'

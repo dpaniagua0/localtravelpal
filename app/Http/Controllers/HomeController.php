@@ -59,7 +59,7 @@ class HomeController extends Controller
                 $tmp_image->save(storage_path("app/public/pages/home/img/{$image_name}.jpg"));
             }
 
-            return redirect('/');
+            return "true";
         }
 
     }

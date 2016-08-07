@@ -15,6 +15,8 @@ class VerifyCsrfToken extends BaseVerifier
         'images/upload',
         'destinations/search',
         'filterbycategories',
-        'getgeocode'
+        'getgeocode',
+        'upload/images',
+        'destinations/uploadImages/*'
     ];
 }

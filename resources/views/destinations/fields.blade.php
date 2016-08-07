@@ -29,7 +29,7 @@
                         'data-fv-notempty' => 'true'
  
                     ]) !!}
-
+                <small>Example: 48 Wall St, New York, NY 10005</small>
                 @if ($errors->has('location'))
                 <span class="help-block">
                     <strong>{{ $errors->first('location') }}</strong>
@@ -301,6 +301,8 @@
         <li class="next"><a href="javascript: void(0);">Next</a></li>
     </ul>
 </div>
+
+
 
 
 

@@ -78,7 +78,6 @@
         <h4 class="modal-title" id="myModalLabel">Carousel images</h4>
       </div>
       {!! Form::open([
-      'route' => 'home.uploadImages',
       'class' => 'form-horizontal',
       'method' => 'POST',
       'files' => true
@@ -117,9 +116,9 @@
         {!! Form::label('images', 'Upload images', ['class' => 'col-sm-2 control-label']) !!}   
         <div class="col-sm-10">
           {!! Form::file('images[]',array(
-          'multiple'=>true, 'class' => 'file file-loading',
-          'data-show-upload' => true
-          )); 
+              'multiple'=>true, 'class' => 'file-loading',
+              'data-show-upload' => true, 'id' => 'images'
+              )); 
           !!}
         </div>
       </div>
@@ -132,4 +131,24 @@
 </div>
 @endif
 
+@section('app-js')
+<script type="text/javascript">
+$(function() {
+
+   $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('input[name="_token"]').attr('content') }
+    });
+
+  $("#images").fileinput({
+    uploadUrl: "/upload/images",
+    uploadAsync: true,
+    maxFileCount: 5,
+    showCaption: false,
+    allowedFileExtensions: ['png', 'jpg', 'jpeg']
+  });
+
+   
+});
+</script>
+@endsection
 

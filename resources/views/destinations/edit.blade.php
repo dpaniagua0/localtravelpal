@@ -36,12 +36,22 @@
 @section('app-js')
 <script type="text/javascript">
 var body = $("body");
+var destinationId = "{{$destination->id}}";
 $(function() {
   $("select.basic-multiple,select.basic-single").select2({
    theme: "bootstrap"
   });
 
-  $("#photos").fileinput({showCaption: false});
+  $("#photos").fileinput({
+    uploadUrl: "/destinations/uploadImages/"+destinationId,
+    uploadAsync: false,
+    maxFileCount: 5,
+    showCaption: false,
+    allowedFileExtensions: ['png', 'jpg', 'jpeg'],
+    uploadExtraData: { id: destinationId },
+    extra: {id: destinationId}
+
+  });
     
     function adjustIframeHeight() {
       var $body   = $('body'),

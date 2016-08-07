@@ -142,7 +142,7 @@ class DestinationController extends Controller
         $destination->video_source = $video["source"];
         $destination->alien_video_id = $video["alien_id"];
 
-        $uploaded_images = $this->uploadPhotos($request);
+      /*  $uploaded_images = $this->uploadPhotos($request);
         if(count($uploaded_images) > 0){
             foreach ($uploaded_images as $image) {
                 $tmp_image = new \App\Image();
@@ -151,7 +151,7 @@ class DestinationController extends Controller
                 $tmp_image->destination_id = $destination->id;
                 $destination->images()->save($tmp_image);
             }
-        }   
+        }   */
 
         if($destination->update($request->all()) && $destination->categories()->sync($request->category_list)){
             return redirect()->route('destinations.edit', $id);
@@ -163,7 +163,9 @@ class DestinationController extends Controller
     *
     */
     public function uploadPhotos(Request $request){
-
+      //  return $request->id;
+        $destination = Destination::findOrfail($request->id);
+        $destination_id = $destination->id;
         if($request->hasFile('photos')){
             $photos = $request->file('photos');
             $uploaded_images = array();
@@ -173,7 +175,17 @@ class DestinationController extends Controller
                 $tmp_image->save(storage_path("app/public/upload/images/{$image_name}.jpg"));
                 array_push($uploaded_images, array('file' => "{$image_name}.jpg", 'path' => 'upload/images')); 
             }
-            return $uploaded_images;
+            if(count($uploaded_images) > 0){
+                foreach ($uploaded_images as $image) {
+                    $tmp_image = new \App\Image();
+                    $tmp_image->img_path = $image["path"];
+                    $tmp_image->img_file = $image["file"];
+                    $tmp_image->destination_id = $destination_id;
+                    $destination->images()->save($tmp_image);
+                }
+            }   
+            /*return $uploaded_images;*/
+           return "true";
         }
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class MessageRequest extends Request
+class ReservationRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class MessageRequest extends Request
     public function rules()
     {
         return [
-            'message' => 'required',
-            'sender_id' => 'required',
-            'receiver_id' => 'required'
+            //
         ];
     }
 }

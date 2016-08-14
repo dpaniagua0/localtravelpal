@@ -20,17 +20,20 @@
                            <ul class="nav nav-tabs">
                             <li class="active"><a href="#basic-tab" data-toggle="tab">Bacis</a></li>
                             <li><a href="#images-tab" data-toggle="tab">Images / Video</a></li>
-                          </ul>
+                            <li><a href="#calendar-tab" data-toggle="tab">Calendar</a></li>
+                          </ul> 
                           
                           @include('destinations.fields')
                        
-                      {!! Form::close() !!}
+                      
                       
                   </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @include('reservations.add_modal')
 @endsection
 
 @section('app-js')
@@ -52,6 +55,29 @@ $(function() {
     extra: {id: destinationId}
 
   });
+
+  $('#video-form').ajaxForm({
+    target: "#video-preview"
+  });
+
+  $("div#calendar").fullCalendar({
+    defaultView: 'agendaWeek',
+    editable: true,
+    dayClick: function(date, jsEvent, view) {
+
+        alert('Clicked on: ' + date.format());
+
+        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+        alert('Current view: ' + view.name);
+
+        // change the day's background color just for fun
+        $(this).css('background-color', 'red');
+
+    }
+  });
+
+  renderCalendar();
     
     function adjustIframeHeight() {
       var $body   = $('body'),
@@ -62,12 +88,15 @@ $(function() {
         }
     }
 
-    //Redirect to images tab on pagination
+    //Redirect to specific tab on pagination
     // Javascript to enable link to tab
     var url = document.location.toString();
     if (url.match('#')) {
         $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        renderCalendar();
     } 
+
+
 
     function setCover(imageId, destinationId) {
       var data = {};
@@ -159,6 +188,12 @@ function validateTab(index) {
     }
 });
 
+
+function renderCalendar(){
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('#calendar').fullCalendar('render');
+  });
+}
 function showCoverResponse(response){
   response.done(function(data){
     setTimeout(function(){

@@ -70,9 +70,9 @@ class DestinationController extends Controller
     {
         $destination = new Destination($request->all());
 
-        $video = $this->getVideoInfo($request->video_url);
+     /*   $video = $this->getVideoInfo($request->video_url);
         $destination->video_source = $video["source"];
-        $destination->alien_video_id = $video["alien_id"];
+        $destination->alien_video_id = $video["alien_id"];*/
 
         if($destination->save() && $destination->categories()->sync($request->category_list)){
             if(Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('admin')){
@@ -138,9 +138,6 @@ class DestinationController extends Controller
     public function update(DestinationRequest $request, $id)
     {
         $destination = Destination::findOrfail($id);
-        $video = $this->getVideoInfo($request->video_url);
-        $destination->video_source = $video["source"];
-        $destination->alien_video_id = $video["alien_id"];
 
       /*  $uploaded_images = $this->uploadPhotos($request);
         if(count($uploaded_images) > 0){
@@ -242,6 +239,21 @@ class DestinationController extends Controller
                 'alien_id' => $alien_video_id
             );
         }
+    }
+
+    public function addVideo(Request $request){
+        $destination = Destination::findOrfail($request->id);
+
+        $video = $this->getVideoInfo($request->video_url);
+        $destination->video_source = $video["source"];
+        $destination->alien_video_id = $video["alien_id"];
+
+        if($destination->save()){
+            $source = $destination->video_source;
+            $video_id = $destination->alien_video_id;
+            return view('helpers.video_player', compact('source', 'video_id'));
+        }
+        return "false";
     }
 
     /**

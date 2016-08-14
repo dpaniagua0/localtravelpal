@@ -9,14 +9,8 @@
                     <div class="panel-heading">
                         Messages
                     </div>
-
                     <div class="panel-body">
-                        <a href="{{ route('categories.create') }}" class="btn btn-primary" role="button">
-                            {{trans('common.create')}} message
-                        </a>
-
-                        <h1>Your messages goes here [ this section is on development ]</h1>
-                       
+                       @include('messages.table')
                     </div>
                 </div>
             </div>

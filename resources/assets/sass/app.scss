@@ -33,6 +33,8 @@ $light-blue: #28c0da;
 
 @import "modules/destinations";
 
+@import "modules/messages";
+
 @import "partials/checkbox";
  
 
@@ -45,6 +47,7 @@ $light-blue: #28c0da;
 @import "vendor/select2bootstrap.min";
 @import "vendor/formValidation.min";
 @import "vendor/ekko-lightbox.min";
+@import "vendor/fullcalendar.min";
 
 @import "partials/responsive";
 

@@ -8,6 +8,7 @@ use App\Http\Requests\UserRequest;
 use App\User;
 use App\Role;
 use App\WishList;
+use Auth;
 use Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 

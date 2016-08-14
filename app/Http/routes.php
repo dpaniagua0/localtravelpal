@@ -115,6 +115,11 @@ Route::any('destinations/uploadImages/{id}', [
     'uses' => 'DestinationController@uploadPhotos'
 ]);
 
+Route::post('destination/addVideo', [
+    'as' => 'destination.addVideo',
+    'uses' => 'DestinationController@addVideo'
+]);
+
 Route::get('list-an-experience',[
     'as' => 'destinations.details',
     'uses' => 'DestinationController@details'
@@ -154,3 +159,5 @@ Route::post('addToList', 'WishListController@addTo');
 Route::post('filterbycategories', 'DestinationController@searchByCategory');
 
 Route::post('getgeocode', 'DestinationController@getGeoCode');
+
+Route::resource('reservations', 'ReservationController');

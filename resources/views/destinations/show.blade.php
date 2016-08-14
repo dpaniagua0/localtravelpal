@@ -64,7 +64,9 @@
     </div>
     
     <div class="destination-actions">
-        <a class="btn btn-danger contact-btn">Contact {{ $destination->owner->name}}</a>
+        <a class="btn btn-danger contact-btn" data-target="#send-message" data-toggle="modal">
+          Contact {{ $destination->owner->name}}
+        </a>
         <!-- Split button -->
         @if(Auth::check())
         <div class="btn-group">
@@ -173,6 +175,7 @@
 @if(Auth::check())
   @include("destinations.add_list_modal")
   @include("destinations.add_review_modal")
+  @include("users.send_message")
 @endif
 @endsection
 
@@ -207,6 +210,15 @@
     }
   });
 
+  $("form#send-message").formValidation();
+  $("form#send-message").ajaxForm({
+    resetForm: true,
+    success: function(){
+      $("body").find(".modal").modal('hide');
+      eModal.alert("Your messge has been sent.");
+    }
+  });
+
   DESTINATIONS.loadGallery();
 
   DESTINATIONS.getGoeCode(mapLocation).done(function(response){
@@ -215,7 +227,7 @@
     initMap(lat,lng);
   });
 
-  $('#add-review').on('hidden.bs.modal', function (e) {
+  $('#add-review, #send-message').on('hidden.bs.modal', function (e) {
     var form = $(this).find("form");
     $(form).find('textarea').val('');
   });
@@ -226,7 +238,6 @@
     var listId = $(this).attr("id");
     var listDestination = $(this).attr("data-destination");
     addToList(listId, listDestination).done(function(response){
-      console.log("added");
       if(response == "true"){
         eModal.alert("Destination added to list.");
       }
@@ -244,7 +255,7 @@
       type: "post",
       data: data
     });
-  }
+  } 
  }); 
 
 

@@ -32,7 +32,9 @@ elixir(function(mix) {
         'formValidation.min.js',
         'framework/bootstrap.min.js',
         'destinations.js',
-        'ekkolightbox.min.js' 
+        'ekkolightbox.min.js',
+        'moment.js',
+        'fullcalendar.min.js' 
     ]);
 
 /*    mix.scripts([

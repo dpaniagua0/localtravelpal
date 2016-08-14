@@ -21,6 +21,7 @@ return [
     'inbox' => 'messages',
     'joined_on' => 'Joined on',
     'reservations' => 'reservations',
-    'userguides' => 'my guides'
+    'userguides' => 'my guides',
+    'send_a_message' => "send a message"
 
 ];

@@ -1,0 +1,22 @@
+.inbox-item {
+	display: table;
+	padding: 10px;
+	width: 100%;
+	border-bottom: 1px solid #c8c8c8;
+	text-decoration: none;
+	background-color: #f8f8f8;
+}
+.inbox-item > div {
+	display: table-row;
+	text-decoration: none;
+}
+.inbox-item  > div > div:first-child {
+	width: 20%;
+}
+.inbox-item > div > div  {
+	display: table-cell;
+}
+.unread-message {
+	background-color: #337ab7;
+	color: #fff;
+}

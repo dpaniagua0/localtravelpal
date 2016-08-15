@@ -49,6 +49,10 @@ class Destination extends Model
         return $this->belongsToMany('App\WishList', 'wish_lists_destination','destination_id', 'wish_list_id');
     }
 
+    public function reservations(){
+      return $this->hasMany('App\Reservation');
+    }
+
     /**
     * Return all the destination reviews
     */ 

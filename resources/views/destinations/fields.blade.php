@@ -306,9 +306,6 @@
 @endif
 <div class="tab-pane" id="calendar-tab">
     <div class="row">
-        <div class="col-md-12 text-left">
-            <a data-target="#add-reservation" class="btn btn-success" data-toggle="modal">Add Reservation</a>
-        </div>  
     </div>
     <div id="calendar"></div>
 </div>

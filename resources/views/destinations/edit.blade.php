@@ -1,6 +1,7 @@
 @extends('layouts.app')
-@section('page-title','Create Experience')
+@section('page-title','Edit Experience')
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -59,24 +60,39 @@ $(function() {
   $('#video-form').ajaxForm({
     target: "#video-preview"
   });
+  $("#reservation-form").ajaxForm({
+    resetForm: true,
+    success: function(responseText, statusText, xhr, $form){
+     if(responseText == "true"){
+      $("body").find(".modal").modal('hide');
+      eModal.alert({
+        message: "Reservation added.",
+        size: eModal.size.sm
+      });
+     }
+    }
+  });
+
+   $('#starttime, #endtime  ').datetimepicker({
+      format: 'LT'
+    });
 
   $("div#calendar").fullCalendar({
     defaultView: 'agendaWeek',
     editable: true,
     dayClick: function(date, jsEvent, view) {
-
-        alert('Clicked on: ' + date.format());
-
-        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-        alert('Current view: ' + view.name);
-
-        // change the day's background color just for fun
-        $(this).css('background-color', 'red');
-
+      $("input#res_date").attr('value',date.format('dddd D, MMMM Y'));
+      $("input#date").attr('value', date.format('Y-MM-D'));
+      $("input#starttime").val(date.format('LT'));
+      $("#add-reservation").modal('show');
     }
   });
 
+  $('#add-reservation').on('hide.bs.modal', function (e) {
+    $('#endtime,#starttime').val('');
+  });
+
+      
   renderCalendar();
     
     function adjustIframeHeight() {

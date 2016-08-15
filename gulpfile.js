@@ -34,7 +34,8 @@ elixir(function(mix) {
         'destinations.js',
         'ekkolightbox.min.js',
         'moment.js',
-        'fullcalendar.min.js' 
+        'fullcalendar.min.js',
+        'bootstrap-datetimepicker.js' 
     ]);
 
 /*    mix.scripts([

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Reservation;
 use App\Http\Requests;
 use App\Http\Requests\ReservationRequest;
-use Auht;
+use Auth;
 
 class ReservationController extends Controller
 {
@@ -40,8 +40,10 @@ class ReservationController extends Controller
     {
         $reservation = new Reservation($request->all());
         if($reservation->save()){
-            if(Auht::user()->hasRole('super_admin')){
-                return redirect()->route('reservations.index');
+            if(Auth::user()->hasRole('super_admin')){
+                return $destination->reservations();
+            } else {
+                return "false";
             }
         }
     }

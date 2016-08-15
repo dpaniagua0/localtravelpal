@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\DestinationRequest;
 use App\Destination;
+use App\Reservation;
 use App\Category;
 use App\Review;
 use Auth;

@@ -46,7 +46,7 @@
 <!-- Search form -->
 <div class="search-destinations">
   <h1 class="text-center">Find A Local Pal</h1>
-  <h3 class="text-center pb-30">Dsicover unique experiences offered by locals</h3>
+  <h3 class="text-center pb-30">Discover unique experiences offered by locals</h3>
   {!! Form::open([
   'route' => 'destinations.search',
   'class' => 'search-form pt-15 pb-15 pr-15 pl-15',

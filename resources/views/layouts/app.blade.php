@@ -34,7 +34,9 @@
 <body id="app-layout">
     @yield('facebook_sdk')
 
-    @include('layouts.navigation')
+    @if(Auth::check())
+        @include('layouts.navigation')
+    @endif
     <div class="page-wrap">
     @yield('content')
 
@@ -43,6 +45,8 @@
         @include("layouts.register")
     @endif
     </div>
+
+    @if(Auth::check())
     <div class="section pre-footer pt-15 pb-15">
         <div class="section-inner">
             <h1 class="mt-15 mb-15">Guides to your Favorite Destinations</h1>
@@ -71,6 +75,7 @@
         </div>
       </div>
     </footer>
+    @endif
     
     <script src="{{ elixir('js/app.js') }}"></script>
     <script src="{{ elixir('js/all.js') }}"></script>

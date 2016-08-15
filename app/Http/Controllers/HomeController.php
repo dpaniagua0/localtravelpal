@@ -20,7 +20,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index']]);
+      //Return this line to get the home view $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth');
     }
 
     /**

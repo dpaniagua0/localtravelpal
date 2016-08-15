@@ -42,6 +42,7 @@ $light-blue: #28c0da;
   resize: none;
 }
 
+@import "vendor/bootstrap-datetimepicker";
 @import "vendor/select2.min";
 @import "vendor/fileinput.min";
 @import "vendor/select2bootstrap.min";

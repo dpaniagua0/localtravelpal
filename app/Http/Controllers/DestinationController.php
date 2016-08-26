@@ -32,9 +32,11 @@ class DestinationController extends Controller
             'except' => [
                 'search', 'show','create','details', 
                 'edit', 'store', 'searchByCategory',
-                'storeReview','getGeoCode'
+                'storeReview','getGeoCode',
             ]
         ]);
+
+        $this->middleware('recruiter', ['only']);
     }
 
 
@@ -77,7 +79,7 @@ class DestinationController extends Controller
 
         if($destination->save() && $destination->categories()->sync($request->category_list)){
             if(Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('admin')){
-                return redirect('destinations');
+                return redirect()->route('destinations');
             } else {
                 return redirect()->route('destinations.edit', $destination->id);
             }
@@ -110,8 +112,9 @@ class DestinationController extends Controller
     {
         $destination = Destination::findOrfail($id);
         $images = $destination->images()->paginate(6);
+        $reservations = $destination->preapprovedReservations()->paginate(6);
 
-        return view('destinations.show', compact('destination', 'images'));
+        return view('destinations.show', compact('destination', 'images', 'reservations'));
     }
 
     /**
@@ -267,6 +270,17 @@ class DestinationController extends Controller
     }
 
     /**
+    * return all the reservations from destination
+    *
+    */
+    public function reservations(Request $request){
+        $destination = Destination::findOrfail($request->id);
+        $reservations = $destination->reservations;
+        
+        return $reservations;
+    }
+
+    /**
     * Set destination cover image
     * @param \Illuminate\Http\Request  $request
     */
@@ -365,7 +379,7 @@ class DestinationController extends Controller
         $destination = Destination::findOrfail($request->id);
         $destination->status = $request->status;
         $destination->save();
-        if(Auth::user()->hasRole('super_admin')){
+        if(Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('recruiter')){
             return redirect('destinations');
         }
         return redirect()->route('users.guides', $destination->owner_id);

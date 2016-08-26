@@ -16,7 +16,6 @@
                         'method' => 'patch'
                       ]) !!}
 
-                      {{$user->roles}}
                     @include('users.fields')
 
                   {!! Form::close() !!}

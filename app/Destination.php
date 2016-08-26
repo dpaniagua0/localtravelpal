@@ -53,6 +53,10 @@ class Destination extends Model
       return $this->hasMany('App\Reservation');
     }
 
+    public function preapprovedReservations(){
+      return $this->hasMany('App\Reservation')->where('status', '2');
+    }
+
     /**
     * Return all the destination reviews
     */ 

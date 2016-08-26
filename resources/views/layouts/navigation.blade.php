@@ -40,6 +40,9 @@
                     @if(Auth::check() && Auth::user()->hasRole('super_admin'))
                         @include('layouts.adminmenu')
                     @endif
+                    @if(Auth::check() && Auth::user()->hasRole('recruiter'))
+                        @include('layouts.recruitermenu')
+                    @endif
                     @if (Auth::guest())
                         <li><a href="#" data-target="#login-modal" data-toggle="modal">Login</a></li>
                         <li><a href="#" data-target="#register-modal" data-toggle="modal">Register</a></li>

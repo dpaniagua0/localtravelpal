@@ -35,6 +35,9 @@
     </div>
 
     @include('reservations.add_modal')
+
+    <!-- This modal is used to display the reservation details -->
+    <div class="details-modal"></div>
 @endsection
 
 @section('app-js')
@@ -79,12 +82,35 @@ $(function() {
 
   $("div#calendar").fullCalendar({
     defaultView: 'agendaWeek',
-    editable: true,
+    editable: false,
+    eventSources: [
+      {
+        url: "/destination/"+destinationId+"/reservations",
+        type: "get",
+        data: {
+          start: "{{ date('Y-m-d') }}",
+          end: "{{ date('Y-m-d', strtotime('+20 days')) }}"
+        }
+      }
+    ],
     dayClick: function(date, jsEvent, view) {
-      $("input#res_date").attr('value',date.format('dddd D, MMMM Y'));
+      $("input#res_date").attr('value',date.format('dddd D, MMMM Y')); // Used just for render the date.
       $("input#date").attr('value', date.format('Y-MM-D'));
       $("input#starttime").val(date.format('LT'));
       $("#add-reservation").modal('show');
+    },
+    eventDurationEditable: false,
+    eventClick: function(calEvent, jsEvent, view) {
+      var reservationId = calEvent.id;
+      $(".details-modal").html("");
+      var url = `/reservations/${reservationId}/details`;
+      $('.details-modal').load(url,function(result){
+        $("#reservation-details").modal('show');
+        $('#starttime, #endtime  ').datetimepicker({
+          format: 'LT'
+        });
+
+      });
     }
   });
 

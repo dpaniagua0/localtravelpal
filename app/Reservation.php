@@ -13,7 +13,12 @@ class Reservation extends Model
      */
     protected $fillable = [
       'name', 'last_name', 'email', 'people_qty','phone',
-      'date','start_time', 'end_time', 'message', 'confirmation_number',
-      'status', 'destination_id'
+      'date','start', 'end', 'message', 'confirmation_number',
+      'status', 'destination_id', 'start_time', 'end_time'
     ];
+
+    public function destination(){
+      return $this->hasOne('App\Destination', 'id','destination_id');
+    }
+
 }

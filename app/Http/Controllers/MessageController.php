@@ -20,7 +20,7 @@ class MessageController extends Controller
         $this->middleware('admin', [
             'except' => [
                 'store', 'edit','create', 'update',
-                'destroy'
+                'destroy', 'index'
             ]
         ]);
     }
@@ -84,7 +84,7 @@ class MessageController extends Controller
         $message = Message::find($id);
         if($message) {
             // get all message between both users 
-            
+            $history = Message::all();
             $message->status = 1;
             $message->save();
             $sender = $message->sender;

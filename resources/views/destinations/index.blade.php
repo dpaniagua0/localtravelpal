@@ -8,7 +8,6 @@
                     <div class="panel-heading">
                         Destinations
                     </div>
-
                     <div class="panel-body">
                         <a href="{{ route('destinations.create') }}" class="btn btn-primary" role="button">
                             Create destination

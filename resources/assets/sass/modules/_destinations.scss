@@ -254,3 +254,9 @@ div.destination-title h1, div.destination-title small{
 .fc-view-container {
 	display: block;
 }
+.reservation-status {
+	opacity: 0.5;
+}
+.reservation-status.active {
+	opacity: 1 !important;
+}

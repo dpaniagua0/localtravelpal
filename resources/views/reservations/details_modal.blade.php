@@ -1,33 +1,47 @@
-<div class="modal fade" id="add-reservation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade" id="reservation-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Set a new reservation</h4>
+        <h4 class="modal-title" id="myModalLabel">Reservations Details</h4>
       </div>
-      {!! Form::open([
-            'route' => 'reservations.store',
+
+      {{--*/ $available_active = ""; /*--}}
+      {{--*/ $unavailable_active = ""; /*--}}
+
+      {{--*/ $display_date = date("l d, F Y", strtotime($reservation->date))/*--}}
+
+      @if($reservation->status == 2)
+        {{--*/ $available_active = "active"; /*--}}
+      @else
+        {{--*/ $unavailable_active = "active"; /*--}}
+      @endif
+
+      {!! Form::model($reservation,[
+            'route' =>  ['reservations.update', $reservation->id],
             'method' => 'POST',
             'id' => 'reservation-form'
       ]) !!}
 
       <div class="modal-body">
       
-        {!! Form::hidden('destination_id', $destination->id) !!}
+       
+       {!! Form::hidden('destination_id', $reservation->destination_id) !!}
         <div class="form-group">
           <label>Date</label>
           {!! Form::hidden('date', null, [ 'id' => 'date']) !!}
      
-          {!! Form::text('res_date', null, [ 'class' => 'form-control', 'disabled', 'id' => 'res_date']) !!}
+          {!! Form::text('res_date', $display_date, [ 'class' => 'form-control', 'disabled', 'id' => 'res_date']) !!}
         </div>
 
         <div class="form-group">
           <label>Available / Unavailable</label>
+          <br>
           <div class="btn-group" data-toggle="buttons">
-            <label class="reservation-status btn btn-success active">
+            <label class="reservation-status btn btn-success {{ $available_active }}">
               <input type="radio" name="status" value="2" autocomplete="off" checked> Available
             </label>
-            <label class="reservation-status btn btn-warning">
+            <label class="reservation-status btn btn-warning {{ $unavailable_active }}">
               <input type="radio" name="status" value="3" autocomplete="off"> Unavailable
             </label>
           </div>

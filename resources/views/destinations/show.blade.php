@@ -110,7 +110,71 @@
         
       </div>
       <div id="reservations" class="tab-pane" role="tabpanel">
-      [[ FORM HERE ]]
+        <div class="row">
+            <h4 class="text-center">Request a reservation</h4>
+            {!! Form::open([
+                 'route' => 'reservations.checkout',
+                 'method' => 'POST',
+                 'class' => 'form-inline'
+            ])  !!}
+            <div class="form-group">
+              <label>Date</label>
+              <br>
+              {!! Form::text('date', null,[ 'class' => 'form-control date-input'])  !!}
+            </div>
+            <div class="form-group">
+              <label>Time</label>
+              <br>
+              {!! Form::text('start_time', null, [ 'class' => 'form-control time-input']) !!}
+            </div>
+            <div class="form-group">
+              <label>Guest</label>
+              <br>
+              {!! Form::text('people_qty', null, [ 'class' => 'form-control'])  !!}
+            </div>
+            
+            <button class="btn btn-info mt-25">Request Reservation</button>
+          </div>
+
+            {!! Form::close() !!}
+       
+
+
+        @if(sizeof($reservations))
+          <h3>Instant Reservations</h3>
+          @foreach($reservations as $reservation)
+            <div class="row pl-5 pr-5">
+              {!! Form::model($reservation,[
+                  'route' => 'reservations.checkout',
+                  'class' => 'form-horizontal',
+                  'method' => 'POST',
+                  'id' => 'reservation-form'
+              ]) !!}
+              {!! Form::hidden('destination_id', $destination->id)  !!}
+              {!! Form::hidden('reservation_id', $reservation->id)!!}
+              <div class="col-md-9" 
+              style="background-color: #fff; border-bottom: 1px solid #28c0da;line-height: 35px">
+
+              <div class="col-md-5 text-center">
+                  {!! Form::hidden('date',null) !!}
+                <p class="form-control-static">
+                  {{ date("l d, F Y", strtotime($reservation->date)) }}
+                </p>
+              </div>
+              <div class="col-md-4 text-center">
+                <p class="form-control-static">
+                  {{ date("H:i:s A", strtotime($reservation->start_time)) }}
+                </p>
+              </div>
+              <div class="col-md-3 pt-5 pb-5">
+                <button class="btn btn-primary">Book Now</button>
+              </div>
+              {!! Form::close() !!}
+            </div>
+            </div>
+              
+          @endforeach
+        @endif
       </div>
     </div>
   </div>
@@ -242,6 +306,14 @@
         eModal.alert("Destination added to list.");
       }
     });
+  });
+
+
+  $(".time-input").datetimepicker({
+    format: 'LT'
+  });
+  $(".date-input").datetimepicker({
+     format: 'DD/MM/YYYY'
   });
 
   function addToList(listId, destinationId){

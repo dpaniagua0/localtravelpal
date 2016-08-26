@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdminMiddleware
+class RecruiterMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         $user = $request->user();
-        if(!$user && !$user->hasRole('super_admin')){
-            abort(403, 'Unauthorized action.');
-        }
-        return $next($request); 
-    
+        if(!$user && !$user->hasRole('recruiter')){
+            abort(403, 'Unauthorized action.');  
+        } 
+        return $next($request);
     }
 }

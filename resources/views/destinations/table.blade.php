@@ -27,18 +27,22 @@
                             <i class="fa fa-pencil"></i>
                         </a>
                     </li>
+
+                    @if(Auth::user()->hasRole('super_admin'))
                     <li>
                         <a class="btn btn-danger confirm-btn"  href="{!! route('destinations.delete', [$destination->id]) !!}"
                          data-title="Are you sure?" data-message="Deleting this destination,this will delete everything related to it">
                          <i class="fa fa-trash"></i>
                      </a>
-                      <li>
+                    </li>
+                    @endif
+                    <li>
                         <a class="btn btn-success confirm-btn" {{ ($destination->status == 1)? 'disabled':'' }}  href="{!! route('destinations.updateStatus', [ 'id' => $destination->id, 'status' => 1]) !!}"
                          data-title="Are you sure?" 
                          data-message="When you puslish a destination it will be avaialable for all the users">
                          <i class="fa fa-globe"></i>
-                     </a>
-                 </li>
+                        </a>
+                    </li>
              </ul>
 
          </td>

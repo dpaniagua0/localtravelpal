@@ -110,6 +110,11 @@ Route::get('destinations/{id}/reviews', [
     'uses' => 'DestinationController@reviews'
 ]);
 
+Route::get('destination/{id}/reservations', [
+    'as' => 'destination.reservations',
+    'uses' => 'DestinationController@reservations'
+]);
+
 Route::any('destinations/uploadImages/{id}', [
     'as' => 'destinations.uploadImages',
     'uses' => 'DestinationController@uploadPhotos'
@@ -161,3 +166,12 @@ Route::post('filterbycategories', 'DestinationController@searchByCategory');
 Route::post('getgeocode', 'DestinationController@getGeoCode');
 
 Route::resource('reservations', 'ReservationController');
+Route::get('reservations/{id}/details', [
+    'as' => 'reservations.details',
+    'uses' => 'ReservationController@details'
+]);
+
+Route::post('reservations/checkout',[
+    'as' => 'reservations.checkout',
+    'uses'=> 'ReservationController@checkout'
+]);

@@ -4,12 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reservation;
+use App\Destination;
 use App\Http\Requests;
 use App\Http\Requests\ReservationRequest;
 use Auth;
+use DB;
 
 class ReservationController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['checkout']]);
+
+        $this->middleware('admin', [
+            'only' => [
+                'edit', 'create','show','delete', 
+                'update'
+            ]
+        ]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -38,10 +59,21 @@ class ReservationController extends Controller
      */
     public function store(ReservationRequest $request)
     {
+        /**
+        * Reservations status 
+        * 2 => approved
+        * 3 => unavailable 
+        */
         $reservation = new Reservation($request->all());
+        $reservation->start = date("Y-m-d H:i:s", strtotime($request->date." ".$request->start_time));
+        $reservation->end = date("Y-m-d H:i:s", strtotime($request->date." ".$request->end_time));
+
         if($reservation->save()){
             if(Auth::user()->hasRole('super_admin')){
-                return $destination->reservations();
+                $reservations = DB::table('reservations')
+                ->select('id', 'date', 'start','end','status')
+                ->where('destination_id','=', $request->destination_id);
+               return json_encode(array("success" => true, "reservations" => $reservations));
             } else {
                 return "false";
             }
@@ -91,5 +123,15 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function details($id) {
+        $reservation = Reservation::findOrfail($id);
+        return view('reservations.details_modal', compact('reservation'));
+    }
+
+    public function checkout(ReservationRequest $request){
+        $reservation = Reservation::findOrfail($request->reservation_id);
+        return view('reservations.checkout', compact('reservation'));
     }
 }

@@ -13,12 +13,13 @@
         @if(count($guides) > 0)
         @foreach($guides as $guide)
 
+
             @if($guide->hasCover())
               {{--*/$cover_file = $guide->hasCover()->img_file; /*--}} 
               {{--*/$cover_path = $guide->hasCover()->img_path; /*--}}
             @endif
 
-            @if(isset($cover_file) && isset($cover_path))
+            @if(!empty($cover_file) && !empty($cover_path))
               {{--*/$cover_image = "/{$cover_path}/350x150/{$cover_file}";/*--}}
             @else
               {{--*/$cover_image = "http://placehold.it/350x150"; /*--}}
@@ -52,6 +53,9 @@
                 
             </div>
         </div>
+        {{--*/ $cover_image = ""; /*--}}
+        {{--*/ $cover_file = "";/*--}}
+        {{--*/ $cover_path = ""; /*--}}
         @endforeach 
 
         {!! $guides->links() !!}

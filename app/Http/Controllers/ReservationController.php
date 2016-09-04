@@ -38,7 +38,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::paginate(20);
+        return view('reservations.index', compact('reservations'));
     }
 
     /**
@@ -75,7 +76,7 @@ class ReservationController extends Controller
                 ->where('destination_id','=', $request->destination_id);
                return json_encode(array("success" => true, "reservations" => $reservations));
             } else {
-                return "false";
+                return json_encode(array("success" => false));
             }
         }
     }

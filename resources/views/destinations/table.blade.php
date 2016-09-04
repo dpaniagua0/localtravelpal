@@ -22,11 +22,13 @@
                             <i class="fa fa-eye"></i>
                         </a>
                     </li>
+                    @if(Auth::user()->id == $destination->id || Auth::user()->hasRole('super_admin'))
                     <li>
                         <a class="btn btn-warning"  href="{!! route('destinations.edit', [$destination->id]) !!}">
                             <i class="fa fa-pencil"></i>
                         </a>
                     </li>
+                    @endif
 
                     @if(Auth::user()->hasRole('super_admin'))
                     <li>
@@ -37,7 +39,7 @@
                     </li>
                     @endif
                     <li>
-                        <a class="btn btn-success confirm-btn" {{ ($destination->status == 1)? 'disabled':'' }}  href="{!! route('destinations.updateStatus', [ 'id' => $destination->id, 'status' => 1]) !!}"
+                        <a class="btn btn-success confirm-btn" {{ ($destination->status == 2)? 'disabled':'' }}  href="{!! route('destinations.updateStatus', [ 'id' => $destination->id, 'status' => 2]) !!}"
                          data-title="Are you sure?" 
                          data-message="When you puslish a destination it will be avaialable for all the users">
                          <i class="fa fa-globe"></i>

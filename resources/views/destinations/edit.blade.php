@@ -65,13 +65,16 @@ $(function() {
   });
   $("#reservation-form").ajaxForm({
     resetForm: true,
+    dataType: 'json',
     success: function(responseText, statusText, xhr, $form){
-     if(responseText == "true"){
-      $("body").find(".modal").modal('hide');
-      eModal.alert({
-        message: "Reservation added.",
-        size: eModal.size.sm
-      });
+      var success = responseText.success;
+      if(success){
+        $("body").find(".modal").modal('hide');
+        eModal.alert({
+          message: "Reservation added.",
+          size: eModal.size.sm
+        });
+        $('#calendar').fullCalendar('refetchEvents');
      }
     }
   });

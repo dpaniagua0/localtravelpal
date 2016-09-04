@@ -6,9 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Storage;
 use Socialite;
 use Auth;
+use Cmgmyr\Messenger\Traits\Messagable;
+
 
 class User extends Authenticatable
 {
+    use Messagable;
     /**
      * The attributes that are mass assignable.
      *

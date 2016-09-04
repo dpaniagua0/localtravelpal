@@ -28,7 +28,7 @@
                 <div class="wish-list-nav">
                     @if(Auth::check())
                         <a class="wish-list-btn" href="{{ route('users.whishlists', Auth::user()->id  )}}">
-                            Whishlist
+                            Wishlist
                         </a>
                     @endif
                 </div>
@@ -61,12 +61,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('messages.index') }}">
-                                        {{ ucfirst(trans('common.inbox')) }}
+                                    <a href="{{URL::to('messages')}}">
+                                        {{ ucfirst(trans('common.inbox')) }} @include('messenger.unread-count')
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('messages.index') }}">
+                                    <a href="{{ route('reservations.index') }}">
                                         {{ ucfirst(trans('common.reservations')) }}
                                     </a>
                                 </li>

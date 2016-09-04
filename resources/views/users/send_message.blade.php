@@ -15,10 +15,18 @@
         <div class="row">
           <div class="col-md-12">
 
-            {!! Form::hidden('sender_id', Auth::user()->id) !!}
+            {!! Form::hidden('user_id', Auth::user()->id) !!}
 
-            {!! Form::hidden('receiver_id', $destination->owner->id) !!}
+            {!! Form::hidden('recipients[]', $destination->owner->id) !!}
 
+            <div class="form-group pl-5 pr-5">
+                {!! Form::text('subject', null, [
+                  'class' => 'form-control', 
+                  'placeholder' => 'Subject',
+                  'data-fv-message' => 'The subject is required',
+                  'data-fv-notempty' => 'true'
+                ]) !!}
+            </div>
             <div class="form-group pl-5 pr-5">
               {!! Form::textarea('message', null, [
                   'class' => 'form-control', 'placeholder' => 'Message',

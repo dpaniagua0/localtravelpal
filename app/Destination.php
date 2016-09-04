@@ -42,7 +42,7 @@ class Destination extends Model
     }
 
     public function scopePublished($query) {
-      return $query->where('status', '=', '1');
+      return $query->where('status', '=', '2');
     }
 
     public function wishlists(){
@@ -50,7 +50,7 @@ class Destination extends Model
     }
 
     public function reservations(){
-      return $this->hasMany('App\Reservation');
+      return $this->hasMany('App\Reservation'); 
     }
 
     public function preapprovedReservations(){

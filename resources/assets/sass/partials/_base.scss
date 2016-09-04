@@ -151,11 +151,25 @@ body {
     border: 1px solid #47BBCC;
     border-radius: 3px;
     color: #fff !important;
-    padding: 5px !important;
+    padding: 5px 15px !important;
     cursor: pointer;
     display:block;
     position: relative;
     float:right;
+    text-align: right;
+    width: 100px;
+    font-weight: normal;
+}
+.wish-list-btn:hover {
+    text-decoration: none;
+    background-color: #47BBDD;
+}
+.wish-list-btn {
+  background-image: url('/upload/images/original/icon_3.png');
+  background-size: 55%;
+  background-position-x: -10px;
+  background-position-y: -6px;
+  background-repeat: no-repeat;
 }
 .wish-list-nav:after {
     content: " ";

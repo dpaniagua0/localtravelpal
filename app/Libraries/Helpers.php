@@ -29,8 +29,8 @@ class Helpers {
     return view('helpers.slider', compact('images'))->render();
   }
 
-  public static function render_destinations($destinations){
-    return view('helpers.destinations_preview', compact('destinations'))->render();
+  public static function render_destinations($destinations, $col_size = null){
+    return view('helpers.destinations_preview', compact('destinations', 'col_size'))->render();
   }
 
   public static function user_wishlists($lists){

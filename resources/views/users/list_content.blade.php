@@ -9,7 +9,8 @@
                        {{ $wish_list->name}}
                     </div>
                     <div class="panel-body">
-                        {!! Helpers::render_destinations($wish_list->destinations) !!}
+                        {{--*/  $col_size = 'col-sm-5 col-md-5'/*--}}
+                        {!! Helpers::render_destinations($wish_list->destinations, $col_size) !!}
                     </div>
                 </div>
             </div>

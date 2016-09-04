@@ -1,9 +1,12 @@
 @if(count($destinations) > 0)
 <div class="featured-guides">
     <div class="row">
-
+        <div class="col-md-12">
+        @if(empty($col_size))
+            {{--*/ $col_size = "col-sm-6 col-md-6"; /*--}}
+        @endif
         @foreach($destinations as $destination)
-            <div class="destination-preview col-sm-6 col-md-6">
+            <div class="destination-preview {{ $col_size }}">
                 <a href="{{ route('destinations.show', $destination->id) }}">
                 <div class="thumbnail" style="position: relative">
 
@@ -43,6 +46,7 @@
                 </a>
             </div>
         @endforeach
+        </div>
     </div>
 </div>
 @else 

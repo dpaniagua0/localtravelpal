@@ -6722,6 +6722,16 @@ div.destination-title h1, div.destination-title small {
 .reservation-status.active {
   opacity: 1 !important; }
 
+.bg-available {
+  background-color: #449d44 !important;
+  border-color: #398439 !important;
+  color: #fff !important; }
+
+.bg-unavailable {
+  background-color: #f0ad4e !important;
+  border-color: #eea236 !important;
+  color: #fff !important; }
+
 .inbox-item {
   display: table;
   padding: 10px;

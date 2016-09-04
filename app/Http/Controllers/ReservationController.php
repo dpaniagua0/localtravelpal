@@ -69,15 +69,19 @@ class ReservationController extends Controller
         $reservation->start = date("Y-m-d H:i:s", strtotime($request->date." ".$request->start_time));
         $reservation->end = date("Y-m-d H:i:s", strtotime($request->date." ".$request->end_time));
 
+        if($request->status == 2){
+            $reservation->css_class = 'bg-available';
+        } else {
+            $reservation->css_class = 'bg-unavailable';
+        }
+
         if($reservation->save()){
-            if(Auth::user()->hasRole('super_admin')){
-                $reservations = DB::table('reservations')
-                ->select('id', 'date', 'start','end','status')
-                ->where('destination_id','=', $request->destination_id);
-               return json_encode(array("success" => true, "reservations" => $reservations));
-            } else {
-                return json_encode(array("success" => false));
-            }
+            $reservations = DB::table('reservations')
+            ->select('id', 'date', 'start','end','status', 'css_class as className')
+            ->where('destination_id','=', $request->destination_id);
+            return json_encode(array("success" => true, "reservations" => $reservations));
+        } else {
+            return json_encode(array('success' => false));
         }
     }
 
@@ -112,7 +116,27 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reservation = Reservation::find($id);
+        $start = date("Y-m-d H:i:s", strtotime($request->date." ".$request->start_time));
+        $end = date("Y-m-d H:i:s", strtotime($request->date." ".$request->end_time));
+
+        if($request->status == 2){
+            $css_class = 'bg-available';
+        } else {
+            $css_class = 'bg-unavailable';
+        }
+        $request->offsetSet('css_class', $css_class);
+        $request->offsetSet('start', $start);
+        $request->offsetSet('end', $end);
+
+        if($reservation->update($request->all())){
+            $reservations = DB::table('reservations')
+            ->select('id', 'date', 'start','end','status', 'css_class as className')
+            ->where('destination_id','=', $request->destination_id);
+            return json_encode(array("success" => true, "reservations" => $reservations));
+        } else {
+            return json_encode(array('success' => false));
+        }
     }
 
     /**

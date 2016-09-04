@@ -1,5 +1,5 @@
 <div class="modal fade" id="reservation-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-md" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -19,10 +19,13 @@
 
       {!! Form::model($reservation,[
             'route' =>  ['reservations.update', $reservation->id],
-            'method' => 'POST',
-            'id' => 'reservation-form'
+            'method' => 'patch',
+            'id' => 'reservation-edit-form'
       ]) !!}
 
+      {{--*/ $reservation->start_time = date('h:i A', strtotime($reservation->start))/*--}}
+
+      {{--*/ $reservation->end_time = date('h:i A', strtotime($reservation->end))/*--}}
       <div class="modal-body">
       
        

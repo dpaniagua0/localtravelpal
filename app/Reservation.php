@@ -14,7 +14,7 @@ class Reservation extends Model
     protected $fillable = [
       'name', 'last_name', 'email', 'people_qty','phone',
       'date','start', 'end', 'message', 'confirmation_number',
-      'status', 'destination_id', 'start_time', 'end_time'
+      'status', 'destination_id', 'start_time', 'end_time', 'css_class'
     ];
 
     public function destination(){

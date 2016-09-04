@@ -13,6 +13,7 @@ use App\Review;
 use Auth;
 use App\Image as Images;
 use Intervention\Image\ImageManagerStatic as Image;
+use DB;
 
 class DestinationController extends Controller
 {
@@ -274,9 +275,11 @@ class DestinationController extends Controller
     *
     */
     public function reservations(Request $request){
-        $destination = Destination::findOrfail($request->id);
-        $reservations = $destination->reservations;
-        
+        //$destination = Destination::findOrfail($request->id);
+        //$reservations = $destination->reservations;
+         $reservations = DB::table('reservations')
+            ->select('id', 'date', 'start','end','status', 'css_class as className')
+            ->where('destination_id','=', $request->id)->get();
         return $reservations;
     }
 

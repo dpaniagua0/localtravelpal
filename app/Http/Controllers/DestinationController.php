@@ -14,6 +14,8 @@ use Auth;
 use App\Image as Images;
 use Intervention\Image\ImageManagerStatic as Image;
 use DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class DestinationController extends Controller
 {
@@ -339,7 +341,22 @@ class DestinationController extends Controller
             }
         } else {
             if($sort_option != -1){
-                $destinations = Destination::published()->sortedBy($sort_option)->paginate(6);
+                if($sort_option == 2){
+
+                    $collection = Destination::published()->sortedBy($sort_option);
+                    $page = 1;
+                    $perPage = 6;
+                    $destinations = new LengthAwarePaginator(
+                    $collection->forPage($page, $perPage), 
+                        $collection->count(), 
+                        $perPage, 
+                        $page
+                    );
+
+                } else {
+
+                    $destinations = Destination::published()->sortedBy($sort_option)->paginate(6);   
+                }
             } else {
                 $destinations = Destination::published()->paginate(6);
 

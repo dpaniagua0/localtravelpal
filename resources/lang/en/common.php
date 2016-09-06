@@ -22,6 +22,7 @@ return [
     'joined_on' => 'Joined on',
     'reservations' => 'reservations',
     'userguides' => 'my guides',
-    'send_a_message' => "send a message"
+    'send_a_message' => "send a message",
+    'reviews' => "review|reviews"
 
 ];

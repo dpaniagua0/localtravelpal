@@ -29,9 +29,11 @@
                             <span class="star"></span>
                             <span class="half-star"></span>
                             <span class="total-reviews">
-                                @if(sizeof($destination->reviews) > 0)
+                                @if(sizeof($destination->reviews) > 1)
                                     {{ sizeof($destination->reviews) }}  
                                     reviews    
+                                @elseif(sizeof($destination->reviews) == 1)
+                                    1 review
                                 @endif
                             </span>
                         </span>

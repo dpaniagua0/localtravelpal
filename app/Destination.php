@@ -101,6 +101,9 @@ class Destination extends Model
           # code...
           break;
         case 2:
+          return  $query->has('reviews', '>', '0')->get()->sortBy(function($query){
+            $query->has('reviews')->count();
+          });
           break;
 
         case 3:

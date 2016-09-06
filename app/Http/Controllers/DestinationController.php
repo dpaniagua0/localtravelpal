@@ -37,7 +37,9 @@ class DestinationController extends Controller
             ]
         ]);
 
-        $this->middleware('recruiter', ['only']);
+        /*$this->middleware('recruiter', 
+
+        ]);*/
     }
 
 

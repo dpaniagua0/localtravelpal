@@ -28,7 +28,12 @@
                             <span class="star"></span>
                             <span class="star"></span>
                             <span class="half-star"></span>
-                            <span class="total-reviews">10 reviews</span>
+                            <span class="total-reviews">
+                                @if(sizeof($destination->reviews) > 0)
+                                    {{ sizeof($destination->reviews) }}  
+                                    reviews    
+                                @endif
+                            </span>
                         </span>
                         <div class="destination-shortdesc">
                             {{ $destination->description }}

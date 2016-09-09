@@ -25,10 +25,12 @@
                         <span class="rating">
                             @if(sizeof($destination->ratings) > 0)
                                 {{--*/ $rating = $destination->averageRating(5); /*--}}
-                                @for($i = 1; $i <= round($rating) ; $i++)
+                                {{--*/ $rating_round = ($rating == 5)? $rating : round($rating); /*--}}
+                                {{--*/ $float_dot = explode('.',$rating); /*--}}
+                                @for($i = 0; $i < $rating_round; $i++)
                                     <span class="star"></span>
                                 @endfor
-                                @if(is_float($rating))
+                                @if($float_dot[1] > 0)
                                     <span class="half-star"></span>
                                 @endif
                             @else 

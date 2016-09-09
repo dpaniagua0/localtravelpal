@@ -361,7 +361,17 @@ class DestinationController extends Controller
                         $page
                     );
 
-                } else {
+                } elseif($sort_option == 1) { 
+                    $collection = Destination::published()->sortedBy($sort_option);
+                    $page = 1;
+                    $perPage = 6;
+                    $destinations = new LengthAwarePaginator(
+                    $collection->forPage($page, $perPage), 
+                        $collection->count(), 
+                        $perPage, 
+                        $page
+                    );
+                }else {
 
                     $destinations = Destination::published()->sortedBy($sort_option)->paginate(6);   
                 }

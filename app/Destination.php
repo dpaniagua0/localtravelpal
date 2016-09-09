@@ -103,7 +103,9 @@ class Destination extends Model
     public function scopeSortedBy($query, $option) {
       switch ($option) {
         case 1:
-          
+          return $query->has('ratings', '>', '0')->get()->sortBy(function($query){
+            $query->has('ratings')->count();
+          });
           break;
         case 2:
           return  $query->has('reviews', '>', '0')->get()->sortBy(function($query){

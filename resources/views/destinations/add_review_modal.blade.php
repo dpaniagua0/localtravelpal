@@ -18,8 +18,7 @@
        {!! Form::hidden('user_id', Auth::user()->id);  !!}
        {!! Form::hidden('destination_id', $destination->id);  !!}
       <div class="modal-body">
-
-         <div class="form-group {{ $errors->has('comment') ? ' has-error' : '' }}">
+        <div class="form-group {{ $errors->has('comment') ? ' has-error' : '' }}">
             <div class="col-sm-12">
                 {!! Form::textarea('comment', null, [
                         'class' => 'form-control', 'placeholder' => 'Comments',
@@ -36,6 +35,51 @@
                 <span class="help-block form-response">
                 </span>
             </div>
+        </div>
+         <div class="form-group">
+          <h4 class="text-center">Destination Rate</h4> 
+          <div class="col-sm-8 col-md-offset-4">
+            <div class="radio radio-primary inline-block">
+                <input class="sort-by" id="radio1" 
+                  type="radio" name="rating"
+                  value="1">
+                  <label for="radio1">
+                    1
+                  </label>
+            </div>
+             <div class="radio radio-primary inline-block">
+                <input class="sort-by" id="radio2" 
+                  type="radio" name="rating"
+                  value="2">
+                  <label for="radio2">
+                    2
+                  </label>
+            </div>
+            <div class="radio radio-primary inline-block">
+                <input class="sort-by" id="radio3" 
+                  type="radio" name="rating"
+                  value="3">
+                  <label for="radio3">
+                    3
+                </label>
+            </div>
+             <div class="radio radio-primary inline-block">
+                <input class="sort-by" id="radio4" 
+                  type="radio" name="rating"
+                  value="4">
+                  <label for="radio4">
+                    4
+                  </label>
+            </div>
+             <div class="radio radio-primary inline-block">
+                <input class="sort-by" id="radio5" 
+                  type="radio" name="rating"
+                  value="5">
+                  <label for="radio5">
+                    5
+                  </label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

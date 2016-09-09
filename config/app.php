@@ -159,6 +159,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
+        willvincent\Rateable\RateableServiceProvider::class
 
     ],
 

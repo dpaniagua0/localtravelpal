@@ -15,6 +15,8 @@ use App\Image as Images;
 use Intervention\Image\ImageManagerStatic as Image;
 use DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+use willvincent\Rateable\Rating as Rating;
+
 
 
 class DestinationController extends Controller
@@ -102,6 +104,12 @@ class DestinationController extends Controller
             $review = new Review;
             $review->user_id = $request->user_id;
             $review->comment = $request->comment;
+
+            $rating = new Rating;
+            $rating->rating = $request->rating;
+            $rating->user_id = $request->user_id;
+
+            $destination->ratings()->save($rating);
 
             $destination->reviews()->save($review);
         }

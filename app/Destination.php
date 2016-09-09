@@ -2,10 +2,15 @@
 
 namespace App;
 
+use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
 
 class Destination extends Model
 {
+
+  use Rateable;
+
+  
   /**
      * The attributes that are mass assignable.
      *
@@ -98,7 +103,7 @@ class Destination extends Model
     public function scopeSortedBy($query, $option) {
       switch ($option) {
         case 1:
-          # code...
+          
           break;
         case 2:
           return  $query->has('reviews', '>', '0')->get()->sortBy(function($query){

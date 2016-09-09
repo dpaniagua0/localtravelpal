@@ -23,17 +23,25 @@
                     <div class="caption">
                         <h3 class="mt-5 mb-5">{{ $destination->title }}</h3>
                         <span class="rating">
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="star"></span>
-                            <span class="half-star"></span>
+                            @if(sizeof($destination->ratings) > 0)
+                                {{--*/ $rating = $destination->averageRating(5); /*--}}
+                                @for($i = 1; $i <= round($rating) ; $i++)
+                                    <span class="star"></span>
+                                @endfor
+                                @if(is_float($rating))
+                                    <span class="half-star"></span>
+                                @endif
+                            @else 
+                                <span class="label label-info">No stars yet.</span>
+                            @endif  
                             <span class="total-reviews">
                                 @if(sizeof($destination->reviews) > 1)
                                     {{ sizeof($destination->reviews) }}  
                                     reviews    
                                 @elseif(sizeof($destination->reviews) == 1)
                                     1 review
+                                @else
+                                    No reviews yet.
                                 @endif
                             </span>
                         </span>

@@ -270,3 +270,37 @@ div.destination-title h1, div.destination-title small{
 	border-color: #eea236 !important;
 	color: #fff !important;	
 }
+.highlight {
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+}
+.highlight p {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    word-break: normal;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+.nt {
+    color: #2f6f9f;
+}
+.na {
+    color: #4f9fcf;
+}
+.s {
+	color: #d44950;
+}
+.highlight p code:first-child {
+    display: inline-block;
+    padding-right: 45px;
+}
+.highlight p code {
+    font-size: inherit;
+    color: #333;
+    background-color: transparent;
+}

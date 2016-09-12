@@ -19,9 +19,10 @@
                             'files' => true
                           ]) !!}
                            <ul class="nav nav-tabs">
-                            <li class="active"><a href="#basic-tab" data-toggle="tab">Bacis</a></li>
+                            <li class="active"><a href="#basic-tab" data-toggle="tab">Basic</a></li>
                             <li><a href="#images-tab" data-toggle="tab">Images / Video</a></li>
                             <li><a href="#calendar-tab" data-toggle="tab">Calendar</a></li>
+                            <li><a href="#settings-tab" data-toggle="tab">Settings</a></li>
                           </ul> 
                           
                           @include('destinations.fields')
@@ -44,6 +45,7 @@
 <script type="text/javascript">
 var body = $("body");
 var destinationId = "{{$destination->id}}";
+var token = "{{ csrf_token() }}";
 $(function() {
   $("select.basic-multiple,select.basic-single").select2({
    theme: "bootstrap"
@@ -156,6 +158,22 @@ $(function() {
         renderCalendar();
     } 
 
+
+    //Change destination status
+    $("[name='destination-status']").bootstrapSwitch({
+      onColor: 'success',
+      offColor: 'danger',
+      onText: 'Online',
+      offText: 'OffLine',
+      onSwitchChange: function(event, state){
+        var id  = $(this).attr('id');
+        if(state){
+          DESTINATIONS.updateStatus(id,"2");
+        } else {
+          DESTINATIONS.updateStatus(id,"3");
+        }
+      }
+    });
 
 
     function setCover(imageId, destinationId) {

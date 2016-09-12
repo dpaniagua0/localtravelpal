@@ -309,6 +309,50 @@
     </div>
     <div id="calendar"></div>
 </div>
+
+<div class="tabl-pane" id="settings-tab">
+    <div class="row">
+        <div class="col-md-12">
+            {{--*/ $destination_status = false; /*--}}  
+            @if($destination->status == 2)
+                {{--*/ $destination_status = 'checked';/*--}}
+            @elseif($destination->status == 3)
+                {{--*/ $destination_status = '';/*--}}
+            @endif
+            <div class="col-md-5">
+                Destination Status
+           
+                <input id="{{$destination->id}}" type="checkbox" name="destination-status" {{$destination_status}} />
+                <br>
+                <small><b>Set Online/Offline destination.</b></small><br>
+                <small><b>When Offline, the destination is not available to public.</b></small>
+            </div>
+
+            <div class="col-md-7">
+                Embeded Code
+                {!! Helpers::render_destinations(array($destination) , 'col-md-9')  !!}
+                <figure class="highlight">
+                    <p>
+                        Copy the code and paste it into your site.
+                        <br><br>
+                        <code class="language-html" data-lang="html">
+                            <span class="nt">&lt;iframe src=</span><span class="s">"http://locopal.com/embed/{{$destination->id}}"</span>
+                            <br>
+                            <span class="nt">frameborder=</span><span class="s">"0"</span>
+                            <span class="nt">width=</span><span class="s">"400"</span>
+                            <span class="nt">height=</span><span class="s">"350"</span><br>
+                            <span class="nt">hspace=</span><span class="s">"0"</span>
+                            <span class="nt">marginwidth=</span><span class="s">"0"</span>
+                            <span class="nt">scrolling=</span><span class="s">"no"</span><span class="nt">&gt;</span>
+                            <br>
+                            <span class="nt">&lt;/iframe&gt;</span>
+                        </code>
+                    </p>
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Previous/Next buttons 
     <ul class="pager wizard">
         <li class="previous"><a href="javascript: void(0);">Previous</a></li>

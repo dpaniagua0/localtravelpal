@@ -100,7 +100,7 @@ Route::post('destination/storeReview',[
     'uses' => 'DestinationController@storeReview'
 ]);
 
-Route::get('destinations/updateStatus/{id}/{status}', [
+Route::any('destinations/updateStatus/{id}/{status}', [
     'as' => 'destinations.updateStatus',
     'uses' => 'DestinationController@updateStatus'
 ]);
@@ -182,4 +182,9 @@ Route::get('reservations/{id}/details', [
 Route::post('reservations/checkout',[
     'as' => 'reservations.checkout',
     'uses'=> 'ReservationController@checkout'
+]);
+
+Route::get('embed/{id}', [
+    'as' => 'embed',
+    'uses' => 'DestinationController@embed'
 ]);

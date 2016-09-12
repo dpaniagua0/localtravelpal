@@ -11,5 +11,5 @@
 @elseif($status == 2)
 	<span class="label label-success">Published</span>
 @elseif($statud = 3)
-	<span class="label label-warning">Hidden</span>
+	<span class="label label-danger">Offline</span>
 @endif

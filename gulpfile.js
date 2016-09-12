@@ -35,7 +35,9 @@ elixir(function(mix) {
         'ekkolightbox.min.js',
         'moment.js',
         'fullcalendar.min.js',
-        'bootstrap-datetimepicker.js' 
+        'bootstrap-datetimepicker.js',
+        'bootstrap-switch.min.js',
+        'clipboard.min.js'
     ]);
 
 /*    mix.scripts([

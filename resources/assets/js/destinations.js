@@ -37,3 +37,15 @@ DESTINATIONS.getGoeCode = function(location){
       data: data
     });
 };
+
+DESTINATIONS.updateStatus = function(id, status){
+	var data = {};
+	data["id"] = id;
+	data["status"] = status;
+	data["_token"] = token;
+	return $.ajax({
+		url: "/destinations/updateStatus/" + id + "/" + status,
+		type: "post",
+		data: data
+	});
+};

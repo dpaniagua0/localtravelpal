@@ -30,14 +30,14 @@ class DestinationController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => ['search', 'show', 'details','searchByCategory','getGeoCode']
+            'except' => ['search', 'show', 'details','searchByCategory','getGeoCode','embed']
         ]);
 
         $this->middleware('admin', [
             'except' => [
                 'search', 'show','create','details', 
                 'edit', 'store', 'searchByCategory',
-                'storeReview','getGeoCode',
+                'storeReview','getGeoCode','embed'
             ]
         ]);
 
@@ -219,7 +219,7 @@ class DestinationController extends Controller
         if(!$request->search){
             $destinations = Destination::published()->get();
         } else {
-            $destinations = Destination::published()->byLocation($request->search)->get();
+            $destinations = Destination::published()->get()->byLocation($request->search)->get();
         }
         return view('destinations.search', compact('destinations', 'query', 'categories', 'sort_by'));
     }
@@ -343,13 +343,28 @@ class DestinationController extends Controller
         $sort_option = $request->sort;
         if($categories != -1){
             if($sort_option != -1){
-                $destinations = Destination::published()->byCategory($categories)->sortedBy($sort_option)->paginate(6);
+               // $destinations = Destination::published()->byCategory($categories)->sortedBy($sort_option)->paginate(6);
+                 if($sort_option == 2 || $sort_option == 1){
+                    $collection = Destination::published()->byCategory($categories)->sortedBy($sort_option);
+                    $page = 1;
+                    $perPage = 6;
+                    $destinations = new LengthAwarePaginator(
+                    $collection->forPage($page, $perPage), 
+                        $collection->count(), 
+                        $perPage, 
+                        $page
+                    );
+                 } else {
+                    $destinations = Destination::published()->byCategory($categories)->sortedBy($sort_option)->paginate(6);
+                 }
+               
+
             } else {
                 $destinations = Destination::published()->byCategory($categories)->paginate(6);
             }
         } else {
             if($sort_option != -1){
-                if($sort_option == 2){
+                if($sort_option == 2 || $sort_option == 1){
 
                     $collection = Destination::published()->sortedBy($sort_option);
                     $page = 1;
@@ -361,7 +376,10 @@ class DestinationController extends Controller
                         $page
                     );
 
-                } elseif($sort_option == 1) { 
+                } else {
+                    $destinations = Destination::published()->sortedBy($sort_option)->paginate(6);   
+                }
+                /* elseif($sort_option == 1) { 
                     $collection = Destination::published()->sortedBy($sort_option);
                     $page = 1;
                     $perPage = 6;
@@ -374,7 +392,7 @@ class DestinationController extends Controller
                 }else {
 
                     $destinations = Destination::published()->sortedBy($sort_option)->paginate(6);   
-                }
+                }*/
             } else {
                 $destinations = Destination::published()->paginate(6);
 
@@ -419,9 +437,19 @@ class DestinationController extends Controller
         $destination = Destination::findOrfail($request->id);
         $destination->status = $request->status;
         $destination->save();
-        if(Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('recruiter')){
-            return redirect('destinations');
-        }
-        return redirect()->route('users.guides', $destination->owner_id);
+        if(!$request->ajax()){
+            if(Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('recruiter')){
+                return redirect('destinations');
+            }
+            return redirect()->route('users.guides', $destination->owner_id);
+        } 
+    }
+
+    /**
+    * @param $id destination id
+    */
+    public function embed($id){
+        $destination = Destination::findOrfail($id);
+        return view('destinations.embed', compact('destination'));
     }
 }

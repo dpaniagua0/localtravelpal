@@ -5,6 +5,7 @@
 
 <h1 class="reviews-header"><span>Reviews</span></h1>
 	{{--*/ $destination_id =  $reviews[0]->reviewable->id; /*--}}
+	{{--*/ $show_reviews = 3;/*--}}
 		@foreach ($reviews as $review) 
 
 			{{--*/ $user = $review->owner /*--}}
@@ -17,15 +18,19 @@
 			@if(!empty($user->avatar))
 				{{--*/ $image_source = $user->avatar;/*--}}
 			@endif 
+			@if($show_reviews > 0)
 			<div class="row review-container">
 				<div class="col-md-2">
-					<img src="{{ $image_source }}"/>
+					<img class="img-responsive" src="{{ $image_source }}"/>
 				</div>
 				<div class="col-md-10 text-justify">
 					<h3>{{ $user->name}}</h3>
-					{{ $review->comment }}
+					<p class="hidden-xs hidden-sm">{{ $review->comment }}</p>
+					<p class="hidden-lg hidden-md">{{ substr($review->comment, 0, 100)}}</p>
 				</div>
 			</div>
+			@endif
+			{{--*/ $show_reviews--; /*--}}
 	    @endforeach
 	    @if(!$paginate)
 	    <div class="row pt-15 text-center">

@@ -51,7 +51,7 @@
 <div class="section-top destination-bg">
   <div class="has-pull-top"></div>
 </div>
-<div class="section pull-top pb-15">
+<div class="section section-destination pull-top pb-15">
   <div class="destination-details">
     <div class="destination-title">
       <h1>{{ $destination->title }} <small>with</small> {{$destination->owner->name}}</h1>
@@ -111,11 +111,12 @@
       </div>
       <div id="reservations" class="tab-pane" role="tabpanel">
         <div class="row">
+          <div class="col-md-4 col-xs-12">
             <h4 class="text-center">Request a reservation</h4>
             {!! Form::open([
                  'route' => 'reservations.checkout',
                  'method' => 'POST',
-                 'class' => 'form-inline'
+                 'class' => 'form-horizontal'
             ])  !!}
             <div class="form-group">
               <label>Date</label>
@@ -137,16 +138,17 @@
           </div>
 
             {!! Form::close() !!}
-       
+          </div>
 
 
         @if(sizeof($reservations))
           <h3>Instant Reservations</h3>
           @foreach($reservations as $reservation)
             <div class="row pl-5 pr-5">
+              <div class="col-md-12">
               {!! Form::model($reservation,[
                   'route' => 'reservations.checkout',
-                  'class' => 'form-horizontal',
+                  'class' => 'form-horizontal insta-form',
                   'method' => 'POST',
                   'id' => 'reservation-form'
               ]) !!}
@@ -155,21 +157,23 @@
               <div class="col-md-9" 
               style="background-color: #fff; border-bottom: 1px solid #28c0da;line-height: 35px">
 
-              <div class="col-md-5 text-center">
+              <div class="col-md-5 col-xs-5 text-center">
                   {!! Form::hidden('date',null) !!}
                 <p class="form-control-static">
-                  {{ date("l d, F Y", strtotime($reservation->date)) }}
+                  {{ date("M d, Y", strtotime($reservation->date)) }}
                 </p>
               </div>
-              <div class="col-md-4 text-center">
-                <p class="form-control-static">
-                  {{ date("H:i:s A", strtotime($reservation->start_time)) }}
+              <div class="col-md-4 col-xs-4 text-center">
+                <p class="form-control-static"> 
+                  {{ date("h:i A", strtotime($reservation->start_time)) }}
                 </p>
               </div>
-              <div class="col-md-3 pt-5 pb-5">
-                <button class="btn btn-primary">Book Now</button>
+              <div class="col-md-3 pt-5 pb-5 col-xs-3">
+                <button class="btn btn-primary btn-sm">Book</button>
               </div>
+              <div class="clearfix"></div>
               {!! Form::close() !!}
+            </div>
             </div>
             </div>
               

@@ -34,6 +34,9 @@
   		padding-left: 0;
   		padding-right: 0;
   	}
+    .home-section {
+      margin-top: 120px;
+    }
   	#home-carousel > .search-destinations {
   		width: 90%;
   		padding: 0;
@@ -55,4 +58,46 @@
    		width: 100%;
    		text-align: center;
    	}
+    .section-destination {
+      width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    div.destination-details {
+      width: 100%;
+    }
+    .destination-actions {
+      text-align: center;
+    }
+    .destination-title {
+      margin-top: -40px;
+      margin-bottom: 40px;
+    }
+    .brand-logo {
+      height: 38px;
+      width: 160px;
+    }
+    .destination-banner {
+      width: 100%;
+      margin: 0 auto;
+      display: none !important;
+    }
+    .gallery-item {
+      width: 33.333%;
+    }
+}
+
+@media(max-width: 450px) { 
+  .destination-actions > a, destination-actions > button {
+    font-size: 12px !important; 
+  }
+  .insta-form {
+    font-size: 12px;
+  }
+  .pre-footer {
+    text-align:center;
+  }
+  .pre-footer h1 {
+    font-size: 1.2em;
+  }
 }

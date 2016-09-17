@@ -15,7 +15,8 @@
         "intervention/imagecache": "^2.3",
         "laravel/socialite": "^2.0",
         "cmgmyr/messenger": "~2.0",
-        "willvincent/laravel-rateable": "~1.0"
+        "willvincent/laravel-rateable": "~1.0",
+        "omnipay/paypal": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

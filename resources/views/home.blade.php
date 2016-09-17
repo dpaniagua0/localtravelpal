@@ -17,7 +17,7 @@
   {!! Helpers::home_slider($files)  !!}
 </div>
 
-<div class="section">
+<div class="section home-section"> 
 	<div class="section-inner">
 		@if(count($destinations) > 0)
 			<div class="destinations-container clearfix">

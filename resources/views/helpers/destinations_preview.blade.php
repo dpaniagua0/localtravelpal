@@ -18,8 +18,10 @@
                     @else 
                         {{--*/ $cover_image = "http://placehold.it/350x350"; /*--}}
                     @endif
-                    <img src="{{$cover_image}}" alt="{{$destination->title}}">
-                    <a class="btn btn-primary book-btn">Book now</a>
+                    <div class="img-thumb">
+                        <img src="{{$cover_image}}" alt="{{$destination->title}}">
+                        <a class="btn btn-primary book-btn">Book now</a>
+                    </div>
                     <div class="caption">
                         <h3 class="mt-5 mb-5">{{ $destination->title }}</h3>
                         <span class="rating">

@@ -32,9 +32,9 @@
           <div class="col-md-12">
             <div class="row">
               <hr>
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-4">
                 <h4>Interested in:</h4>
-                <div class="interest-categories">
+                <div class="interest-categories col-xs-6 col-sm-12 col-md-12">
                   @foreach($categories as $category)
                     <div class="checkbox checkbox-primary">
                         <input class="search-category" id="checkbox{{$category->id}}" 
@@ -47,7 +47,7 @@
                   @endforeach 
                 </div>
                 <h4 class="mt-30"> Sort By: </h4>
-                <div>
+                <div class="col-xs-6 col-sm-12 col-md-12">
                   @foreach($sort_by as $v => $k)
                     <div class="radio radio-primary">
                         <input class="sort-by" id="radio{{$v}}" 
@@ -61,7 +61,7 @@
                 </div>
               </div>
 
-              <div class="col-md-9">
+              <div class="col-md-9 col-sm-8 col-xs-12">
                   @if(count($destinations) > 0) 
                  
                   @if($query != "")
@@ -71,7 +71,8 @@
                     <h4>All results</h4>
                   @endif
                   <div class="result-destinations"> 
-                    {!! Helpers::render_destinations($destinations) !!}
+                    {{--*/ $col_size = "col-sm-8 col-xs-6 col-md-6" /*--}}
+                    {!! Helpers::render_destinations($destinations, $col_size) !!}
                   </div>
               </div>
 

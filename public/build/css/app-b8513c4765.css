@@ -6625,7 +6625,7 @@ div.destination-title h1, div.destination-title small {
   margin-right: auto;
   position: absolute;
   width: 50%;
-  top: 48%;
+  bottom: 10%;
   font-size: 1.3em;
   background-colo: #47BBCC;
   boder: 1px solid #47BBCC; }
@@ -9498,7 +9498,10 @@ a.fc-more:hover {
 * Responsive site utitlities
 */
 @media only screen and (min-width: 768px) {
-  /* tablets and desktop */ }
+  /* tablets and desktop */
+  .img-thumb {
+    position: relative;
+    height: 330px; } }
 
 @media only screen and (max-width: 767px) {
   /* phones */
@@ -9514,7 +9517,18 @@ a.fc-more:hover {
     padding-right: 0; } }
 
 @media only screen and (max-width: 767px) and (orientation: portrait) {
-  /* portrait phones */ }
+  /* portrait phones */
+  .search-bar, .search-bar > form.search-form {
+    width: 100%; }
+  .destination-preview {
+    margin: 0 auto;
+    padding: 0;
+    width: 60%; } }
+
+@media (max-width: 750px) {
+  .img-thumb {
+    position: relative;
+    height: 250px; } }
 
 @media (max-width: 567px) {
   .section {
@@ -9557,7 +9571,9 @@ a.fc-more:hover {
     margin: 0 auto;
     display: none !important; }
   .gallery-item {
-    width: 33.333%; } }
+    width: 33.333%; }
+  .search-bar, .search-bar > form.search-form {
+    width: 100%; } }
 
 @media (max-width: 450px) {
   .destination-actions > a, destination-actions > button {
@@ -9567,7 +9583,24 @@ a.fc-more:hover {
   .pre-footer {
     text-align: center; }
   .pre-footer h1 {
-    font-size: 1.2em; } }
+    font-size: 1.2em; }
+  .destination-shortdesc {
+    display: none !important; }
+  .destination-preview {
+    margin: 0 auto;
+    padding: 0;
+    width: 100% !important;
+    display: block;
+    margin-top: 20px; }
+  .destination-preview .thumbnail {
+    margin: 0 auto;
+    padding: 0;
+    height: 480px !important;
+    width: 100%; }
+  .featured-guides {
+    margin-bottom: 50px; }
+  .img-thumb {
+    height: auto !important; } }
 
 @font-face {
   font-family: 'fontello';

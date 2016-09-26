@@ -59,7 +59,9 @@ class Destination extends Model
     }
 
     public function preapprovedReservations(){
-      return $this->hasMany('App\Reservation')->where('status', '2');
+      return $this->hasMany('App\Reservation')->where('status', '2')
+      ->where('is_set','0')->where('is_private','0')
+      ->where('date', '>=', date('Y-m-d'));
     }
 
     /**

@@ -180,8 +180,18 @@ Route::get('reservations/{id}/details', [
 ]);
 
 Route::post('reservations/checkout',[
-    'as' => 'reservations.checkout',
+    'as' => 'reservations.checkout', 
     'uses'=> 'ReservationController@checkout'
+]);
+
+Route::post('reservations/preapproved', [
+    'as' => 'reservations.preapproved',
+    'uses' => 'ReservationController@preapproved'
+]);
+
+Route::post('reservations/request', [
+    'as' => 'reservations.request',
+    'uses' => 'ReservationController@requestReservation'
 ]);
 
 Route::get('embed/{id}', [

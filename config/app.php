@@ -159,7 +159,9 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
-        willvincent\Rateable\RateableServiceProvider::class
+        willvincent\Rateable\RateableServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class ,
+
 
     ],
 
@@ -210,6 +212,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
 
     ],
 

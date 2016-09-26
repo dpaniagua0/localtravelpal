@@ -219,7 +219,7 @@ class DestinationController extends Controller
         if(!$request->search){
             $destinations = Destination::published()->get();
         } else {
-            $destinations = Destination::published()->get()->byLocation($request->search)->get();
+            $destinations = Destination::published()->byLocation($request->search)->get();
         }
         return view('destinations.search', compact('destinations', 'query', 'categories', 'sort_by'));
     }

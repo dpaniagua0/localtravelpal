@@ -77,6 +77,11 @@
                                        {{ ucfirst(trans('common.userguides')) }}
                                     </a>
                                 </li>
+                                 <li>
+                                    <a href="{{ route('reservations.index') }}">
+                                       {{ ucfirst(trans('common.myreservations')) }}
+                                    </a>
+                                </li>
                                 @endif
                                 <li role="separator" class="divider"></li>
                                 <li>

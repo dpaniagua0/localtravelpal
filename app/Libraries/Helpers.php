@@ -52,4 +52,8 @@ class Helpers {
   public static function guide_status($status){
     return view('helpers.guide_status', compact('status'))->render();
   }
+
+  public static function reservation_status($status) {
+    return view('helpers.reservation_status', compact('status'))->render();
+  }
 }

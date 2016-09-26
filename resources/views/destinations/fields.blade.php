@@ -310,7 +310,7 @@
     <div id="calendar"></div>
 </div>
 
-<div class="tabl-pane" id="settings-tab">
+<div class="tab-pane" id="settings-tab">
     <div class="row">
         <div class="col-md-12">
             {{--*/ $destination_status = false; /*--}}  

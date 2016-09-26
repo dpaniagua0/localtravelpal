@@ -23,6 +23,7 @@ return [
     'reservations' => 'reservations',
     'userguides' => 'my guides',
     'send_a_message' => "send a message",
-    'reviews' => "review|reviews"
+    'reviews' => "review|reviews",
+    'myreservations' => "My Reservations"
 
 ];

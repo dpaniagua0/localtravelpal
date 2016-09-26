@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\Http\Requests\ReservationRequest;
 use Auth;
 use DB;
+use Srmklive\PayPal\Facades\PayPal as PayPal;
+use Srmklive\PayPal\Services\AdaptivePayments;
 
 class ReservationController extends Controller
 {
@@ -20,14 +22,9 @@ class ReservationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['checkout']]);
+        $this->middleware('auth');
 
-        $this->middleware('admin', [
-            'only' => [
-                'edit', 'create','show','delete', 
-                'update'
-            ]
-        ]);
+        $this->middleware('admin');
     }
 
 
@@ -38,7 +35,12 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::paginate(20);
+        if(Auth::user()->hasRole('super_admin')){
+       //     $reservations = Reservation::paginate(20);
+        //} else {
+            $user_email = Auth::user()->email;
+            $reservations = Reservation::byUser($user_email)->paginate(5);
+        }
         return view('reservations.index', compact('reservations'));
     }
 
@@ -49,7 +51,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('reservations.create');
     }
 
     /**
@@ -155,8 +157,70 @@ class ReservationController extends Controller
         return view('reservations.details_modal', compact('reservation'));
     }
 
+    public function requestReservation(ReservationRequest $request){
+         /**
+        * Reservations status 
+        * 2 => approved
+        * 3 => unavailable 
+        */
+        $reservation = new Reservation($request->all());
+        $res_date = date("Y-m-d", strtotime($request->date));
+        $reservation->date = $res_date;
+        $reservation->start = date("Y-m-d H:i:s", strtotime($res_date." ".$request->start_time));
+        $reservation->end = date("Y-m-d H:i:s", strtotime($res_date." ".$request->end_time));
+
+        if($request->status == 2){
+            $reservation->css_class = 'bg-available';
+        } else {
+            $reservation->css_class = 'bg-unavailable';
+        }
+
+        if($reservation->save()){
+            return json_encode(array("success" => true));
+        } else {
+            return json_encode(array('success' => false));
+        }
+    }
+
     public function checkout(ReservationRequest $request){
-        $reservation = Reservation::findOrfail($request->reservation_id);
+        abort(403);
+        $reservation = Reservation::find($request->reservation_id);
+        if(!$reservation){
+            $reservation = new Reservation($request->all());
+        }
         return view('reservations.checkout', compact('reservation'));
+    }
+
+    public function preapproved(Request $request) {
+       
+        $provider = new AdaptivePayments(); 
+       
+
+        // Change the values accordingly for your application
+        $data = [
+            'receivers'  => [
+                [
+                    'email' => 'localprovider@locopal.com',
+                    'amount' => 10,
+                    'primary' => true,
+                ],
+                [
+                    'email' => 'locopal-payment@locopal.com',
+                    'amount' => 5,
+                    'primary' => false
+                ]
+            ],
+            'payer' => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
+            'return_url' => url('reservation/summary'), 
+            'cancel_url' => url('reservation/cancel'),
+        ];
+
+        $response = $provider->createPayRequest($data);
+
+        $redirect_url = $provider->getRedirectUrl('approved', $response['payKey']);
+
+        return redirect($redirect_url);
+
+
     }
 }

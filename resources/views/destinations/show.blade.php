@@ -112,33 +112,9 @@
       <div id="reservations" class="tab-pane" role="tabpanel">
         <div class="row">
           <div class="col-md-4 col-xs-12">
-            <h4 class="text-center">Request a reservation</h4>
-            {!! Form::open([
-                 'route' => 'reservations.checkout',
-                 'method' => 'POST',
-                 'class' => 'form-horizontal'
-            ])  !!}
-            <div class="form-group">
-              <label>Date</label>
-              <br>
-              {!! Form::text('date', null,[ 'class' => 'form-control date-input'])  !!}
-            </div>
-            <div class="form-group">
-              <label>Time</label>
-              <br>
-              {!! Form::text('start_time', null, [ 'class' => 'form-control time-input']) !!}
-            </div>
-            <div class="form-group">
-              <label>Guest</label>
-              <br>
-              {!! Form::text('people_qty', null, [ 'class' => 'form-control'])  !!}
-            </div>
-            
-            <button class="btn btn-info mt-25">Request Reservation</button>
+            <button class="btn btn-info mt-25" data-toggle="modal" data-target="#add-reservation">Request Reservation</button>
           </div>
-
-            {!! Form::close() !!}
-          </div>
+        </div>
 
 
         @if(sizeof($reservations))
@@ -150,7 +126,6 @@
                   'route' => 'reservations.checkout',
                   'class' => 'form-horizontal insta-form',
                   'method' => 'POST',
-                  'id' => 'reservation-form'
               ]) !!}
               {!! Form::hidden('destination_id', $destination->id)  !!}
               {!! Form::hidden('reservation_id', $reservation->id)!!}
@@ -165,7 +140,7 @@
               </div>
               <div class="col-md-4 col-xs-4 text-center">
                 <p class="form-control-static"> 
-                  {{ date("h:i A", strtotime($reservation->start_time)) }}
+                  {{ date("h:i A", strtotime($reservation->start)) }}
                 </p>
               </div>
               <div class="col-md-3 pt-5 pb-5 col-xs-3">
@@ -244,6 +219,7 @@
   @include("destinations.add_list_modal")
   @include("destinations.add_review_modal")
   @include("users.send_message")
+  @include('reservations.request')
 @endif
 @endsection
 
@@ -255,6 +231,10 @@
   var lng = 0;
   var mapLocation = "{{ $destination->location }}";
   var destinationTitle = "{{ $destination->title }}";
+
+  var message_txt = "Reservation added.The local  provider will contact soon.";
+  message_txt+= "If the reservation is approved you will recieve an email notification.";
+  message_txt+= "Until that the charge will be on hold.";
  $(function(){
 
 
@@ -313,12 +293,92 @@
   });
 
 
+    $('#reservation-form')
+    .formValidation({
+      framework: 'bootstrap',
+      icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+
+       fields: {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required'
+                    }
+                }
+            },
+            phone: {
+                validators: {
+                    notEmpty: {
+                        message: 'The phone is required'
+                    },
+                    phone: {
+                      country: 'US',
+                      message: 'The value is not valid phone number'
+                    }
+                }
+            },
+            res_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The date is required'
+                        },
+                        date: {
+                            format: 'MM/DD/YYYY',
+                            message: 'The date is not a valid'
+                        }
+                    }
+                }
+        }
+    });
+  $("#reservation-form").ajaxForm({
+    resetForm: true,
+    dataType: 'json',
+    success: function(responseText, statusText, xhr, $form){
+      var success = responseText.success;
+      if(success){
+        $("body").find(".modal").modal('hide');
+        eModal.alert({
+          message: message_txt,
+          size: eModal.size.sm
+        });
+     }
+    }
+  });
+
+
+  
+
   $(".time-input").datetimepicker({
     format: 'LT'
   });
   $(".date-input").datetimepicker({
-     format: 'DD/MM/YYYY'
+     format: 'DD/MM/YYYY',
   });
+  $('#starttime, #endtime  ').datetimepicker({
+      format: 'LT'
+  });
+  $(".res-date").datetimepicker({
+     format: 'MM/DD/YYYY'
+  });
+
+
+  $('.res-date').on('dp.change dp.show', function(e) {
+    // Revalidate the date when user change it
+    $('#reservation-form').bootstrapValidator('revalidateField', 'date');
+  });
+  $('#starttime').on('dp.change dp.show', function(e) {
+    // Revalidate the date when user change it
+    $('#reservation-form').bootstrapValidator('revalidateField', 'start_time');
+  });
+  $('#endtime').on('dp.change dp.show', function(e) {
+    // Revalidate the date when user change it
+    $('#reservation-form').bootstrapValidator('revalidateField', 'end_time');
+  });
+
 
   function addToList(listId, destinationId){
     var data = {};

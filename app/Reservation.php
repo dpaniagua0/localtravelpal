@@ -14,11 +14,16 @@ class Reservation extends Model
     protected $fillable = [
       'name', 'last_name', 'email', 'people_qty','phone',
       'date','start', 'end', 'message', 'confirmation_number',
-      'status', 'destination_id', 'start_time', 'end_time', 'css_class'
+      'status', 'destination_id', 'start_time', 'end_time', 'css_class',
+      'provider_id'
     ];
 
     public function destination(){
       return $this->hasOne('App\Destination', 'id','destination_id');
+    }
+
+    public function scopebyUser($query, $string) {
+      return $query->where('email', '=', "{$string}");
     }
 
 }

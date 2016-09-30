@@ -32,7 +32,7 @@
                                                     {!! Helpers::reservation_status($reservation->status) !!}
                                                 </td>
                                                 <td>{{ $reservation->destination->title }}</td>
-                                                <td>{{ date("d l, F Y", strtotime($reservation->date)) }}</td>
+                                                <td>{{ date("l d, F Y", strtotime($reservation->date)) }}</td>
                                                 <td>{{ date("h:i A", strtotime($reservation->start)) }}</td>
                                                 <td>
                                                     @if($reservation->status == 2)

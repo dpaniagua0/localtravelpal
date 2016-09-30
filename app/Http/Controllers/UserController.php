@@ -233,11 +233,17 @@ class UserController extends Controller
     * @return response
     */
     public function userGuides($id){
-        $user = User::with('destinations')->whereId($id)->firstOrfail();
-        $guides = $user->destinations()->paginate(4);
-        if($user->hasRole('super_admin')){
+
+        if(Auth::user()->hasRole('super_admin')){
+          $user = User::with('destinations')->whereId($id)->firstOrfail();
+          $guides = $user->destinations()->paginate(4);
           return view('destinations.guides', compact('guides'));
-        } 
+        } else if(!Auth::user()->hasRole('super_admin') && Auth::user()->id == $id){
+          $user = User::with('destinations')->whereId(Auth::user()->id)->firstOrfail();
+          $guides = $user->destinations()->paginate(4);
+        } else if(!Auth::user()->hasRole('super_admin') && Auth::user()->id != $id){
+          abort(403);
+        }
         return view('destinations.guides', compact('guides'));
     }
 

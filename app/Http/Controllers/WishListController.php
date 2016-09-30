@@ -101,7 +101,7 @@ class WishListController extends Controller
         $wish_list = WishList::find($request->list_id);
         $destination = Destination::find($request->destination_id);
         if($wish_list && $destination){
-            $wish_list->destinations()->sync([ $request->destination_id ]);
+            $wish_list->destinations()->attach($request->destination_id);
                 return "true";
             
         }

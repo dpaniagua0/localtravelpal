@@ -14,6 +14,7 @@
       <div class="modal-body">
       
         {!! Form::hidden('destination_id', $destination->id) !!}
+        {!! Form::hidden('provider_id', $destination->owner_id) !!}
         <div class="form-group">
           <label>Date</label>
           {!! Form::hidden('date', null, [ 'id' => 'date']) !!}

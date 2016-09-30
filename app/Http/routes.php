@@ -194,6 +194,11 @@ Route::post('reservations/request', [
     'uses' => 'ReservationController@requestReservation'
 ]);
 
+Route::get('/summary', [
+    'as' => 'reservations.summary',
+    'uses' => 'ReservationController@summary'
+]);
+
 Route::get('embed/{id}', [
     'as' => 'embed',
     'uses' => 'DestinationController@embed'

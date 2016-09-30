@@ -1,6 +1,7 @@
  
 {!! Form::hidden('owner_id', Auth::user()->id) !!}
 
+
 <div class="tab-content  mt-15">
     <div class="tab-pane active" id="basic-tab">
         <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
@@ -42,11 +43,11 @@
             {!! Form::label('min_capacity', 'People*', ['class' => 'col-sm-2 control-label']) !!}   
             <div class="col-sm-3 {{ $errors->has('min_capacity') ? ' has-error' : '' }}">
 
-                    <div class="input-group input-group-lg">
+                    <div class="input-group">
                       <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-users"></i></span>
 
                       {!! Form::text('min_capacity', null, [
-                      'class' => 'form-control', 'placeholder' => 'min capacity' ,
+                      'class' => 'form-control input-md', 'placeholder' => 'min capacity' ,
                       'data-fv-message' => 'The min capacity field is required',
                       'data-fv-notempty' => 'true',
                       'data-fv-digits' => 'true',
@@ -63,10 +64,10 @@
             </div>
 
             <div class="col-sm-3 {{ $errors->has('max_capacity') ? ' has-error' : '' }}">
-                    <div class="input-group input-group-lg">
+                    <div class="input-group">
                       <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-users"></i></span>
                       {!! Form::text('max_capacity', null, [
-                      'class' => 'form-control', 'placeholder' => 'max capacity',
+                      'class' => 'form-control input-md', 'placeholder' => 'max capacity',
                       'data-fv-message' => 'The max capacity field is required',
                       'data-fv-notempty' => 'true',
                       'data-fv-digits' => 'true',
@@ -88,7 +89,7 @@
             <div class="col-sm-3 {{ $errors->has('price') ? ' has-error' : ''}}">
                 <div class="input-group">
                   <span class="input-group-addon">$</span>
-                  {!! Form::text('price', null, ['class' => 'form-control', 
+                  {!! Form::text('price', null, ['class' => 'form-control input-md', 
                   'placeholder' => '00.00', 'aria-label' => 'Amount (to the nearest dollar)',
                   'data-fv-message' => 'The price field is required',
                   'data-fv-notempty' => 'true',
@@ -188,7 +189,7 @@
                 'data-fv-message' => 'The categories field is required',
                 'data-fv-notempty' => 'true',
                 ]); !!}
-                @else
+                @elseif(sizeof($destination) > 0)
                 {!! Form::select('category_list[]', $categories, $destination->categories_list, 
                 ['class' =>'form-control basic-multiple','multiple',
                 'data-fv-message' => 'The categories field is required',
@@ -217,7 +218,7 @@
         {!! Form::close() !!}
     </div>
 <!-- Imges tab -->
-@if(isset($destination))
+@if(isset($destination) && sizeof($destination) > 0)
 <div id="images-tab" class="tab-pane">
     {!! Form::open(array('id' => 'video-form', 'route' => 'destination.addVideo'))!!} 
     <div class="form-group {{ $errors->has('video_url') ? ' has-error' : '' }}">
@@ -243,7 +244,7 @@
         </div>
         <div class="row pr-15 pl-15">
             <div class="col-md-10 col-md-offset-2" id="video-preview">
-                @if(isset($destination))
+                @if(isset($destination) && sizeof($destination) > 0)
                     {!! Helpers::render_video($destination->video_source, $destination->alien_video_id)  !!}
                 @endif
             </div>
@@ -266,7 +267,7 @@
                 </span>
                 @endif
                 <br>
-                @if(isset($destination) && count($images) > 0)
+                @if(isset($destination) && sizeof($destination) > 0)
 
                 <div class="destination-images clearfix">
                     {!! Helpers::destination_cover($destination) !!}
@@ -312,6 +313,7 @@
 
 <div class="tab-pane" id="settings-tab">
     <div class="row">
+        @if(isset($destination) && sizeof($destination) > 0)
         <div class="col-md-12">
             {{--*/ $destination_status = false; /*--}}  
             @if($destination->status == 2)
@@ -351,6 +353,7 @@
                 </figure>
             </div>
         </div>
+        @endif
     </div>
 </div>
     <!-- Previous/Next buttons 

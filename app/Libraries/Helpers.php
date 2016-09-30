@@ -56,4 +56,8 @@ class Helpers {
   public static function reservation_status($status) {
     return view('helpers.reservation_status', compact('status'))->render();
   }
+
+  public static function tour_time($destination) {
+    return view('helpers.tour_time', compact('destination'));
+  }
 }

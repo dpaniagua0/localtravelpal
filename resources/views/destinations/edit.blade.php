@@ -100,6 +100,8 @@ $(function() {
     ],
     dayClick: function(date, jsEvent, view) {
     //  $("input#res_date").attr('value',date.format('dddd D, MMMM Y')); // Used just for render the date.
+      var stringDate = date.format('dddd D, MMMM Y');
+      $("input#res_date").attr('value',stringDate);
       $("input#date").attr('value', date.format('Y-MM-D'));
       $("input#starttime").val(date.format('LT'));
       $("#add-reservation").modal('show');

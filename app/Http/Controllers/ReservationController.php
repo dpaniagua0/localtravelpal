@@ -22,9 +22,7 @@ class ReservationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-
-        $this->middleware('admin');
+        $this->middleware('auth', [ 'except' => 'summary']);
     }
 
 
@@ -36,8 +34,10 @@ class ReservationController extends Controller
     public function index()
     {
         if(Auth::user()->hasRole('super_admin')){
-       //     $reservations = Reservation::paginate(20);
+            $reservations = Reservation::paginate(20);
         //} else {
+          
+        } else {
             $user_email = Auth::user()->email;
             $reservations = Reservation::byUser($user_email)->paginate(5);
         }
@@ -183,44 +183,73 @@ class ReservationController extends Controller
     }
 
     public function checkout(ReservationRequest $request){
-        abort(403);
         $reservation = Reservation::find($request->reservation_id);
+        $destination = $reservation->destination;
+        $provider = $destination->owner;
         if(!$reservation){
             $reservation = new Reservation($request->all());
         }
-        return view('reservations.checkout', compact('reservation'));
+        return view('reservations.checkout', compact('reservation', 'destination', 'provider'));
+    }
+
+    public function processPayment(Request $request){
+        $reservation = Reservation::find($request->id);
+        if($reservation){
+            $primary_receiver = $request->owner_email;
+            $feed_receiver = "locopal-payment@locopal.com";
+        //  $total_amount = $destination->
+        }
     }
 
     public function preapproved(Request $request) {
+
+        $reservation = Reservation::find($request->id);
+        $reservation->is_set = 1;
+        //The reservation has been paid.
+        $reservation->status = 4;
+        $reservation->save();
        
         $provider = new AdaptivePayments(); 
-       
 
-        // Change the values accordingly for your application
+        $destination = $reservation->destination;
+        $main_receiver = $destination->owner->email;
+        $fee_receiver = "locopal-payment@locopal.com";
+       
+        $guest = $request->people_qty;
+        $price = $reservation->destination->price;
+        
+        $sub_total = ($price * $guest);
+        $fee = ($sub_total * 0.10);
+        $total_amount = $sub_total + $fee;
+     
+        // Change the values accordingly for information
         $data = [
             'receivers'  => [
                 [
-                    'email' => 'localprovider@locopal.com',
-                    'amount' => 10,
+                    'email' => $main_receiver,
+                    'amount' => $total_amount,
                     'primary' => true,
                 ],
                 [
-                    'email' => 'locopal-payment@locopal.com',
-                    'amount' => 5,
+                    'email' => $fee_receiver,
+                    'amount' => $fee,
                     'primary' => false
                 ]
             ],
             'payer' => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-            'return_url' => url('reservation/summary'), 
-            'cancel_url' => url('reservation/cancel'),
+            'return_url' => url('/summary'), 
+            'cancel_url' => url('/cancel'),
         ];
 
         $response = $provider->createPayRequest($data);
 
+    
         $redirect_url = $provider->getRedirectUrl('approved', $response['payKey']);
 
         return redirect($redirect_url);
+    }
 
-
+    public function summary(Request $request){
+        return view('reservations.summary');
     }
 }

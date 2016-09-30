@@ -37,7 +37,8 @@ class DestinationController extends Controller
             'except' => [
                 'search', 'show','create','details', 
                 'edit', 'store', 'searchByCategory',
-                'storeReview','getGeoCode','embed'
+                'storeReview','getGeoCode','embed',
+                'uploadPhotos', 'setCover', 'reservations'
             ]
         ]);
 
@@ -302,6 +303,8 @@ class DestinationController extends Controller
     public function setCover(Request $request){
         //check if destination has a cover
         $destination = Destination::findOrfail($request->destination_id);
+        $destination->has_cover = 1;
+        $destination->save();
         if($destination->hasCover()){
             //Find the image with cover set as 1
             $image = Images::findOrfail($destination->hasCover()->id);
@@ -312,6 +315,7 @@ class DestinationController extends Controller
         //Set the new cover
         $new_cover = Images::findOrfail($request->image_id);
         $new_cover->is_cover = 1;
+
         if($new_cover->save()){
 
             $images = $destination->images()->where('is_cover', 0)->paginate(6);

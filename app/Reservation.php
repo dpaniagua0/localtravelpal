@@ -15,7 +15,7 @@ class Reservation extends Model
       'name', 'last_name', 'email', 'people_qty','phone',
       'date','start', 'end', 'message', 'confirmation_number',
       'status', 'destination_id', 'start_time', 'end_time', 'css_class',
-      'provider_id'
+      'provider_id', 'is_private'
     ];
 
     public function destination(){

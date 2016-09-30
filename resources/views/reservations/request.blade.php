@@ -18,6 +18,7 @@
         
             {!! Form::hidden('destination_id', $destination->id) !!}
             {!! Form::hidden('provider_id', $destination->owner_id) !!}
+            
 
             {!! Form::hidden('is_private', 1) !!}
 
@@ -67,6 +68,10 @@
               'data-fv-emailaddress-message' => "The value is not a valid email address"
 
             ]) !!}
+        </div>
+        <div class="form-group">
+          <label>Guest</label>
+          {!! Form::selectRange('people_qty', 1, $destination->max_capacity, null, [ 'class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
